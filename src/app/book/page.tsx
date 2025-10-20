@@ -44,7 +44,7 @@ export default function BookPage() {
         <div className="card" role="status" aria-live="polite">
           <h1 className="text-2xl font-semibold mb-2">Booking received 🎉</h1>
           <p className="text-black/70">
-            Thanks for choosing Fresh. We7ll text or email a confirmation shortly.
+            Thanks for choosing Go Clean. We7ll text or email a confirmation shortly.
           </p>
           <a href="/book" className="btn mt-4 inline-block">Book another</a>
         </div>
@@ -87,7 +87,23 @@ export default function BookPage() {
 
           <div className="field">
             <label className="label" htmlFor="address">Service address</label>
-            <input className="input" id="address" name="address" required placeholder="123 Main St, City, ST" />
+            <input className="input" id="address" name="address" required placeholder="123 Main St" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="field">
+              <label className="label" htmlFor="city">City</label>
+              <input className="input" id="city" name="city" required placeholder="New York" />
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="zipCode">Zip code</label>
+              <input className="input" id="zipCode" name="zipCode" required placeholder="10001" />
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label" htmlFor="additionalAddress">Additional address details</label>
+            <textarea className="textarea" id="additionalAddress" name="additionalAddress" placeholder="Apartment number, building name, access instructions, etc." />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

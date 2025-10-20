@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/firebaseAdmin";
 import { stripe } from "@/lib/stripe";
 
 const BookingSchema = z.object({
@@ -9,6 +8,9 @@ const BookingSchema = z.object({
   phone: z.string().min(7),
   email: z.string().email(),
   address: z.string().min(5),
+  city: z.string().min(1),
+  zipCode: z.string().min(1),
+  additionalAddress: z.string().optional().default(""),
   service: z.enum([
     "1 bedroom, 1 bathroom",
     "2 bedrooms, 1 bathroom",
@@ -34,20 +36,25 @@ export async function POST(req: NextRequest) {
     const json = await req.json();
     const parsed = BookingSchema.parse(json);
 
-    const { firstName, lastName, phone, email, address, service, hours, datetime, notes } = parsed;
+    const { firstName, lastName, phone, email, address, city, zipCode, additionalAddress, service, hours, datetime, notes } = parsed;
 
     const priceCents = getPriceCents(service, hours);
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-    const orderRef = db.collection("orders").doc();
+    // Generate a simple order ID for now (without Firebase)
+    const orderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
     const order = {
-      id: orderRef.id,
+      id: orderId,
       status: "pending",
       firstName,
       lastName,
       phone,
       email,
       address,
+      city,
+      zipCode,
+      additionalAddress,
       service,
       hours,
       datetime,
@@ -55,7 +62,9 @@ export async function POST(req: NextRequest) {
       amountCents: priceCents,
       createdAt: new Date().toISOString(),
     };
-    await orderRef.set(order);
+    
+    // For now, we'll just log the order (you can implement proper storage later)
+    console.log("New booking order:", order);
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -69,16 +78,16 @@ export async function POST(req: NextRequest) {
             unit_amount: priceCents,
             product_data: {
               name: `Home cleaning — ${service} • ${hours}`,
-              description: `${address}`,
+              description: `${address}, ${city}, ${zipCode}${additionalAddress ? ` - ${additionalAddress}` : ''}`,
             },
           },
         },
       ],
       customer_email: email,
-      success_url: `${siteUrl}/book?success=1&orderId=${orderRef.id}`,
-      cancel_url: `${siteUrl}/book?canceled=1&orderId=${orderRef.id}`,
+      success_url: `${siteUrl}/book?success=1&orderId=${orderId}`,
+      cancel_url: `${siteUrl}/book?canceled=1&orderId=${orderId}`,
       metadata: {
-        orderId: orderRef.id,
+        orderId: orderId,
       },
     });
 

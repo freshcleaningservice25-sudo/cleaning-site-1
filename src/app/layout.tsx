@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fresh Cleaning",
+  title: "Go Clean",
   description: "Book professional home cleaning quickly and securely.",
 };
 
@@ -31,7 +31,7 @@ export default function RootLayout({
           <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
             <a href="/book" className="flex items-center gap-2">
               <span className="inline-block h-7 w-7 rounded-md bg-brand" aria-hidden />
-              <span className="text-xl font-semibold tracking-tight">Fresh</span>
+              <span className="text-xl font-semibold tracking-tight">Go Clean</span>
             </a>
             <nav className="text-sm flex gap-4">
               <a href="/book" className="hover:underline">Book now</a>
@@ -43,7 +43,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="border-t border-black/[.06] py-8 text-center text-sm text-black/60">
-          © {new Date().getFullYear()} Fresh Cleaning. All rights reserved.
+          © {new Date().getFullYear()} Go Clean. All rights reserved.
         </footer>
       </body>
     </html>
