@@ -1,7 +1,5 @@
-import { App, cert, getApps, initializeApp } from "firebase-admin/app";
+import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-
-let app: App | undefined;
 
 if (!getApps().length) {
   const projectId = process.env.FIREBASE_PROJECT_ID;
@@ -20,7 +18,7 @@ if (!getApps().length) {
     throw new Error("Missing Firebase Admin environment variables");
   }
 
-  app = initializeApp({
+  initializeApp({
     credential: cert({ projectId, clientEmail, privateKey }),
   });
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface Order {
@@ -27,11 +27,7 @@ export default function AdminDashboard() {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  async function fetchOrders() {
+  const fetchOrders = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/orders");
       if (res.status === 401) {
@@ -43,12 +39,16 @@ export default function AdminDashboard() {
       }
       const data = await res.json();
       setOrders(data.orders);
-    } catch (err) {
+    } catch {
       setError("Failed to load orders");
     } finally {
       setLoading(false);
     }
-  }
+  }, [router]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString("en-US", {

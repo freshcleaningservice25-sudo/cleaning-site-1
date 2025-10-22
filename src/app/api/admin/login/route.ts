@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const { password } = await req.json();
     
     if (password === ADMIN_PASSWORD) {
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       cookieStore.set("admin-auth", "true", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     } else {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

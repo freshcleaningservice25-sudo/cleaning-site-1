@@ -1,16 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-type ServiceType =
-  | "1 bedroom, 1 bathroom"
-  | "2 bedrooms, 1 bathroom"
-  | "3 bedrooms, 2 bathrooms";
-
-type CleaningHours = "2 hours" | "3 hours" | "4 hours";
-
-export default function BookPage() {
+function BookPageContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const search = useSearchParams();
   const submitted = search.get("success") === "1";
@@ -160,6 +153,14 @@ export default function BookPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function BookPage() {
+  return (
+    <Suspense fallback={<div className="max-w-2xl mx-auto">Loading...</div>}>
+      <BookPageContent />
+    </Suspense>
   );
 }
 

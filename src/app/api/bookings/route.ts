@@ -92,8 +92,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ checkoutUrl: session.url }, { status: 200 });
-  } catch (err: any) {
-    const message = err?.message || "Invalid request";
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Invalid request";
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
