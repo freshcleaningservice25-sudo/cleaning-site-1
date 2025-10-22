@@ -27,18 +27,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="border-b border-black/[.06] bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-10">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/book" className="flex items-center gap-2">
-              <span className="inline-block h-7 w-7 rounded-md bg-brand" aria-hidden />
-              <span className="text-xl font-semibold tracking-tight">Go Clean</span>
-            </a>
-            <nav className="text-sm flex gap-4">
-              <a href="/book" className="hover:underline">Book now</a>
-              <a href="/admin" className="hover:underline">Admin</a>
-            </nav>
-          </div>
-        </header>
         <main className="max-w-4xl mx-auto px-4 py-8">
           {children}
         </main>
