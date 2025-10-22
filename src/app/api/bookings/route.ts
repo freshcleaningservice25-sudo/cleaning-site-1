@@ -33,6 +33,10 @@ function getPriceCents(service: string, hours: string): number {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!stripe) {
+      return NextResponse.json({ error: "Stripe not configured" }, { status: 500 });
+    }
+
     const json = await req.json();
     const parsed = BookingSchema.parse(json);
 

@@ -3,6 +3,10 @@ import { stripe } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!stripe) {
+      return NextResponse.json({ error: "Stripe not configured" }, { status: 500 });
+    }
+
     const { amount, serviceData } = await req.json();
 
     const paymentIntent = await stripe.paymentIntents.create({
