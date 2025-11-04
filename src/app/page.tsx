@@ -78,14 +78,16 @@ export default function GoCleanWelcomeFinalBranded() {
             <p className="mt-6 text-xs" style={{ color: "#64748B" }}>Serving Chicago & suburbs • Residential • Commercial • Airbnb</p>
           </div>
           <div className="relative w-full lg:w-1/2">
-            <div className="aspect-[30/37] w-full rounded-3xl overflow-hidden border shadow-sm" style={{ borderColor: "#E2E8F0" }}>
+            <div className="w-full rounded-3xl overflow-hidden" style={{ border: 'none', outline: 'none' }}>
               <Image 
-                src="/images/clean-hero.png" 
+                src="/clean-hero-removebg-preview.png" 
                 alt="Professional cleaning service" 
                 width={1500}
                 height={1850}
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain"
+                style={{ border: 'none', outline: 'none' }}
                 priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
           </div>
