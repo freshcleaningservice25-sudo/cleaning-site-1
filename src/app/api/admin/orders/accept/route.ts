@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { db } from "@/lib/firebaseAdmin";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Send email notification to the client
-    if (process.env.RESEND_API_KEY && order?.email) {
+    if (resend && order?.email) {
       try {
         const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@yourdomain.com";
         
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
                 <p><strong>Amount:</strong> $${(order.amountCents / 100).toFixed(2)}</p>
               </div>
               
-              <p>We'll be in touch shortly to confirm the details and answer any questions you may have.</p>
+              <p>We&apos;ll be in touch shortly to confirm the details and answer any questions you may have.</p>
               
               <p>Thank you for choosing Go Clean USA!</p>
               
