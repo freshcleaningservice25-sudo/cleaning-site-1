@@ -66,7 +66,7 @@ export default function GoCleanWelcomeFinalBranded() {
       // Check if response is JSON
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
-        const text = await response.text();
+        await response.text();
         throw new Error("Server error. Please check your Firebase configuration.");
       }
 
@@ -194,7 +194,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <p className="text-xl font-semibold mb-8" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Because clean feels better.</p>
 
             <p className="text-lg leading-relaxed mb-10" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "90%" }}>
-              We're a Chicago-based, family-run cleaning team offering both eco-friendly and professional-grade cleaning solutions. Whether you prefer gentle, plant-based products or stronger commercial cleaners, we deliver the same quality, care, and professionalism every time.
+              We&apos;re a Chicago-based, family-run cleaning team offering both eco-friendly and professional-grade cleaning solutions. Whether you prefer gentle, plant-based products or stronger commercial cleaners, we deliver the same quality, care, and professionalism every time.
             </p>
             <div className="flex flex-wrap gap-4 mb-8 justify-center">
               <a 
@@ -351,7 +351,7 @@ export default function GoCleanWelcomeFinalBranded() {
         <div className="max-w-7xl mx-auto px-8 py-16">
           <h2 className="text-4xl font-bold text-center mb-4" style={{ color: "#0F172A" }}>Transparent Pricing</h2>
           <p className="text-lg text-center mb-12 max-w-2xl mx-auto" style={{ color: "#475569" }}>
-            Simple rates based on your home size. Choose eco or regular cleaning — we'll confirm exact price after photos or walkthrough.
+            Simple rates based on your home size. Choose eco or regular cleaning — we&apos;ll confirm exact price after photos or walkthrough.
           </p>
           <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto mb-8">
             {[
@@ -376,7 +376,7 @@ export default function GoCleanWelcomeFinalBranded() {
             ))}
           </div>
           <p className="text-sm text-center max-w-2xl mx-auto" style={{ color: "#64748B" }}>
-            Not every home can be cleaned 100% with eco-only products — and that's okay. If your space needs stronger solutions, we'll let you know first and use them safely.
+            Not every home can be cleaned 100% with eco-only products — and that&apos;s okay. If your space needs stronger solutions, we&apos;ll let you know first and use them safely.
           </p>
         </div>
       </section>
@@ -407,7 +407,7 @@ export default function GoCleanWelcomeFinalBranded() {
           </div>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg leading-relaxed" style={{ color: "#334155", lineHeight: "1.7" }}>
-              Whether it's your family home, a busy office, or your Airbnb rental, we treat every space as if it were our own — with care, responsibility, and attention to detail. Because for us, cleaning isn't just about shiny floors — it's about helping Chicago families live healthier, happier lives.
+              Whether it&apos;s your family home, a busy office, or your Airbnb rental, we treat every space as if it were our own — with care, responsibility, and attention to detail. Because for us, cleaning isn&apos;t just about shiny floors — it&apos;s about helping Chicago families live healthier, happier lives.
             </p>
           </div>
         </div>

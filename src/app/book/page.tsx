@@ -67,7 +67,7 @@ export default function BookPage() {
       // Check if response is JSON
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
-        const text = await response.text();
+        await response.text();
         throw new Error("Server error. Please check your Firebase configuration.");
       }
 
@@ -160,7 +160,7 @@ export default function BookPage() {
           <div className="text-center mb-12">
             <h1 className="text-5xl font-bold tracking-tight mb-6" style={{ color: "#0F172A" }}>Book Your Cleaning Service</h1>
             <p className="text-lg leading-relaxed" style={{ color: "#475569" }}>
-              Tell us about your rooms, schedule and priorities. We'll tailor a plan that feels just right.
+              Tell us about your rooms, schedule and priorities. We&apos;ll tailor a plan that feels just right.
             </p>
           </div>
 

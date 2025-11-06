@@ -31,9 +31,7 @@ interface PaymentModalProps {
 }
 
 // Inner component that uses Stripe hooks
-function CheckoutForm({ serviceData, requestId, price, onClose }: { 
-  serviceData?: PaymentModalProps['serviceData'], 
-  requestId?: string | null,
+function CheckoutForm({ price, onClose }: { 
   price: number,
   onClose: () => void 
 }) {
@@ -266,8 +264,6 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
         ) : clientSecret ? (
           <Elements stripe={stripePromise} options={options}>
             <CheckoutForm 
-              serviceData={serviceData} 
-              requestId={requestId} 
               price={price}
               onClose={onClose}
             />
