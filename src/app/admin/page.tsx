@@ -17,6 +17,7 @@ interface Order {
   amountCents: number;
   createdAt: string;
   paidAt?: string;
+  acceptedAt?: string;
   notes?: string;
 }
 
@@ -66,9 +67,38 @@ export default function AdminDashboard() {
 
   function getStatusColor(status: string) {
     switch (status) {
+      case "accepted": return "text-blue-600 bg-blue-50";
       case "paid": return "text-green-600 bg-green-50";
       case "pending": return "text-yellow-600 bg-yellow-50";
+      case "completed": return "text-purple-600 bg-purple-50";
       default: return "text-gray-600 bg-gray-50";
+    }
+  }
+
+  async function handleAcceptOrder(orderId: string) {
+    if (!confirm("Are you sure you want to accept this order? An email will be sent to the client.")) {
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/admin/orders/accept", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ error: "Unknown error" }));
+        throw new Error(errorData.error || "Failed to accept order");
+      }
+
+      // Refresh orders list
+      await fetchOrders();
+      alert("Order accepted! Email sent to client.");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to accept order. Please try again.";
+      alert(errorMessage);
+      console.error("Accept order error:", err);
     }
   }
 
@@ -156,12 +186,22 @@ export default function AdminDashboard() {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <button
-                        onClick={() => setSelectedOrder(order)}
-                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                      >
-                        View Details
-                      </button>
+                      <div className="flex gap-2 items-center">
+                        <button
+                          onClick={() => setSelectedOrder(order)}
+                          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                        >
+                          View Details
+                        </button>
+                        {(order.status === "paid" || order.status === "pending") && (
+                          <button
+                            onClick={() => handleAcceptOrder(order.id)}
+                            className="text-sm font-medium px-3 py-1 rounded bg-green-600 text-white hover:bg-green-700"
+                          >
+                            Accept
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -250,6 +290,20 @@ export default function AdminDashboard() {
                     <p className="text-lg">{formatDate(selectedOrder.createdAt)}</p>
                   </div>
                 </div>
+
+                {(selectedOrder.status === "paid" || selectedOrder.status === "pending") && (
+                  <div className="mt-6 pt-6 border-t">
+                    <button
+                      onClick={async () => {
+                        await handleAcceptOrder(selectedOrder.id);
+                        setSelectedOrder(null);
+                      }}
+                      className="w-full px-6 py-3 rounded-xl text-white font-semibold bg-green-600 hover:bg-green-700 transition"
+                    >
+                      Accept Order & Send Email
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

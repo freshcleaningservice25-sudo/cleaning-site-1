@@ -7,13 +7,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Stripe not configured" }, { status: 500 });
     }
 
-    const { amount, serviceData } = await req.json();
+    const { amount, serviceData, requestId } = await req.json();
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: "usd",
       metadata: {
         serviceData: JSON.stringify(serviceData),
+        requestId: requestId || "",
       },
     });
 

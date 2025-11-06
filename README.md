@@ -2,7 +2,42 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set Up Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Then fill in the values:
+
+**Firebase Admin SDK:**
+- Go to [Firebase Console](https://console.firebase.google.com/)
+- Select your project (or create a new one)
+- Go to Project Settings > Service Accounts
+- Click "Generate New Private Key" to download the service account JSON
+- Extract the following values:
+  - `FIREBASE_PROJECT_ID`: Your project ID
+  - `FIREBASE_CLIENT_EMAIL`: The `client_email` from the JSON
+  - `FIREBASE_PRIVATE_KEY`: The `private_key` from the JSON (keep the quotes and `\n` characters)
+
+**Other Required Variables:**
+- `ADMIN_PASSWORD`: Password for admin login
+- `RESEND_API_KEY`: Get from [Resend.com](https://resend.com) (for email notifications)
+- `RESEND_FROM_EMAIL`: Your verified email address in Resend
+- `STRIPE_SECRET_KEY`: Get from [Stripe Dashboard](https://dashboard.stripe.com/apikeys)
+- `STRIPE_WEBHOOK_SECRET`: Get from Stripe Webhooks
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: Get from Stripe Dashboard
+- `NEXT_PUBLIC_SITE_URL`: Your site URL (use `http://localhost:3000` for local development)
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev

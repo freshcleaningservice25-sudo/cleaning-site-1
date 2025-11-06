@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { db } from "@/lib/firebaseAdmin";
 
 export async function GET() {
   try {
@@ -10,9 +11,17 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // For now, return empty orders array
-    // You can implement proper order storage later
-    return NextResponse.json({ orders: [] });
+    // Fetch orders from Firebase, ordered by creation date (newest first)
+    const ordersSnapshot = await db.collection("orders")
+      .orderBy("createdAt", "desc")
+      .get();
+    
+    const orders = ordersSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return NextResponse.json({ orders });
   } catch (err) {
     console.error("Error fetching orders:", err);
     return NextResponse.json({ error: "Failed to fetch orders" }, { status: 500 });

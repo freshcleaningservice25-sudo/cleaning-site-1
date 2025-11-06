@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import { useState, useEffect } from "react";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_51S86DSDfH7qBRYLsbJQWIHFFCFTtdK2T5p34MLRDLh5Ugu4vQlN3SoFpNpi6YGTTQHADJTtO26fWi5SRMJUMnI0W00qTJGAxcC");
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -19,95 +20,193 @@ interface PaymentModalProps {
     bathrooms: number;
     date: string;
     time: string;
+    ecoCleaning: boolean;
+    additionalServices?: string[];
     serviceType: string;
     duration: string;
     service: string;
     message: string;
   };
+  requestId?: string | null;
 }
 
-export default function PaymentModal({ isOpen, onClose, serviceData }: PaymentModalProps) {
+// Inner component that uses Stripe hooks
+function CheckoutForm({ serviceData, requestId, price, onClose }: { 
+  serviceData?: PaymentModalProps['serviceData'], 
+  requestId?: string | null,
+  price: number,
+  onClose: () => void 
+}) {
+  const stripe = useStripe();
+  const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Calculate price based on service type and duration
-  const calculatePrice = () => {
-    if (!serviceData?.serviceType || !serviceData?.duration) return 15000; // Default $150
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const serviceType = serviceData.serviceType;
-    const duration = serviceData.duration;
-
-    // Pricing logic based on service type and duration
-    if (serviceType === "Regular") {
-      return duration === "2.5 hours" ? 12500 : 18900; // $125 or $189
-    } else if (serviceType === "Deep") {
-      return duration === "2.5 hours" ? 18900 : 25000; // $189 or $250
-    } else if (serviceType === "Move-in/out") {
-      return duration === "2.5 hours" ? 25000 : 40000; // $250 or $400
-    } else if (serviceType === "Junk Removal") {
-      return duration === "2.5 hours" ? 10000 : 30000; // $100 or $300
-    } else if (serviceType === "Windows") {
-      return duration === "2.5 hours" ? 12000 : 20000; // $120 or $200
+    if (!stripe || !elements) {
+      return;
     }
+
+    setIsProcessing(true);
+    setErrorMessage(null);
+
+    try {
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/payment-success`,
+        },
+        redirect: 'if_required',
+      });
+
+      if (error) {
+        setErrorMessage(error.message || "An error occurred");
+        setIsProcessing(false);
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        alert("Payment successful! Redirecting...");
+        onClose();
+        window.location.href = `${window.location.origin}/payment-success`;
+      }
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : "An error occurred");
+      setIsProcessing(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement />
+      {errorMessage && (
+        <div className="text-red-600 text-sm mt-2">{errorMessage}</div>
+      )}
+      <button
+        type="submit"
+        disabled={!stripe || isProcessing}
+        className="w-full py-4 rounded-2xl text-white font-bold shadow-lg transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl"
+        style={{ backgroundColor: "#4CAF50" }}
+      >
+        {isProcessing ? "Processing..." : `Pay $${(price / 100).toFixed(2)}`}
+      </button>
+    </form>
+  );
+}
+
+export default function PaymentModal({ isOpen, onClose, serviceData, requestId }: PaymentModalProps) {
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Additional services pricing and names
+  const additionalServicesPricing: Record<string, number> = {
+    oven: 3800, // $38
+    refrigerator: 3800, // $38
+    cabinets: 4000, // $40
+    microwave: 1600, // $16
+    windows: 4900, // $49
+    blinds: 1100, // $11
+    balcony: 3200, // $32
+    laundry: 2200, // $22
+  };
+
+  const additionalServicesNames: Record<string, string> = {
+    oven: "Inside the oven",
+    refrigerator: "Inside the refrigerator",
+    cabinets: "Inside kitchen cabinets",
+    microwave: "Inside the microwave",
+    windows: "Windows from inside (up to 6 pcs)",
+    blinds: "Blinds/slats",
+    balcony: "Balcony/Patio",
+    laundry: "Washing/Drying/Folding",
+  };
+
+  // Calculate price based on bedrooms, bathrooms, eco cleaning, and additional services
+  const calculatePrice = () => {
+    if (!serviceData?.bedrooms || !serviceData?.bathrooms) return 13900; // Default $139
+
+    const bedrooms = serviceData.bedrooms;
+    const bathrooms = serviceData.bathrooms;
+    const ecoCleaning = serviceData.ecoCleaning || false;
+    const additionalServices = serviceData.additionalServices || [];
+
+    let basePrice = 0;
+
+    // Pricing based on bedrooms and bathrooms
+    if (bedrooms === 1 && bathrooms === 1) {
+      basePrice = 13900; // $139
+    } else if (bedrooms === 2 && bathrooms === 1) {
+      basePrice = 16900; // $169
+    } else if (bedrooms === 3 && bathrooms === 2) {
+      basePrice = 21900; // $219
+    } else {
+      // For other combinations, calculate based on size
+      // Base: $139 for 1 bed/1 bath
+      // Additional bedroom: +$30
+      // Additional bathroom: +$20
+      basePrice = 13900 + ((bedrooms - 1) * 3000) + ((bathrooms - 1) * 2000);
+    }
+
+    // Add 10% premium for eco cleaning
+    if (ecoCleaning) {
+      basePrice = Math.round(basePrice * 1.1);
+    }
+
+    // Add additional services prices
+    additionalServices.forEach((serviceId: string) => {
+      if (additionalServicesPricing[serviceId]) {
+        basePrice += additionalServicesPricing[serviceId];
+      }
+    });
     
-    return 15000; // Default fallback
+    return basePrice;
   };
 
   const price = calculatePrice();
   const priceInDollars = (price / 100).toFixed(2);
 
-  const handlePayment = async () => {
-    setIsProcessing(true);
-    
-    try {
-      const stripe = await stripePromise;
-      
-      // Create a payment intent on your server
-      const response = await fetch("/api/create-payment-intent", {
+  // Create payment intent when modal opens
+  useEffect(() => {
+    if (isOpen && !clientSecret) {
+      setIsLoading(true);
+      fetch("/api/create-payment-intent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: price, // Dynamic price based on service type and duration
+          amount: price,
           serviceData: serviceData,
+          requestId: requestId,
         }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create payment intent");
-      }
-
-      const { clientSecret } = await response.json();
-
-      if (!clientSecret) {
-        throw new Error("No client secret received");
-      }
-
-      // Confirm the payment
-      const result = await stripe?.confirmPayment({
-        clientSecret,
-        confirmParams: {
-          return_url: `${window.location.origin}/payment-success`,
-        },
-      });
-
-      if (result?.error) {
-        console.error("Payment failed:", result.error);
-        alert(`Payment failed: ${result.error.message || "Unknown error"}`);
-      } else {
-        // Payment succeeded
-        onClose();
-      }
-    } catch (error) {
-      console.error("Payment error:", error);
-      alert(`Payment error: ${error instanceof Error ? error.message : "Unknown error occurred"}`);
-    } finally {
-      setIsProcessing(false);
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.clientSecret) {
+            setClientSecret(data.clientSecret);
+          } else {
+            alert(data.error || "Failed to create payment intent");
+            onClose();
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Failed to initialize payment");
+          onClose();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
-  };
+  }, [isOpen, price, serviceData, requestId, clientSecret, onClose]);
 
   if (!isOpen) return null;
+
+  const options: StripeElementsOptions = {
+    clientSecret,
+    appearance: {
+      theme: 'stripe',
+    },
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -126,11 +225,26 @@ export default function PaymentModal({ isOpen, onClose, serviceData }: PaymentMo
           <div className="bg-gray-50 p-4 rounded-xl">
             <h3 className="font-semibold mb-2">Service Summary</h3>
             <p className="text-sm text-gray-600">
-              {serviceData?.serviceType || "Regular"} - {serviceData?.duration || "2.5 hours"}
+              {serviceData?.serviceType || "Regular"}
             </p>
             <p className="text-sm text-gray-600">
               {serviceData?.service || "Residential Cleaning"}
             </p>
+            {serviceData?.ecoCleaning && (
+              <p className="text-sm font-medium" style={{ color: "#4CAF50" }}>
+                🌿 Eco Cleaning Enabled
+              </p>
+            )}
+            {serviceData?.additionalServices && serviceData.additionalServices.length > 0 && (
+              <div className="mt-2">
+                <p className="text-sm font-medium mb-1">Additional Services:</p>
+                {serviceData.additionalServices.map((serviceId: string) => (
+                  <p key={serviceId} className="text-sm text-gray-600 ml-2">
+                    • {additionalServicesNames[serviceId] || serviceId} (+${((additionalServicesPricing[serviceId] || 0) / 100).toFixed(2)})
+                  </p>
+                ))}
+              </div>
+            )}
             <p className="text-sm text-gray-600">
               {serviceData?.bedrooms} bedrooms, {serviceData?.bathrooms} bathrooms
             </p>
@@ -145,14 +259,24 @@ export default function PaymentModal({ isOpen, onClose, serviceData }: PaymentMo
           </div>
         </div>
 
-        <button
-          onClick={handlePayment}
-          disabled={isProcessing}
-          className="w-full py-4 rounded-2xl text-white font-semibold shadow transition text-lg disabled:opacity-50"
-          style={{ backgroundColor: "#4CAF50" }}
-        >
-          {isProcessing ? "Processing..." : `Pay $${priceInDollars}`}
-        </button>
+        {isLoading ? (
+          <div className="text-center py-8">
+            <p>Loading payment form...</p>
+          </div>
+        ) : clientSecret ? (
+          <Elements stripe={stripePromise} options={options}>
+            <CheckoutForm 
+              serviceData={serviceData} 
+              requestId={requestId} 
+              price={price}
+              onClose={onClose}
+            />
+          </Elements>
+        ) : (
+          <div className="text-center py-8 text-red-600">
+            <p>Failed to load payment form</p>
+          </div>
+        )}
 
         <p className="text-xs text-gray-500 text-center mt-4">
           Secure payment powered by Stripe

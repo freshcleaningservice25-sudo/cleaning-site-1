@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   description: "Book professional home cleaning quickly and securely.",
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,13 +33,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ minWidth: '1200px', overflowX: 'auto' }}
       >
-        <main className="max-w-4xl mx-auto px-4 py-8">
+        <main style={{ width: '100%' }}>
           {children}
         </main>
-        <footer className="border-t border-black/[.06] py-8 text-center text-sm text-black/60">
-          © {new Date().getFullYear()} Go Clean. All rights reserved.
-        </footer>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { stripe } from "@/lib/stripe";
+import { db } from "@/lib/firebaseAdmin";
 
 const BookingSchema = z.object({
   firstName: z.string().min(1),
@@ -45,30 +46,31 @@ export async function POST(req: NextRequest) {
     const priceCents = getPriceCents(service, hours);
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-    // Generate a simple order ID for now (without Firebase)
+    // Generate a simple order ID
     const orderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     const order = {
       id: orderId,
-      status: "pending",
+      status: "pending", // pending -> paid -> accepted -> completed
       firstName,
       lastName,
       phone,
       email,
-      address,
+      address: `${address}${additionalAddress ? `, ${additionalAddress}` : ''}`,
       city,
       zipCode,
-      additionalAddress,
       service,
       hours,
       datetime,
-      notes,
+      notes: notes || "",
       amountCents: priceCents,
       createdAt: new Date().toISOString(),
+      paidAt: null,
+      acceptedAt: null,
     };
     
-    // For now, we'll just log the order (you can implement proper storage later)
-    console.log("New booking order:", order);
+    // Save order to Firebase
+    await db.collection("orders").doc(orderId).set(order);
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
