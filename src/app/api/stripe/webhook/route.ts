@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as { metadata?: { orderId?: string } };
     const orderId = session.metadata?.orderId;
-    if (orderId) {
+    if (orderId && db) {
       // Update order status to "paid" in Firebase
       await db.collection("orders").doc(orderId).update({
         status: "paid",
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as { metadata?: { requestId?: string } };
     const requestId = paymentIntent.metadata?.requestId;
-    if (requestId) {
+    if (requestId && db) {
       // Update order status to "paid" in Firebase
       await db.collection("orders").doc(requestId).update({
         status: "paid",

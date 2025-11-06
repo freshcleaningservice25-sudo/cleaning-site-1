@@ -11,6 +11,10 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    if (!db) {
+      return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+    }
+
     // Fetch orders from Firebase, ordered by creation date (newest first)
     const ordersSnapshot = await db.collection("orders")
       .orderBy("createdAt", "desc")

@@ -69,6 +69,10 @@ export async function POST(req: NextRequest) {
       acceptedAt: null,
     };
     
+    if (!db) {
+      return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+    }
+    
     // Save order to Firebase
     await db.collection("orders").doc(orderId).set(order);
 

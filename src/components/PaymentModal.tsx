@@ -200,7 +200,7 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
   if (!isOpen) return null;
 
   const options: StripeElementsOptions = {
-    clientSecret,
+    clientSecret: clientSecret || undefined,
     appearance: {
       theme: 'stripe',
     },
