@@ -25,8 +25,8 @@ export default function BookPage() {
     ecoCleaning: false,
     additionalServicesEnabled: false,
     additionalServices: [] as string[],
-    serviceType: "",
-    duration: "",
+    serviceType: "Standard",
+    duration: "One-time",
     service: "Residential Cleaning",
     message: ""
   });
@@ -125,6 +125,57 @@ export default function BookPage() {
     });
   };
 
+  // Calculate price based on current selections
+  const calculatePrice = () => {
+    const bedrooms = Number(formData.bedrooms) || 1;
+    const bathrooms = Number(formData.bathrooms) || 1;
+    let basePrice = 0;
+
+    // Pricing based on bedrooms and bathrooms
+    if (bedrooms === 1 && bathrooms === 1) {
+      basePrice = 139; // $139
+    } else if (bedrooms === 2 && bathrooms === 1) {
+      basePrice = 169; // $169
+    } else if (bedrooms === 3 && bathrooms === 2) {
+      basePrice = 219; // $219
+    } else {
+      // For other combinations, calculate based on size
+      // Base: $139 for 1 bed/1 bath
+      // Additional bedroom: +$30
+      // Additional bathroom: +$20
+      basePrice = 139 + ((bedrooms - 1) * 30) + ((bathrooms - 1) * 20);
+    }
+
+    // Add 10% premium for eco cleaning
+    if (formData.ecoCleaning) {
+      basePrice = Math.round(basePrice * 1.1);
+    }
+
+    // Add additional services prices
+    const additionalServicesPricing: Record<string, number> = {
+      oven: 38,
+      refrigerator: 38,
+      cabinets: 40,
+      microwave: 16,
+      windows: 49,
+      blinds: 11,
+      balcony: 32,
+      laundry: 22,
+    };
+
+    if (formData.additionalServices && formData.additionalServices.length > 0) {
+      formData.additionalServices.forEach((serviceId: string) => {
+        if (additionalServicesPricing[serviceId]) {
+          basePrice += additionalServicesPricing[serviceId];
+        }
+      });
+    }
+    
+    return basePrice;
+  };
+
+  const estimatedPrice = calculatePrice();
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: brand.bg, minWidth: '1200px' }}>
       {/* Header */}
@@ -151,7 +202,7 @@ export default function BookPage() {
           >
             Back to Home
           </Link>
-        </div>
+            </div>
       </header>
 
       {/* Booking Form Section */}
@@ -303,7 +354,7 @@ export default function BookPage() {
                     style={{ borderColor: "#E2E8F0" }} 
                     required
                   />
-                </div>
+            </div>
                 <div>
                   <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Preferred Time*</label>
                   <input 
@@ -315,27 +366,81 @@ export default function BookPage() {
                     style={{ borderColor: "#E2E8F0" }} 
                     required
                   />
+            </div>
+          </div>
+
+              {/* Service Type and Frequency Section */}
+              <div>
+                <h3 className="text-lg font-bold mb-4" style={{ color: "#0F172A" }}>2) Type of Cleaning and Periodicity</h3>
+                
+                <div className="mb-4 flex items-center gap-4">
+                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Type:</label>
+                  <div className="flex flex-1 rounded-lg overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFFFF" }}>
+                    {["Standard", "Deep", "Move-In/Out"].map((type, index) => (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, serviceType: type }))}
+                        className="flex-1 px-5 py-2.5 font-semibold transition-all"
+                        style={{
+                          backgroundColor: formData.serviceType === type ? "#0F172A" : "#FFFFFF",
+                          borderRight: index < 2 ? "1px solid #E2E8F0" : "none",
+                          color: formData.serviceType === type ? "#FFFFFF" : "#0F172A",
+                          cursor: "pointer",
+                          outline: "none"
+                        }}
+                      >
+                        {type}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              {/* Eco Cleaning Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl border" style={{ borderColor: "#E2E8F0", backgroundColor: formData.ecoCleaning ? "#F0FDF4" : "#FAFAFA" }}>
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">🌿</span>
-                  <label className="text-base font-semibold" style={{ color: "#0F172A" }}>Eco Cleaning</label>
-                  <span className="text-sm" style={{ color: "#64748B" }}>
-                    {formData.ecoCleaning ? "Enabled" : "Disabled"}
-                  </span>
+
+                <div className="mb-4 flex items-center gap-4">
+                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Frequency:</label>
+                  <div className="flex gap-2 flex-1 flex-wrap">
+                    {["One-time", "Monthly", "Once every 2 weeks", "Weekly"].map((freq) => (
+                      <button
+                        key={freq}
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, duration: freq }))}
+                        className="px-5 py-2.5 rounded-lg font-semibold transition-all border"
+                        style={{
+                          backgroundColor: formData.duration === freq ? "#0F172A" : "#FFFFFF",
+                          borderColor: formData.duration === freq ? "#0F172A" : "#E2E8F0",
+                          borderWidth: "1px",
+                          color: formData.duration === freq ? "#FFFFFF" : "#0F172A",
+                          cursor: "pointer"
+                        }}
+                      >
+                        {freq}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="ecoCleaning"
-                    checked={formData.ecoCleaning}
-                    onChange={handleInputChange}
-                    className="sr-only peer"
-                  />
-                  <div className="w-14 h-7 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
-                </label>
+
+                <div className="mb-4 flex items-center gap-4">
+                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Products:</label>
+                  <div className="flex gap-2 flex-1">
+                    {["Regular", "Eco"].map((product) => (
+                      <button
+                        key={product}
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, ecoCleaning: product === "Eco" }))}
+                        className="px-5 py-2.5 rounded-lg font-semibold transition-all border"
+                        style={{
+                          backgroundColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#FFFFFF",
+                          borderColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#E2E8F0",
+                          borderWidth: "1px",
+                          color: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#FFFFFF" : "#0F172A",
+                          cursor: "pointer"
+                        }}
+                      >
+                        {product}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Additional Services Toggle */}
@@ -396,38 +501,16 @@ export default function BookPage() {
                 </div>
               )}
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Service Type</label>
-                  <select 
-                    name="serviceType"
-                    value={formData.serviceType || ""}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }}
-                    required
-                  >
-                    <option value="">Select Type</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Deep">Deep</option>
-                    <option value="Move-in/out">Move-in/out</option>
-                    <option value="Junk Removal">Junk Removal</option>
-                    <option value="Windows">Windows</option>
-                  </select>
+              {/* Pricing Estimate Section */}
+              <div className="rounded-xl p-6 border" style={{ backgroundColor: "#F0FDF4", borderColor: "#86EFAC" }}>
+                <div className="mb-3">
+                  <span className="text-lg font-bold" style={{ color: "#0F172A" }}>
+                    Estimate: ${estimatedPrice} / visit
+                  </span>
                 </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Service</label>
-                  <select 
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }}
-                  >
-                    <option>Residential Cleaning</option>
-                    <option>Commercial Cleaning</option>
-                    <option>Airbnb / Turnover</option>
-                  </select>
+                <div className="text-sm space-y-1" style={{ color: "#475569" }}>
+                  <p>Basic materials and inventory are included. Eco-friendly products are available at the client&apos;s choice.</p>
+                  <p>The final price is confirmed by photo/video or upon inspection.</p>
                 </div>
               </div>
               <div>
@@ -440,8 +523,8 @@ export default function BookPage() {
                   className="w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-green-500 transition-all resize-none" 
                   style={{ borderColor: "#E2E8F0" }} 
                   placeholder="Rooms, pets, floors, preferred days…"
-                />
-              </div>
+              />
+            </div>
               <button 
                 type="submit" 
                 disabled={isSubmitting}

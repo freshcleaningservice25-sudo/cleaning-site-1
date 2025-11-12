@@ -2,187 +2,218 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import PaymentModal from "../components/PaymentModal";
 
 export default function GoCleanWelcomeFinalBranded() {
   const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [requestId, setRequestId] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    zipCode: "",
-    bedrooms: 2,
-    bathrooms: 1,
-    date: "",
-    time: "",
-    ecoCleaning: false,
-    additionalServicesEnabled: false,
-    additionalServices: [] as string[],
-    serviceType: "",
-    duration: "",
-    service: "Residential Cleaning",
-    message: ""
-  });
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
 
-  const additionalServicesList = [
-    { id: "oven", name: "Inside the oven", price: 38, description: "Deep cleaning (inside/outside), 30-45 min." },
-    { id: "refrigerator", name: "Inside the refrigerator", price: 38, description: "Shelf removal, washing/sanitization, 30-45 min." },
-    { id: "cabinets", name: "Inside kitchen cabinets", price: 40, description: "Removing/returning dishes, wiping shelves", priceNote: "+ / kitchen" },
-    { id: "microwave", name: "Inside the microwave", price: 16, description: "Washing inside/outside, grease removal." },
-    { id: "windows", name: "Windows from inside (up to 6 pcs)", price: 49, description: "Glass/sills/frames as accessible." },
-    { id: "blinds", name: "Blinds/slats", price: 11, description: "Price per window / set of blinds." },
-    { id: "balcony", name: "Balcony/Patio", price: 32, description: "Outdoor space cleaning." },
-    { id: "laundry", name: "Washing/Drying/Folding", price: 22, description: "Laundry service." },
+  const faqs = [
+    {
+      question: "What's the difference between Standard and Deep Cleaning?",
+      answer: "Standard Cleaning covers regular maintenance — dusting, vacuuming, mopping, bathrooms, and kitchen surfaces. Deep Cleaning includes extra detailing: baseboards, inside appliances, doors, vents, and areas behind furniture."
+    },
+    {
+      question: "What's the difference between Eco and Regular cleaning products?",
+      answer: "We offer both options: Eco Cleaning uses plant-based, biodegradable, pet & child safe products. Regular Cleaning uses professional-grade products for heavy-duty tasks. You can choose either or let us mix both as needed."
+    },
+    {
+      question: "Do I need to provide cleaning supplies or equipment?",
+      answer: "No need — we bring everything ourselves. We use our own professional tools, vacuums, mops, and eco-friendly products. If you have your favorite products or want us to use yours — no problem, we can do it your way."
+    },
+    {
+      question: "How long will the cleaning take?",
+      answer: "It depends on the size and condition of your home: 1 bed / 1 bath — about 2–3 hours, 2 bed / 1 bath — about 3–4 hours, 3 bed / 2 bath — about 4–5 hours. Times may vary depending on cleaning type and number of cleaners."
+    },
+    {
+      question: "How do I get an estimate or book a cleaning?",
+      answer: "You can: Click \"Book Cleaning\" on our website, text or call us at (773) 397-7380, or request a quote via our online form."
+    },
+    {
+      question: "How do payments work?",
+      answer: "We accept Zelle, Venmo, Cash, and Card. Payment is due after cleaning is completed."
+    },
+    {
+      question: "Are your products safe for pets and kids?",
+      answer: "Yes! Our eco line is made from natural, non-toxic ingredients — perfect for families with kids or pets."
+    },
+    {
+      question: "Do you clean Airbnbs or offices?",
+      answer: "Absolutely. We specialize in Residential, Commercial, and Airbnb turnover cleaning — including linens, restocking, and photo-ready finishing."
+    },
+    {
+      question: "What if I'm not home during cleaning?",
+      answer: "No problem! Just leave us instructions on how to access your home (door code, key, or concierge). We'll lock up securely when done."
+    }
   ];
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setShowSuccessMessage(false);
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
 
-    try {
-      // Convert bedrooms and bathrooms to numbers
-      const dataToSend = {
-        ...formData,
-        bedrooms: Number(formData.bedrooms),
-        bathrooms: Number(formData.bathrooms),
-      };
-
-      // First, submit the request to admin
-      const response = await fetch("/api/requests", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      // Check if response is JSON
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        await response.text();
-        throw new Error("Server error. Please check your Firebase configuration.");
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit request");
-      }
-
-      setRequestId(data.requestId);
-
-      // Show success message
-      setShowSuccessMessage(true);
-      
-      // Wait 2 seconds, then show payment modal
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-        setIsPaymentOpen(true);
-      }, 2000);
-
-    } catch (error) {
-      console.error("Error submitting request:", error);
-      const errorMessage = error instanceof Error 
-        ? error.message 
-        : "Failed to submit request. Please try again.";
-      alert(errorMessage);
-    } finally {
-      setIsSubmitting(false);
+  // Before/After work examples - update with your actual image paths
+  // Format: { before: "/our works/before1.jpg", after: "/our works/after1.jpg", type: "stacked" | "split" }
+  const workExamples = [
+    {
+      before: "/our works/photo_2025-11-12 15.25.45.jpeg",
+      after: "/our works/photo_2025-11-12 15.25.48.jpeg",
+      type: "split" // or "stacked" for top-bottom
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.25.53.jpeg",
+      after: "/our works/photo_2025-11-12 15.25.55.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.25.58.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.01.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.04.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.13.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.15.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.18.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.22.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.24.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.29.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.31.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.34.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.36.jpeg",
+      type: "split"
+    },
+    {
+      before: "/our works/photo_2025-11-12 15.26.38.jpeg",
+      after: "/our works/photo_2025-11-12 15.26.43.jpeg",
+      type: "split"
     }
+  ];
+
+  const nextWork = () => {
+    setCurrentWorkIndex((prev) => (prev + 1) % workExamples.length);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const handleAdditionalServiceToggle = (serviceId: string) => {
-    setFormData(prev => {
-      const currentServices = prev.additionalServices || [];
-      if (currentServices.includes(serviceId)) {
-        return {
-          ...prev,
-          additionalServices: currentServices.filter(id => id !== serviceId)
-        };
-      } else {
-        return {
-          ...prev,
-          additionalServices: [...currentServices, serviceId]
-        };
-      }
-    });
+  const prevWork = () => {
+    setCurrentWorkIndex((prev) => (prev - 1 + workExamples.length) % workExamples.length);
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF", color: brand.text, minWidth: '1200px' }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", color: brand.text, minWidth: '1200px' }}>
       {/* Header */}
-      <header className="sticky top-0 z-20 backdrop-blur-sm border-b" style={{ backgroundColor: "rgba(255,255,255,0.95)", borderColor: "#E5E7EB" }}>
-        <div className="w-full px-8 py-5 flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-xl overflow-hidden flex items-center justify-center">
+      <header className="sticky top-0 z-20 backdrop-blur-sm border-b shadow-sm" style={{ backgroundColor: "#FAF8F4", borderColor: "#E5E7EB" }}>
+        <div className="w-full px-4 py-4 flex items-center justify-between" style={{ maxWidth: '100%' }}>
+          <div className="flex items-center gap-3">
+            <div className="h-28 w-28 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0">
               <Image 
                 src="/logo.png" 
                 alt="Go Clean USA Logo" 
-                width={64}
-                height={64}
+                width={112}
+                height={112}
                 className="w-full h-full object-contain"
               />
             </div>
             <div>
-              <p className="text-xl font-bold tracking-tight" style={{ color: "#0F172A" }}>Go Clean USA</p>
-              <p className="text-sm font-semibold" style={{ color: "#4CAF50" }}>Because clean feels better.</p>
+              <p className="text-2xl font-bold tracking-tight leading-tight mb-0.5" style={{ color: "#0F172A" }}>Go Clean USA</p>
+              <p className="text-sm font-semibold leading-tight" style={{ color: "#4CAF50" }}>Because clean feels better.</p>
             </div>
           </div>
-          <nav className="flex items-center gap-8 text-base">
-            <a 
-              href="#hero" 
-              className="font-medium transition-colors duration-200 hover:text-green-600" 
-              style={{ color: "#374151" }}
-            >
-              About Us
-            </a>
-            <a 
-              href="#services" 
-              className="font-medium transition-colors duration-200 hover:text-green-600" 
-              style={{ color: "#374151" }}
-            >
-              Services
-            </a>
-            <a 
-              href="#approach" 
-              className="font-medium transition-colors duration-200 hover:text-green-600" 
-              style={{ color: "#374151" }}
-            >
-              Our Approach
-            </a>
-            <a 
-              href="#contact" 
-              className="font-medium transition-colors duration-200 hover:text-green-600" 
-              style={{ color: "#374151" }}
-            >
-              Contact
-            </a>
+          <div className="flex items-center gap-14">
+            <nav className="flex items-center gap-14 text-base">
+              <a 
+                href="#hero" 
+                className="font-semibold transition-all duration-200 relative py-2 group" 
+                style={{ color: "#374151" }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#4CAF50";
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#374151";
+                }}
+              >
+                <span className="relative">
+                  About Us
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                </span>
+              </a>
+              <a 
+                href="#services" 
+                className="font-semibold transition-all duration-200 relative py-2 group" 
+                style={{ color: "#374151" }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#4CAF50";
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#374151";
+                }}
+              >
+                <span className="relative">
+                  Services
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                </span>
+              </a>
+              <a 
+                href="#approach" 
+                className="font-semibold transition-all duration-200 relative py-2 group" 
+                style={{ color: "#374151" }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#4CAF50";
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#374151";
+                }}
+              >
+                <span className="relative">
+                  Our Approach
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                </span>
+              </a>
+              <a 
+                href="#contact" 
+                className="font-semibold transition-all duration-200 relative py-2 group" 
+                style={{ color: "#374151" }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#4CAF50";
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLAnchorElement;
+                  target.style.color = "#374151";
+                }}
+              >
+                <span className="relative">
+                  Contact
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                </span>
+              </a>
           </nav>
-          <a 
-            href="#contact" 
-            className="inline-flex items-center px-6 py-3 rounded-xl text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105" 
-            style={{ backgroundColor: "#4CAF50", fontSize: "15px" }}
-            onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
-            onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
-          >
-            Book Cleaning
-          </a>
+            <a 
+              href="/book" 
+              className="inline-flex items-center px-7 py-3.5 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex-shrink-0" 
+              style={{ backgroundColor: "#4CAF50", fontSize: "16px" }}
+              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
+              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
+            >
+              Book Cleaning
+            </a>
+          </div>
         </div>
       </header>
 
@@ -216,17 +247,17 @@ export default function GoCleanWelcomeFinalBranded() {
             </div>
             <p className="text-sm font-medium tracking-wide" style={{ color: "#64748B", letterSpacing: "0.025em" }}>Serving Chicago & suburbs • Residential • Commercial • Airbnb</p>
           </div>
-          <div className="relative w-1/2">
-            <div className="w-full rounded-3xl overflow-hidden">
+          <div className="relative w-1/2 flex items-center justify-center">
+            <div className="w-full max-w-md rounded-3xl overflow-hidden">
               <Image 
                 src="/clean-hero-removebg-preview.png" 
                 alt="Professional cleaning service" 
-                width={1500}
-                height={1850}
+                width={600}
+                height={740}
                 className="w-full h-auto object-contain"
                 style={{ border: 'none', outline: 'none' }}
                 priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
           </div>
@@ -251,12 +282,12 @@ export default function GoCleanWelcomeFinalBranded() {
               )},
               {title:'Airbnb Turnovers', description:'Fast, detailed cleaning with linens and restocking.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
               )},
               {title:'Move In / Move Out', description:'Inside appliances, cabinets, baseboards and more.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               )},
             ].map((s,i)=> (
@@ -293,8 +324,14 @@ export default function GoCleanWelcomeFinalBranded() {
                 ))}
               </ul>
             </div>
-            <div className="bg-gray-100 rounded-xl p-8 flex items-center justify-center min-h-[300px]">
-              <p className="text-gray-500 text-center">Eco and regular cleaning products</p>
+            <div className="rounded-xl overflow-hidden">
+              <Image 
+                src="/eco-hero.jpeg" 
+                alt="Eco and regular cleaning products" 
+                width={600}
+                height={400}
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
@@ -318,17 +355,22 @@ export default function GoCleanWelcomeFinalBranded() {
               )},
               {text: "We bring our own supplies & equipment", icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2 4h7v16H2V4z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2 4h7M2 20h7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 8h6v10h-6V8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 8h6M13 18h6" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M16 6h2v2h-2V6z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 5l2-1" />
                 </svg>
               )},
               {text: "2 cleaners available for faster cleaning", icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               )},
               {text: "Experienced with Residential, Commercial, and Airbnb", icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
               )},
               {text: "Clear pricing, no surprises", icon: (
@@ -398,332 +440,179 @@ export default function GoCleanWelcomeFinalBranded() {
               <p className="text-sm font-semibold mb-2" style={{ color: brand.primary }}>Step 1 — Clean (Plant‑based)</p>
               <h3 className="text-xl font-bold mb-2" style={{ color: "#0F172A" }}>Handcrafted organic solutions</h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>Gentle formulas for everyday cleaning; safe for families and surfaces.</p>
-            </div>
+              </div>
             <div className="rounded-xl border p-6 bg-white text-left">
               <p className="text-sm font-semibold mb-2" style={{ color: brand.primary }}>Step 2 — Disinfect (When Needed)</p>
               <h3 className="text-xl font-bold mb-2" style={{ color: "#0F172A" }}>EPA‑registered, Safer Choice options</h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>Hydrogen peroxide, citric acid or ethanol for 99.9% germ elimination.</p>
-            </div>
-          </div>
+                </div>
+              </div>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg leading-relaxed" style={{ color: "#334155", lineHeight: "1.7" }}>
               Whether it&apos;s your family home, a busy office, or your Airbnb rental, we treat every space as if it were our own — with care, responsibility, and attention to detail. Because for us, cleaning isn&apos;t just about shiny floors — it&apos;s about helping Chicago families live healthier, happier lives.
             </p>
-          </div>
-        </div>
+                </div>
+              </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-20" style={{ backgroundColor: brand.bg }}>
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-2 gap-16 items-start">
-          <div className="pt-8">
-            <h2 className="text-5xl font-bold tracking-tight mb-6" style={{ color: "#0F172A" }}>Ready for a calmer, cleaner space?</h2>
-            <p className="text-lg mb-8 leading-relaxed" style={{ color: "#475569" }}>Tell us about your rooms, schedule and priorities. We&apos;ll tailor a plan that feels just right.</p>
-            <ul className="space-y-3 text-base" style={{ color: "#475569" }}>
-              <li className="flex items-center gap-3">
-                <span className="text-green-600 text-xl">✓</span>
-                <span>Eco‑first daily cleaning</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-green-600 text-xl">✓</span>
-                <span>99.9% disinfection when needed</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-green-600 text-xl">✓</span>
-                <span>Transparent pricing</span>
-              </li>
-            </ul>
+      {/* Our Works Section */}
+      <section className="py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>OUR WORKS</h2>
           </div>
-          <div className="bg-white rounded-3xl border shadow-lg p-10" style={{ borderColor: "#E2E8F0", boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
-            {showSuccessMessage ? (
-              <div className="text-center py-8">
-                <div className="mb-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2" style={{ color: "#4CAF50" }}>Request Sent Successfully! 🎉</h3>
-                <p className="text-lg" style={{ color: "#475569" }}>
-                  Your request has been received. Redirecting to payment...
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="grid gap-5">
-              <div>
-                <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Name</label>
-                <input 
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                  style={{ borderColor: "#E2E8F0" }} 
-                  placeholder="Your name" 
-                  required
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Email</label>
-                  <input 
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="you@email.com" 
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Phone</label>
-                  <input 
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="(xxx) xxx‑xxxx" 
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Address</label>
-                <input 
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                  style={{ borderColor: "#E2E8F0" }} 
-                  placeholder="Street address" 
-                  required
-                />
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>City</label>
-                  <input 
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="City" 
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Zip Code</label>
-                  <input 
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="Zip code" 
-                    required
-                  />
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Number of Bedrooms*</label>
-                  <input 
-                    name="bedrooms"
-                    type="number" 
-                    min="1" 
-                    max="10" 
-                    value={formData.bedrooms}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="2" 
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Number of Bathrooms*</label>
-                  <input 
-                    name="bathrooms"
-                    type="number" 
-                    min="1" 
-                    max="10" 
-                    value={formData.bathrooms}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    placeholder="1" 
-                    required
-                  />
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Preferred Date*</label>
-                  <input 
-                    name="date"
-                    type="date" 
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Preferred Time*</label>
-                  <input 
-                    name="time"
-                    type="time" 
-                    value={formData.time}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
-                    required
-                  />
-                </div>
-              </div>
-              {/* Eco Cleaning Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl border" style={{ borderColor: "#E2E8F0", backgroundColor: formData.ecoCleaning ? "#F0FDF4" : "#FAFAFA" }}>
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">🌿</span>
-                  <label className="text-base font-semibold" style={{ color: "#0F172A" }}>Eco Cleaning</label>
-                  <span className="text-sm" style={{ color: "#64748B" }}>
-                    {formData.ecoCleaning ? "Enabled" : "Disabled"}
-                  </span>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="ecoCleaning"
-                    checked={formData.ecoCleaning}
-                    onChange={handleInputChange}
-                    className="sr-only peer"
-                  />
-                  <div className="w-14 h-7 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
-                </label>
-              </div>
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevWork}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+              style={{ color: "#4CAF50" }}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextWork}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+              style={{ color: "#4CAF50" }}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
 
-              {/* Additional Services Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl border" style={{ borderColor: "#E2E8F0", backgroundColor: formData.additionalServicesEnabled ? "#F0FDF4" : "#FAFAFA" }}>
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">➕</span>
-                  <label className="text-base font-semibold" style={{ color: "#0F172A" }}>Additional Services</label>
-                  <span className="text-sm" style={{ color: "#64748B" }}>
-                    {formData.additionalServicesEnabled ? "Enabled" : "Disabled"}
-                  </span>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="additionalServicesEnabled"
-                    checked={formData.additionalServicesEnabled}
-                    onChange={handleInputChange}
-                    className="sr-only peer"
-                  />
-                  <div className="w-14 h-7 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
-                </label>
-              </div>
-
-              {/* Additional Services List */}
-              {formData.additionalServicesEnabled && (
-                <div className="grid grid-cols-2 gap-4 p-4 rounded-xl border" style={{ borderColor: "#E2E8F0", backgroundColor: "#F8FAFC" }}>
-                  {additionalServicesList.map((service) => (
-                    <div
-                      key={service.id}
-                      className="flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors"
-                      style={{
-                        borderColor: formData.additionalServices?.includes(service.id) ? "#4CAF50" : "#E2E8F0",
-                        backgroundColor: formData.additionalServices?.includes(service.id) ? "#F0FDF4" : "#FFFFFF"
-                      }}
-                      onClick={() => handleAdditionalServiceToggle(service.id)}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.additionalServices?.includes(service.id) || false}
-                        onChange={() => handleAdditionalServiceToggle(service.id)}
-                        className="mt-1 w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <label className="text-sm font-semibold cursor-pointer" style={{ color: "#0F172A" }}>
-                            {service.name}
-                          </label>
-                          <span className="text-sm font-bold" style={{ color: "#4CAF50" }}>
-                            ${service.price}{service.priceNote && <span className="text-xs font-normal">{service.priceNote}</span>}
-                          </span>
+            {/* Carousel Content */}
+            <div className="mx-16">
+              {workExamples.map((work, index) => (
+                <div
+                  key={index}
+                  className={`${index === currentWorkIndex ? "block" : "hidden"}`}
+                >
+                  {work.type === "stacked" ? (
+                    // Stacked layout (before on top, after on bottom)
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
+                        <div className="relative w-full flex items-center justify-center p-4">
+                          <Image
+                            src={work.before}
+                            alt="Before cleaning"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto max-w-full object-contain rounded-lg"
+                            unoptimized
+                          />
                         </div>
-                        <p className="text-xs" style={{ color: "#64748B" }}>
-                          {service.description}
-                        </p>
+                        <div className="absolute top-6 left-6 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm font-semibold z-10">
+                          Before
+                        </div>
+                      </div>
+                      <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
+                        <div className="relative w-full flex items-center justify-center p-4">
+                          <Image
+                            src={work.after}
+                            alt="After cleaning"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto max-w-full object-contain rounded-lg"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="absolute top-6 left-6 bg-green-600 text-white px-3 py-1 rounded text-sm font-semibold z-10">
+                          After
+                        </div>
                       </div>
                     </div>
-                  ))}
+                  ) : (
+                    // Split layout (before on left, after on right)
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
+                        <div className="relative w-full flex items-center justify-center p-4">
+                          <Image
+                            src={work.before}
+                            alt="Before cleaning"
+                            width={800}
+                            height={1000}
+                            className="w-full h-auto max-w-full object-contain rounded-lg"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="absolute top-6 left-6 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm font-semibold z-10">
+                          Before
+                        </div>
+                      </div>
+                      <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
+                        <div className="relative w-full flex items-center justify-center p-4">
+                          <Image
+                            src={work.after}
+                            alt="After cleaning"
+                            width={800}
+                            height={1000}
+                            className="w-full h-auto max-w-full object-contain rounded-lg"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="absolute top-6 left-6 bg-green-600 text-white px-3 py-1 rounded text-sm font-semibold z-10">
+                          After
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Service Type</label>
-                  <select 
-                    name="serviceType"
-                    value={formData.serviceType || ""}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }}
-                    required
-                  >
-                    <option value="">Select Type</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Deep">Deep</option>
-                    <option value="Move-in/out">Move-in/out</option>
-                    <option value="Junk Removal">Junk Removal</option>
-                    <option value="Windows">Windows</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Service</label>
-                  <select 
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }}
-                  >
-                    <option>Residential Cleaning</option>
-                    <option>Commercial Cleaning</option>
-                    <option>Airbnb / Turnover</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Message</label>
-                <textarea 
-                  name="message"
-                  rows={4} 
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-green-500 transition-all resize-none" 
-                  style={{ borderColor: "#E2E8F0" }} 
-                  placeholder="Rooms, pets, floors, preferred days…"
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {workExamples.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentWorkIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentWorkIndex ? "bg-green-600 w-8" : "bg-gray-300"
+                  }`}
                 />
+              ))}
+            </div>
+                </div>
               </div>
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full inline-flex items-center justify-center px-8 py-4 rounded-2xl text-white font-bold shadow-lg transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl transform hover:scale-[1.02]" 
-                style={{ backgroundColor: "#4CAF50" }} 
-                onMouseEnter={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#388E3C")} 
-                onMouseLeave={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#4CAF50")}
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>FAQ</h2>
+                </div>
+          <div className="grid grid-cols-2 gap-6">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white border-b transition-all"
+                style={{
+                  borderColor: "#E2E8F0"
+                }}
               >
-                {isSubmitting ? "Sending Request..." : "Book Cleaning"}
-              </button>
-            </form>
-            )}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-0 py-4 flex items-center justify-between text-left hover:opacity-80 transition-opacity"
+                >
+                  <span className="text-base font-medium" style={{ color: "#0F172A" }}>
+                    {faq.question}
+                  </span>
+                  <span className="text-2xl font-light" style={{ color: "#0F172A" }}>
+                    {openFAQ === index ? "−" : "+"}
+                  </span>
+                </button>
+                {openFAQ === index && (
+                  <div className="pb-4">
+                    <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                      {faq.answer}
+                    </p>
+              </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -739,13 +628,6 @@ export default function GoCleanWelcomeFinalBranded() {
           </div>
         </div>
       </footer>
-      
-      <PaymentModal 
-        isOpen={isPaymentOpen} 
-        onClose={() => setIsPaymentOpen(false)} 
-        serviceData={formData}
-        requestId={requestId}
-      />
     </div>
   );
 }
