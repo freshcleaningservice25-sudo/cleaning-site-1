@@ -578,6 +578,97 @@ export default function GoCleanWelcomeFinalBranded() {
               </div>
       </section>
 
+      {/* Customer Reviews Section */}
+      <section className="py-20 border-b" style={{ backgroundColor: "#FAF8F4" }}>
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>What Our Customers Say</h2>
+            <p className="text-lg" style={{ color: "#64748B" }}>Real reviews from satisfied clients across Chicago</p>
+          </div>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Review 1 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: "#E2E8F0" }}>
+              <div className="mb-4">
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="#FBBF24" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
+                  I scheduled an eco cleaning with GoCleanUSA and couldn&apos;t be happier! The team arrived on time, brought their own eco-friendly supplies, and made my apartment sparkle without any harsh smells. I love that they care about the environment while still providing an amazing clean. Highly recommend!
+                </p>
+              </div>
+              <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
+                <p className="font-semibold text-base" style={{ color: "#0F172A" }}>Sarah L.</p>
+                <p className="text-sm" style={{ color: "#64748B" }}>60647, Chicago</p>
+              </div>
+            </div>
+
+            {/* Review 2 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: "#E2E8F0" }}>
+              <div className="mb-4">
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="#FBBF24" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
+                  I booked a deep cleaning after moving out and they did a fantastic job. Every surface was spotless, and they even got into places I didn&apos;t think could be cleaned. Communication was great, and the price was very reasonable. I&apos;ll definitely be using their regular cleaning service.
+                </p>
+              </div>
+              <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
+                <p className="font-semibold text-base" style={{ color: "#0F172A" }}>Michael R.</p>
+                <p className="text-sm" style={{ color: "#64748B" }}>60618, Chicago</p>
+              </div>
+            </div>
+
+            {/* Review 3 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: "#E2E8F0" }}>
+              <div className="mb-4">
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="#FBBF24" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
+                  We&apos;ve been using GoCleanUSA&apos;s regular cleaning for months and it&apos;s always consistent and professional. The eco products leave our home fresh and chemical-free — perfect since we have pets and small kids. The cleaners are always polite and trustworthy.
+                </p>
+              </div>
+              <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
+                <p className="font-semibold text-base" style={{ color: "#0F172A" }}>Emily K.</p>
+                <p className="text-sm" style={{ color: "#64748B" }}>60622, Chicago</p>
+              </div>
+            </div>
+
+            {/* Review 4 */}
+            <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: "#E2E8F0" }}>
+              <div className="mb-4">
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="#FBBF24" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
+                  Booked a last-minute cleaning before a family visit and they squeezed me in! The cleaners worked quickly but thoroughly. The eco option made the house smell clean without any strong chemicals. Excellent customer service from start to finish.
+                </p>
+              </div>
+              <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
+                <p className="font-semibold text-base" style={{ color: "#0F172A" }}>James P.</p>
+                <p className="text-sm" style={{ color: "#64748B" }}>60614, Chicago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-7xl mx-auto px-8">
