@@ -501,12 +501,9 @@ export default function GoCleanWelcomeFinalBranded() {
                             height={800}
                             className="w-full h-auto max-w-full object-contain rounded-lg"
                             unoptimized
-                          />
-                        </div>
-                        <div className="absolute top-6 left-6 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm font-semibold z-10">
-                          Before
-                        </div>
-                      </div>
+                />
+              </div>
+                </div>
                       <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
                         <div className="relative w-full flex items-center justify-center p-4">
                           <Image
@@ -516,12 +513,9 @@ export default function GoCleanWelcomeFinalBranded() {
                             height={800}
                             className="w-full h-auto max-w-full object-contain rounded-lg"
                             unoptimized
-                          />
-                        </div>
-                        <div className="absolute top-6 left-6 bg-green-600 text-white px-3 py-1 rounded text-sm font-semibold z-10">
-                          After
-                        </div>
-                      </div>
+                  />
+                </div>
+              </div>
                     </div>
                   ) : (
                     // Split layout (before on left, after on right)
@@ -537,9 +531,6 @@ export default function GoCleanWelcomeFinalBranded() {
                             unoptimized
                           />
                         </div>
-                        <div className="absolute top-6 left-6 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm font-semibold z-10">
-                          Before
-                        </div>
                       </div>
                       <div className="relative w-full rounded-lg overflow-visible shadow-md bg-gray-100">
                         <div className="relative w-full flex items-center justify-center p-4">
@@ -551,9 +542,6 @@ export default function GoCleanWelcomeFinalBranded() {
                             className="w-full h-auto max-w-full object-contain rounded-lg"
                             unoptimized
                           />
-                        </div>
-                        <div className="absolute top-6 left-6 bg-green-600 text-white px-3 py-1 rounded text-sm font-semibold z-10">
-                          After
                         </div>
                       </div>
                     </div>
