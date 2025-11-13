@@ -184,11 +184,12 @@ export default function BookPage() {
           <Link href="/" className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-xl overflow-hidden flex items-center justify-center">
               <Image 
-                src="/logo.png" 
+                src="/logo2.png" 
                 alt="Go Clean USA Logo" 
                 width={64}
                 height={64}
                 className="h-full w-full object-contain"
+                style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
               />
             </div>
             <span className="text-2xl font-bold" style={{ color: "#4CAF50" }}>Go Clean USA</span>

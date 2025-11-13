@@ -26,22 +26,39 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
   const fetchOrders = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/orders");
       if (res.status === 401) {
-        router.push("/admin/login");
+        setIsAuthenticated(false);
+        // Use replace instead of push to avoid adding to history
+        router.replace("/admin/login");
+        // Fallback redirect in case router doesn't work
+        setTimeout(() => {
+          window.location.href = "/admin/login";
+        }, 100);
         return;
       }
       if (!res.ok) {
-        throw new Error("Failed to fetch orders");
+        const errorData = await res.json().catch(() => ({ error: "Failed to fetch orders" }));
+        throw new Error(errorData.error || "Failed to fetch orders");
       }
+      setIsAuthenticated(true);
       const data = await res.json();
-      setOrders(data.orders);
-    } catch {
-      setError("Failed to load orders");
+      setOrders(data.orders || []);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to load orders";
+      setError(errorMessage);
+      // If it's an auth error, redirect to login
+      if (err instanceof Error && (err.message.includes("Unauthorized") || err.message.includes("401"))) {
+        router.replace("/admin/login");
+        setTimeout(() => {
+          window.location.href = "/admin/login";
+        }, 100);
+      }
     } finally {
       setLoading(false);
     }
@@ -104,16 +121,26 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto p-8">
         <div className="flex items-center justify-center h-64">
-          <div className="text-lg">Loading orders...</div>
+          <div className="text-lg text-gray-700">Loading orders...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-6xl mx-auto p-8">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-lg text-gray-700">Redirecting to login...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto p-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-semibold">Admin Dashboard</h1>
         <div className="flex gap-4">
@@ -123,7 +150,7 @@ export default function AdminDashboard() {
           <button 
             onClick={() => {
               document.cookie = "admin-auth=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-              router.push("/admin/login");
+              router.replace("/admin/login");
             }}
             className="btn bg-gray-500 hover:bg-gray-600"
           >

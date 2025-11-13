@@ -22,12 +22,19 @@ export default function AdminLogin() {
       });
 
       if (res.ok) {
-        router.push("/admin");
+        // Use replace to avoid adding login page to history
+        router.replace("/admin");
+        // Force a page reload to ensure cookie is properly set
+        setTimeout(() => {
+          window.location.href = "/admin";
+        }, 100);
       } else {
-        setError("Invalid password");
+        const errorData = await res.json().catch(() => ({ error: "Invalid password" }));
+        setError(errorData.error || "Invalid password");
       }
-    } catch {
-      setError("Login failed");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }

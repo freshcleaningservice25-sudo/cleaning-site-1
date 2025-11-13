@@ -112,21 +112,18 @@ export default function GoCleanWelcomeFinalBranded() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", color: brand.text, minWidth: '1200px' }}>
       {/* Header */}
-      <header className="sticky top-0 z-20 backdrop-blur-sm border-b shadow-sm" style={{ backgroundColor: "#FAF8F4", borderColor: "#E5E7EB" }}>
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b shadow-sm" style={{ backgroundColor: "#FAF8F4", borderColor: "#E5E7EB" }}>
         <div className="w-full px-4 py-4 flex items-center justify-between" style={{ maxWidth: '100%' }}>
           <div className="flex items-center gap-3">
-            <div className="h-28 w-28 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0">
+            <div className="h-28 w-28 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0">
               <Image 
-                src="/logo.png" 
+                src="/logo2.png" 
                 alt="Go Clean USA Logo" 
                 width={112}
                 height={112}
                 className="w-full h-full object-contain"
+                style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
               />
-            </div>
-            <div>
-              <p className="text-2xl font-bold tracking-tight leading-tight mb-0.5" style={{ color: "#0F172A" }}>Go Clean USA</p>
-              <p className="text-sm font-semibold leading-tight" style={{ color: "#4CAF50" }}>Because clean feels better.</p>
             </div>
           </div>
           <div className="flex items-center gap-14">
@@ -218,14 +215,14 @@ export default function GoCleanWelcomeFinalBranded() {
       </header>
 
       {/* Hero */}
-      <section id="hero" className="border-b">
+      <section id="hero" className="border-b" style={{ paddingTop: '140px' }}>
         <div className="w-full py-20 flex flex-row gap-8 items-center">
           <div className="w-1/2 flex flex-col justify-center items-center text-center">
             <h1 className="text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#4CAF50", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
-            <p className="text-xl font-semibold mb-8" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Because clean feels better.</p>
+            <p className="text-xl font-semibold mb-8" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Eco-Safe, Professionally Done.</p>
 
-            <p className="text-lg leading-relaxed mb-10" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "90%" }}>
-              We&apos;re a Chicago-based, family-run cleaning team offering both eco-friendly and professional-grade cleaning solutions. Whether you prefer gentle, plant-based products or stronger commercial cleaners, we deliver the same quality, care, and professionalism every time.
+            <p className="text-lg leading-relaxed mb-10" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "500px" }}>
+              Stop worrying about cleaning schedules. We are a family-owned team providing custom solutions—from gentle, plant-based products to powerful deep-clean techniques. Your satisfaction is 100% guaranteed, or we re-clean for free.
             </p>
             <div className="flex flex-wrap gap-4 mb-8 justify-center">
               <a 
@@ -245,7 +242,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 Our Approach
               </a>
             </div>
-            <p className="text-sm font-medium tracking-wide" style={{ color: "#64748B", letterSpacing: "0.025em" }}>Serving Chicago & suburbs • Residential • Commercial • Airbnb</p>
+            <p className="text-sm font-medium tracking-wide" style={{ color: "#64748B", letterSpacing: "0.025em" }}>Serving Chicago & suburbs • Licensed, Insured & Background-Checked Cleaners</p>
           </div>
           <div className="relative w-1/2 flex items-center justify-center">
             <div className="w-full max-w-md rounded-3xl overflow-hidden">
@@ -270,22 +267,22 @@ export default function GoCleanWelcomeFinalBranded() {
           <h2 className="text-4xl font-bold tracking-tight text-center mb-12" style={{ color: "#0F172A" }}>Our Services</h2>
           <div className="grid gap-6 grid-cols-4 max-w-7xl mx-auto px-8">
             {[
-              {title:'Residential Cleaning', description:'Apartments, condos and family homes. Regular, deep or move-out.', icon: (
+              {title:'Stress-Free Residential Cleaning', description:'Reclaim your home with regular, deep, or move-out services for apartments, condos, and family homes.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               )},
-              {title:'Commercial Cleaning', description:'Offices, studios, salons, and small businesses.', icon: (
+              {title:'Office & Commercial Space Sanitation', description:'Maintain a clean, professional environment for offices, studios, salons, and small businesses.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               )},
-              {title:'Airbnb Turnovers', description:'Fast, detailed cleaning with linens and restocking.', icon: (
+              {title:'Fast, 5-Star Airbnb Turnovers', description:'Ensure 5-star reviews with fast, detailed cleaning, linen service, and essential restocking.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
               )},
-              {title:'Move In / Move Out', description:'Inside appliances, cabinets, baseboards and more.', icon: (
+              {title:'Total Move In/Out Restoration', description:'Full cleaning and restoration, including appliances, cabinets, baseboards, and beyond, for guaranteed deposit return.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
@@ -306,16 +303,16 @@ export default function GoCleanWelcomeFinalBranded() {
         <div className="max-w-7xl mx-auto px-8 py-16">
           <div className="grid grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6" style={{ color: "#0F172A" }}>Eco or Regular — Your Choice</h2>
+              <h2 className="text-4xl font-bold mb-6" style={{ color: "#0F172A" }}>You Choose The Care: Eco-Safe or Pro-Grade Power.</h2>
               <p className="text-lg leading-relaxed mb-6" style={{ color: "#475569", lineHeight: "1.7" }}>
-                We believe in honesty and flexibility. Some homes prefer gentle, plant-based cleaners; others need stronger, professional products for heavy-duty jobs. Both are safe, effective, and handled with care.
+                We believe cleaning should never be &quot;one-size-fits-all.&quot; We provide honest flexibility, allowing you to choose the right solution for your family, pets, and home surfaces. Both options are safe, effective, and tailored to your approval.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Eco-friendly plant-based products",
-                  "Professional-grade cleaners for tough jobs",
-                  "Pet & kid safe options",
-                  "Used responsibly with your approval"
+                  "Certified Eco-Safe: Non-toxic, plant-based products for a clean, chemical-free home.",
+                  "Pro-Grade Power: Stronger, professional-grade cleaners for deep sanitation and heavy-duty jobs.",
+                  "Guaranteed Pet & Kid Safety: Always safe for your children and furry friends.",
+                  "Your Approval First: We only use stronger products with your explicit prior approval and responsibility."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="text-green-600 text-xl mt-0.5">✓</span>
@@ -391,9 +388,9 @@ export default function GoCleanWelcomeFinalBranded() {
       {/* Pricing Section */}
       <section className="border-b" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-7xl mx-auto px-8 py-16">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: "#0F172A" }}>Transparent Pricing</h2>
+          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: "#0F172A" }}>BOOK NOW & SECURE YOUR SPOT</h2>
           <p className="text-lg text-center mb-12 max-w-2xl mx-auto" style={{ color: "#475569" }}>
-            Simple rates based on your home size. Choose eco or regular cleaning — we&apos;ll confirm exact price after photos or walkthrough.
+            Transparency is key. If your home requires stronger solutions for sanitation, we will always notify you and obtain your approval first before using them responsibly and safely.
           </p>
           <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto mb-8">
             {[
