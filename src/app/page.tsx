@@ -133,28 +133,44 @@ export default function GoCleanWelcomeFinalBranded() {
     const mapContainer = document.querySelector('.map-container') as HTMLElement;
     if (!mapContainer) return;
 
+    // Type definitions for vendor-specific fullscreen APIs
+    interface HTMLElementWithVendorFullscreen extends HTMLElement {
+      webkitRequestFullscreen?: () => Promise<void>;
+      mozRequestFullScreen?: () => Promise<void>;
+      msRequestFullscreen?: () => Promise<void>;
+    }
+
+    interface DocumentWithVendorFullscreen extends Document {
+      webkitExitFullscreen?: () => Promise<void>;
+      mozCancelFullScreen?: () => Promise<void>;
+      msExitFullscreen?: () => Promise<void>;
+    }
+
+    const element = mapContainer as HTMLElementWithVendorFullscreen;
+    const doc = document as DocumentWithVendorFullscreen;
+
     try {
       if (!document.fullscreenElement) {
         // Enter fullscreen
         if (mapContainer.requestFullscreen) {
           await mapContainer.requestFullscreen();
-        } else if ((mapContainer as any).webkitRequestFullscreen) {
-          await (mapContainer as any).webkitRequestFullscreen();
-        } else if ((mapContainer as any).mozRequestFullScreen) {
-          await (mapContainer as any).mozRequestFullScreen();
-        } else if ((mapContainer as any).msRequestFullscreen) {
-          await (mapContainer as any).msRequestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+          await element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          await element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+          await element.msRequestFullscreen();
         }
       } else {
         // Exit fullscreen
         if (document.exitFullscreen) {
           await document.exitFullscreen();
-        } else if ((document as any).webkitExitFullscreen) {
-          await (document as any).webkitExitFullscreen();
-        } else if ((document as any).mozCancelFullScreen) {
-          await (document as any).mozCancelFullScreen();
-        } else if ((document as any).msExitFullscreen) {
-          await (document as any).msExitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          await doc.webkitExitFullscreen();
+        } else if (doc.mozCancelFullScreen) {
+          await doc.mozCancelFullScreen();
+        } else if (doc.msExitFullscreen) {
+          await doc.msExitFullscreen();
         }
       }
     } catch (error) {

@@ -101,7 +101,7 @@ export default function AdminDashboard() {
           day: "numeric",
         });
       }
-    } catch (err) {
+    } catch {
       return dateString; // Return original string on error
     }
   }
