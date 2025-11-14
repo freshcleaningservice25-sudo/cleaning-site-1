@@ -19,7 +19,7 @@ interface PaymentModalProps {
     bedrooms: number;
     bathrooms: number;
     date: string;
-    time: string;
+    time?: string;
     ecoCleaning: boolean;
     additionalServices?: string[];
     serviceType: string;
@@ -247,7 +247,7 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
               {serviceData?.bedrooms} bedrooms, {serviceData?.bathrooms} bathrooms
             </p>
             <p className="text-sm text-gray-600">
-              {serviceData?.date} at {serviceData?.time}
+              {serviceData?.date}{serviceData?.time ? ` at ${serviceData.time}` : ''}
             </p>
           </div>
 
