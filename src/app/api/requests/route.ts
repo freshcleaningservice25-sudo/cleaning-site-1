@@ -12,7 +12,7 @@ const RequestSchema = z.object({
   bedrooms: z.number().min(1),
   bathrooms: z.number().min(1),
   date: z.string().min(1),
-  time: z.string().min(1),
+  time: z.string().optional(),
   ecoCleaning: z.boolean().optional().default(false),
   additionalServices: z.array(z.string()).optional().default([]),
   serviceType: z.string().min(1),
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
     };
 
     const amountCents = calculatePrice();
-    const datetime = `${date}T${time}`;
+    const datetime = time ? `${date}T${time}` : date;
 
     const request = {
       id: requestId,
