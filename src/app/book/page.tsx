@@ -7,7 +7,8 @@ import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
+const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "";
+const stripePromise = stripePublishableKey ? loadStripe(stripePublishableKey) : null;
 
 export default function BookPage() {
   const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
@@ -219,7 +220,15 @@ export default function BookPage() {
           </div>
 
           <div className="bg-white rounded-3xl border shadow-lg p-10" style={{ borderColor: "#E2E8F0", boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
-            <Elements stripe={stripePromise}>
+            {!stripePublishableKey && (
+              <div className="mb-6 p-4 rounded-lg bg-yellow-50 border border-yellow-200">
+                <p className="text-sm text-yellow-800">
+                  ⚠️ Stripe is not configured. Please set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in your Vercel environment variables.
+                </p>
+              </div>
+            )}
+            {stripePromise ? (
+              <Elements stripe={stripePromise}>
             {showSuccessMessage ? (
               <div className="text-center py-8">
                 <div className="mb-4">
@@ -812,7 +821,13 @@ export default function BookPage() {
               </button>
             </form>
             )}
-            </Elements>
+              </Elements>
+            ) : (
+              <div className="p-8 text-center">
+                <p className="text-red-600 mb-4">Payment processing is not available. Please configure Stripe.</p>
+                <p className="text-sm text-gray-600">Contact support if you need assistance.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
