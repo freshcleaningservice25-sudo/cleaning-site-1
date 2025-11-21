@@ -37,6 +37,16 @@ Then fill in the values:
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: Get from Stripe Dashboard
 - `NEXT_PUBLIC_SITE_URL`: Your site URL (use `http://localhost:3000` for local development)
 
+**BookingKoala Integration (Optional):**
+To use BookingKoala instead of the custom booking form:
+- `NEXT_PUBLIC_USE_BOOKINGKOALA`: Set to `"true"` to enable BookingKoala
+- `NEXT_PUBLIC_BOOKINGKOALA_MODE`: Integration mode - `"redirect"` (default), `"iframe"`, or `"embed"`
+- `NEXT_PUBLIC_BOOKINGKOALA_URL`: Your BookingKoala booking URL (e.g., `https://yourstore.bookingkoala.com/book`)
+- `NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE`: Embed script code (if using embed mode)
+- `NEXT_PUBLIC_BOOKINGKOALA_STORE_ID`: Your BookingKoala store ID (optional)
+
+**Note:** If `NEXT_PUBLIC_USE_BOOKINGKOALA` is not set or set to `"false"`, the site will use the custom booking form.
+
 ### 3. Run the Development Server
 
 ```bash

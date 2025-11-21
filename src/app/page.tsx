@@ -4,10 +4,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function GoCleanWelcomeFinalBranded() {
-  const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
+  const brand = { primary: "#4CAF50", primaryDark: "#388E3C", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const faqs = [
     {
@@ -28,7 +29,7 @@ export default function GoCleanWelcomeFinalBranded() {
     },
     {
       question: "How do I get an estimate or book a cleaning?",
-      answer: "You can: Click \"Book Cleaning\" on our website, text or call us at (773) 397-7380, or request a quote via our online form."
+      answer: "You can: Click \"Book Cleaning\" on our website, text or call us at 917-385-2100, or request a quote via our online form."
     },
     {
       question: "How do payments work?",
@@ -179,24 +180,24 @@ export default function GoCleanWelcomeFinalBranded() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", color: brand.text, minWidth: '1200px' }}>
+    <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
-        <div className="w-full px-8 py-2 flex items-center justify-between" style={{ maxWidth: '100%' }}>
+        <div className="w-full px-8 py-1 flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center">
             <Image 
               src="/logo2.png" 
               alt="Go Clean USA Logo" 
-              width={96}
-              height={96}
-              className="object-contain"
-              style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
+              width={120}
+              height={120}
+              className="object-cover rounded-full"
+              style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
             />
           </div>
           
-          {/* Navigation and CTA */}
-          <div className="flex items-center gap-12">
+          {/* Desktop Navigation and CTA */}
+          <div className="hidden lg:flex items-center gap-12">
             <nav className="flex items-center gap-16 text-base">
               <a 
                 href="#hero" 
@@ -275,7 +276,7 @@ export default function GoCleanWelcomeFinalBranded() {
             {/* Social Media & Contact Icons */}
             <div className="flex items-center gap-3">
               <a 
-                href="tel:+17733977380" 
+                href="tel:+19173852100" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                 style={{ backgroundColor: "#4CAF50" }}
                 aria-label="Call us"
@@ -285,7 +286,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 </svg>
               </a>
               <a 
-                href="mailto:info@gocleanusa.com" 
+                href="mailto:Contact@gocleanusa.com" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                 style={{ backgroundColor: "#4CAF50" }}
                 aria-label="Email us"
@@ -295,7 +296,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 </svg>
               </a>
               <a 
-                href="https://www.tiktok.com/@gocleanusa" 
+                href="https://www.tiktok.com/@gocleanusa.com?_r=1&_t=ZP-91TOV6iSNzS" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
@@ -318,24 +319,124 @@ export default function GoCleanWelcomeFinalBranded() {
               Book Cleaning
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors"
+            style={{ backgroundColor: "#4CAF50" }}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden border-t" style={{ borderColor: "#E5E7EB", backgroundColor: "#FAF8F4" }}>
+            <nav className="flex flex-col px-4 py-4 space-y-4">
+              <a 
+                href="#hero" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold uppercase tracking-wide py-2 transition-colors"
+                style={{ color: "#1F2937" }}
+              >
+                About Us
+              </a>
+              <a 
+                href="#services" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold uppercase tracking-wide py-2 transition-colors"
+                style={{ color: "#1F2937" }}
+              >
+                Services
+              </a>
+              <a 
+                href="#approach" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold uppercase tracking-wide py-2 transition-colors"
+                style={{ color: "#1F2937" }}
+              >
+                Our Approach
+              </a>
+              <a 
+                href="#contact" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold uppercase tracking-wide py-2 transition-colors"
+                style={{ color: "#1F2937" }}
+              >
+                Contact
+              </a>
+              <div className="flex items-center gap-3 pt-2">
+                <a 
+                  href="tel:+19173852100" 
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+                  style={{ backgroundColor: "#4CAF50" }}
+                  aria-label="Call us"
+                >
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </a>
+                <a 
+                  href="mailto:Contact@gocleanusa.com" 
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+                  style={{ backgroundColor: "#4CAF50" }}
+                  aria-label="Email us"
+                >
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.tiktok.com/@gocleanusa.com?_r=1&_t=ZP-91TOV6iSNzS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+                  style={{ backgroundColor: "#4CAF50" }}
+                  aria-label="Follow us on TikTok"
+                >
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                  </svg>
+                </a>
+              </div>
+              <a 
+                href="/book" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
+                style={{ backgroundColor: "#4CAF50" }}
+              >
+                Book Cleaning
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
       <section id="hero" className="border-b" style={{ paddingTop: '140px' }}>
-        <div className="w-full py-20 flex flex-row gap-8 items-center">
-          <div className="w-1/2 flex flex-col justify-center items-center text-center">
-            <h1 className="text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#4CAF50", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
-            <p className="text-xl font-semibold mb-8" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Eco-Safe, Professionally Done.</p>
+        <div className="w-full py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#4CAF50", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
+            <p className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-6 md:mb-8 px-4" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Eco-Safe, Professionally Done.</p>
 
-            <p className="text-lg leading-relaxed mb-10" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "500px" }}>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10 px-4" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "500px" }}>
               Stop worrying about cleaning schedules. We are a family-owned team providing custom solutions—from gentle, plant-based products to powerful deep-clean techniques. Your satisfaction is 100% guaranteed, or we re-clean for free.
             </p>
-            <div className="flex flex-wrap gap-4 mb-8 justify-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center w-full sm:w-auto px-4">
               <a 
-                href="#contact" 
-                className="px-8 py-4 rounded-2xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105" 
-                style={{ backgroundColor: "#4CAF50", fontSize: "16px" }}
+                href="/book" 
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-2xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-center" 
+                style={{ backgroundColor: "#4CAF50", fontSize: "14px sm:text-base" }}
                 onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
                 onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
               >
@@ -343,15 +444,15 @@ export default function GoCleanWelcomeFinalBranded() {
               </a>
               <a 
                 href="#approach" 
-                className="px-8 py-4 rounded-2xl border-2 font-semibold transition-all duration-200 hover:bg-green-50" 
-                style={{ borderColor: "#4CAF50", color: "#4CAF50", fontSize: "16px" }}
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border-2 font-semibold transition-all duration-200 hover:bg-green-50 text-center" 
+                style={{ borderColor: "#4CAF50", color: "#4CAF50", fontSize: "14px sm:text-base" }}
               >
                 Our Approach
               </a>
             </div>
-            <p className="text-sm font-medium tracking-wide" style={{ color: "#64748B", letterSpacing: "0.025em" }}>Serving Chicago & suburbs • Licensed, Insured & Background-Checked Cleaners</p>
+            <p className="text-xs sm:text-sm font-medium tracking-wide px-4" style={{ color: "#64748B", letterSpacing: "0.025em" }}>Serving Chicago & suburbs • Licensed, Insured & Background-Checked Cleaners</p>
           </div>
-          <div className="relative w-1/2 flex items-center justify-center">
+          <div className="relative w-full lg:w-1/2 flex items-center justify-center mt-4 lg:mt-0">
             <div className="w-full max-w-md rounded-3xl overflow-hidden">
               <Image 
                 src="/clean-hero-removebg-preview.png" 
@@ -370,9 +471,9 @@ export default function GoCleanWelcomeFinalBranded() {
 
       {/* Services */}
       <section id="services" className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
-        <div className="max-w-full mx-auto px-0 py-16">
-          <h2 className="text-4xl font-bold tracking-tight text-center mb-12" style={{ color: "#0F172A" }}>Our Services</h2>
-          <div className="grid gap-6 grid-cols-4 max-w-7xl mx-auto px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#0F172A" }}>Our Services</h2>
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
             {[
               {title:'Stress-Free Residential Cleaning', description:'Reclaim your home with regular, deep, or move-out services for apartments, condos, and family homes.', icon: (
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
@@ -407,11 +508,11 @@ export default function GoCleanWelcomeFinalBranded() {
 
       {/* Eco or Regular Section */}
       <section className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <div className="grid grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6" style={{ color: "#0F172A" }}>You Choose The Care: Eco-Safe or Pro-Grade Power.</h2>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: "#475569", lineHeight: "1.7" }}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6" style={{ color: "#0F172A" }}>You Choose The Care: Eco-Safe or Pro-Grade Power.</h2>
+              <p className="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6" style={{ color: "#475569", lineHeight: "1.7" }}>
                 We believe cleaning should never be &quot;one-size-fits-all.&quot; We provide honest flexibility, allowing you to choose the right solution for your family, pets, and home surfaces. Both options are safe, effective, and tailored to your approval.
               </p>
               <ul className="space-y-3">
@@ -443,9 +544,9 @@ export default function GoCleanWelcomeFinalBranded() {
 
       {/* Why Choose Us Section */}
       <section className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <h2 className="text-4xl font-bold text-center mb-12" style={{ color: "#0F172A" }}>Why Chicago Clients Choose Us</h2>
-          <div className="grid grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#0F172A" }}>Why Chicago Clients Choose Us</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               {text: "Local family team — not a big platform", icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
@@ -494,24 +595,24 @@ export default function GoCleanWelcomeFinalBranded() {
 
       {/* Pricing Section */}
       <section className="border-b" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: "#0F172A" }}>BOOK NOW & SECURE YOUR SPOT</h2>
-          <p className="text-lg text-center mb-12 max-w-2xl mx-auto" style={{ color: "#475569" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 px-4" style={{ color: "#0F172A" }}>BOOK NOW & SECURE YOUR SPOT</h2>
+          <p className="text-sm sm:text-base md:text-lg text-center mb-6 sm:mb-8 md:mb-12 max-w-2xl mx-auto px-4" style={{ color: "#475569" }}>
             Transparency is key. If your home requires stronger solutions for sanitation, we will always notify you and obtain your approval first before using them responsibly and safely.
           </p>
-          <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto mb-6 sm:mb-8">
             {[
               { price: "$139", size: "1 bed / 1 bath" },
               { price: "$169", size: "2 bed / 1 bath" },
               { price: "$219", size: "3 bed / 2 bath" }
             ].map((tier, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-8 text-center border border-gray-200">
-                <p className="text-sm mb-2" style={{ color: "#64748B" }}>from</p>
-                <p className="text-5xl font-bold mb-3" style={{ color: "#0F172A" }}>{tier.price}</p>
-                <p className="text-base mb-6" style={{ color: "#475569" }}>{tier.size}</p>
+              <div key={i} className="bg-gray-50 rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-200">
+                <p className="text-xs sm:text-sm mb-2" style={{ color: "#64748B" }}>from</p>
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3" style={{ color: "#0F172A" }}>{tier.price}</p>
+                <p className="text-sm sm:text-base mb-4 sm:mb-6" style={{ color: "#475569" }}>{tier.size}</p>
                 <a
                   href="/book"
-                  className="w-full inline-block px-6 py-3 rounded-xl text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-center"
+                  className="w-full inline-block px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-center text-sm sm:text-base"
                   style={{ backgroundColor: "#4CAF50" }}
                   onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
                   onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
@@ -521,7 +622,7 @@ export default function GoCleanWelcomeFinalBranded() {
               </div>
             ))}
           </div>
-          <p className="text-sm text-center max-w-2xl mx-auto" style={{ color: "#64748B" }}>
+          <p className="text-xs sm:text-sm text-center max-w-2xl mx-auto px-4" style={{ color: "#64748B" }}>
             Not every home can be cleaned 100% with eco-only products — and that&apos;s okay. If your space needs stronger solutions, we&apos;ll let you know first and use them safely.
           </p>
         </div>
@@ -529,65 +630,75 @@ export default function GoCleanWelcomeFinalBranded() {
 
       {/* Approach */}
       <section id="approach" className="border-b" style={{ backgroundColor: brand.bg }}>
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <h2 className="text-4xl font-bold tracking-tight text-center mb-8" style={{ color: "#0F172A" }}>Our Approach</h2>
-          <div className="max-w-4xl mx-auto text-center mb-10">
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "#334155", lineHeight: "1.7" }}>
-              In the first step, we use hand-crafted, plant-based cleaning solutions made from simple, trusted ingredients like organic soap, vinegar, baking soda, salt, and water. They safely lift dirt and buildup without leaving behind toxic residues — making them perfect for homes with kids, pets, and allergy sensitivities.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-6 sm:mb-8" style={{ color: "#0F172A" }}>Our Approach</h2>
+          <div className="max-w-4xl mx-auto text-center mb-6 sm:mb-8 md:mb-10 px-4">
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6" style={{ color: "#334155", lineHeight: "1.7" }}>
+              As a local, family-owned business in Chicago, we know that no two homes are the same. What works for one family may not work for another. That&apos;s why we give you the power to choose and take an honest, responsible approach to your home&apos;s cleanliness.
             </p>
-            <p className="text-lg leading-relaxed" style={{ color: "#334155", lineHeight: "1.7" }}>
-              For deeper sanitation, we add the second step — EPA-registered disinfectants made from natural components like hydrogen peroxide, citric acid, and ethanol. This step eliminates up to 99.9% of bacteria and viruses, while staying gentle on your home and the environment.
+            <p className="text-base sm:text-lg font-semibold mb-6 sm:mb-8" style={{ color: "#0F172A", lineHeight: "1.7" }}>
+              Choose the level of care that your home needs:
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8 md:mb-10 px-4">
             <div className="rounded-xl border p-6 bg-white text-left">
-              <p className="text-sm font-semibold mb-2" style={{ color: brand.primary }}>Step 1 — Clean (Plant‑based)</p>
-              <h3 className="text-xl font-bold mb-2" style={{ color: "#0F172A" }}>Handcrafted organic solutions</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>Gentle formulas for everyday cleaning; safe for families and surfaces.</p>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-3xl">🌿</span>
+                <p className="text-sm font-semibold" style={{ color: "#4CAF50" }}>1. Eco-Safe Clean</p>
               </div>
+              <h3 className="text-xl font-bold mb-3" style={{ color: "#0F172A" }}>The safest choice for your family</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                We use our trusted, non-toxic, plant-based solutions and supplies. Perfect for homes with infants, small children, expectant mothers, allergy sufferers, or pets. Cleanliness without compromising health.
+              </p>
+            </div>
             <div className="rounded-xl border p-6 bg-white text-left">
-              <p className="text-sm font-semibold mb-2" style={{ color: brand.primary }}>Step 2 — Disinfect (When Needed)</p>
-              <h3 className="text-xl font-bold mb-2" style={{ color: "#0F172A" }}>EPA‑registered, Safer Choice options</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>Hydrogen peroxide, citric acid or ethanol for 99.9% germ elimination.</p>
-                </div>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-3xl">🛠️</span>
+                <p className="text-sm font-semibold" style={{ color: "#4CAF50" }}>2. Pro-Grade Power</p>
               </div>
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg leading-relaxed" style={{ color: "#334155", lineHeight: "1.7" }}>
-              Whether it&apos;s your family home, a busy office, or your Airbnb rental, we treat every space as if it were our own — with care, responsibility, and attention to detail. Because for us, cleaning isn&apos;t just about shiny floors — it&apos;s about helping Chicago families live healthier, happier lives.
+              <h3 className="text-xl font-bold mb-3" style={{ color: "#0F172A" }}>For the toughest cleaning challenges</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                When maximum disinfection is required (e.g., post-construction, move-in/out, commercial spaces). We utilize powerful, EPA-registered professional solutions, only with your explicit prior approval.
+              </p>
+            </div>
+          </div>
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed font-medium" style={{ color: "#334155", lineHeight: "1.7" }}>
+              It&apos;s More Than Just Cleaning: We help Chicago families live healthier and happier lives by creating a clean, comfortable, and welcoming space you love coming home to.
             </p>
-                </div>
-              </div>
+          </div>
+        </div>
       </section>
 
       {/* Our Works Section */}
-      <section className="py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>OUR WORKS</h2>
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>OUR WORKS</h2>
           </div>
           <div className="relative">
             {/* Navigation Arrows */}
             <button
               onClick={prevWork}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+              className="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
               style={{ color: "#4CAF50" }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <button
               onClick={nextWork}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
+              className="absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
               style={{ color: "#4CAF50" }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
 
             {/* Carousel Content */}
-            <div className="mx-16">
+            <div className="mx-8 sm:mx-12 md:mx-16">
               {workExamples.map((work, index) => (
                 <div
                   key={index}
@@ -671,13 +782,13 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Customer Reviews Section */}
-      <section className="py-20 border-b" style={{ backgroundColor: "#FAF8F4" }}>
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>What Our Customers Say</h2>
-            <p className="text-lg" style={{ color: "#64748B" }}>Real reviews from satisfied clients across Chicago</p>
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAF8F4" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>What Our Customers Say</h2>
+            <p className="text-sm sm:text-base md:text-lg px-4" style={{ color: "#64748B" }}>Real reviews from satisfied clients across Chicago</p>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Review 1 */}
             <div className="bg-white rounded-xl p-6 shadow-sm border" style={{ borderColor: "#E2E8F0" }}>
               <div className="mb-4">
@@ -762,12 +873,12 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>FAQ</h2>
-                </div>
-          <div className="grid grid-cols-2 gap-6">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>FAQ</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {faqs.map((faq, index) => (
               <div
                 key={index}
@@ -801,27 +912,27 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Contact & Serving Area Section */}
-      <section id="contact" className="py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-4xl font-semibold uppercase tracking-wide text-center mb-12" style={{ color: "#1F2937" }}>Contacts</h2>
-          <div className="grid grid-cols-2 gap-12">
+      <section id="contact" className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-wide text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#1F2937" }}>Contacts</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* Contact Information */}
             <div>
               <div className="space-y-3 mb-8">
                 <div>
-                  <a href="tel:+17733977380" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
-                    +1 773 397 7380
+                  <a href="tel:+19173852100" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
+                    917-385-2100
                   </a>
                 </div>
                 <div>
-                  <a href="mailto:info@gocleanusa.com" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
-                    info@gocleanusa.com
+                  <a href="mailto:Contact@gocleanusa.com" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
+                    Contact@gocleanusa.com
                   </a>
                 </div>
                 <div>
                   <p className="text-base" style={{ color: "#1F2937" }}>
-                    4456 N Kedzie ave<br />
-                    Chicago, IL, United States, 60625
+                    4011A N Lowell Ave 1A-W<br />
+                    Chicago, 60641
                   </p>
                 </div>
                 <div className="mt-6">
@@ -858,7 +969,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   </svg>
                 </a>
                 <a 
-                  href="https://www.tiktok.com/@gocleanusa" 
+                  href="https://www.tiktok.com/@gocleanusa.com?_r=1&_t=ZP-91TOV6iSNzS" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
@@ -883,14 +994,13 @@ export default function GoCleanWelcomeFinalBranded() {
                     </svg>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-white flex items-center justify-center">
                       <Image 
                         src="/logo2.png" 
                         alt="Go Clean Logo" 
-                        width={24}
-                        height={24}
-                        className="object-contain"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
+                        width={32}
+                        height={32}
+                        style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
                       />
                     </div>
                     <div className="flex flex-col">
@@ -942,30 +1052,29 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12" style={{ backgroundColor: "#45A049" }}>
-        <div className="max-w-7xl mx-auto px-8">
+      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#45A049" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Top Section */}
-          <div className="flex flex-row items-start justify-between mb-8">
+          <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-6 sm:gap-8">
             {/* Logo Section */}
             <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-white flex items-center justify-center">
                   <Image 
                     src="/logo2.png" 
                     alt="Go Clean USA Logo" 
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                    style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
+                    width={40}
+                    height={40}
+                    style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
                   />
                 </div>
               </div>
-              <span className="text-white font-bold text-xl uppercase">Go Clean USA</span>
-              <span className="text-white text-sm uppercase mt-1">Cleaning Services</span>
+              <span className="text-white font-bold text-lg sm:text-xl uppercase">Go Clean USA</span>
+              <span className="text-white text-xs sm:text-sm uppercase mt-1">Cleaning Services</span>
             </div>
 
             {/* Services and Links Section */}
-            <div className="flex flex-row gap-16">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 lg:gap-16">
               {/* Services Column */}
               <div className="flex flex-col">
                 <h3 className="text-white font-semibold uppercase mb-4 text-sm">SERVICES</h3>

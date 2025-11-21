@@ -6,11 +6,29 @@ import PaymentModal from "../../components/PaymentModal";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement } from "@stripe/react-stripe-js";
+import BookingKoala from "../../components/BookingKoala";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "";
 const stripePromise = stripePublishableKey ? loadStripe(stripePublishableKey) : null;
 
+// Check if BookingKoala is enabled
+const useBookingKoala = process.env.NEXT_PUBLIC_USE_BOOKINGKOALA === "true";
+const bookingKoalaMode = (process.env.NEXT_PUBLIC_BOOKINGKOALA_MODE || "redirect") as "embed" | "redirect" | "iframe";
+
 export default function BookPage() {
+  // If BookingKoala is enabled, render BookingKoala component
+  if (useBookingKoala) {
+    return (
+      <BookingKoala 
+        mode={bookingKoalaMode}
+        bookingUrl={process.env.NEXT_PUBLIC_BOOKINGKOALA_URL}
+        embedCode={process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE}
+        storeId={process.env.NEXT_PUBLIC_BOOKINGKOALA_STORE_ID}
+      />
+    );
+  }
+
+  // Otherwise, use the original custom booking form
   const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,23 +54,24 @@ export default function BookPage() {
   });
 
   const additionalServicesList = [
-    { id: "deep", name: "Deep Cleaning", price: 0, description: "Thorough deep cleaning service", icon: "house-stars" },
-    { id: "heavy", name: "Heavy Duty / Post Construction", price: 0, description: "Intensive cleaning after construction", icon: "house-stars-heavy" },
-    { id: "pet", name: "Pet in the house", price: 0, description: "Cleaning service for homes with pets", icon: "house-pets" },
-    { id: "windows", name: "Interior Windows", price: 49, description: "Windows from inside (up to 6 pcs)", icon: "window" },
-    { id: "blinds", name: "Wet Wipe Window Blinds (per window)", price: 11, description: "Price per window / set of blinds", icon: "blinds" },
-    { id: "fan", name: "Ceiling Fan / Chandelier (per one)", price: 0, description: "Cleaning ceiling fans and chandeliers", icon: "fan" },
-    { id: "oven", name: "Inside Oven", price: 38, description: "Deep cleaning (inside/outside), 30-45 min.", icon: "oven" },
-    { id: "refrigerator", name: "Inside Fridge", price: 38, description: "Shelf removal, washing/sanitization, 30-45 min.", icon: "fridge" },
-    { id: "cabinets-empty", name: "Inside Cabinets (Empty)", price: 40, description: "Cleaning empty kitchen cabinets", icon: "cabinets" },
-    { id: "cabinets-full", name: "Inside Cabinets (full)", price: 40, description: "Cleaning cabinets with items inside", icon: "cabinets-full" },
-    { id: "green", name: "Green Cleaning", price: 0, description: "Eco-friendly cleaning products", icon: "plant" },
-    { id: "dishes", name: "Wash 1 sink full of dishes", price: 0, description: "Dishwashing service", icon: "dishes" },
-    { id: "laundry", name: "Laundry", price: 22, description: "Washing/Drying/Folding", icon: "laundry" },
-    { id: "hardwood", name: "Hardwood Floor Scrubbing & Polishing (per room)", price: 0, description: "Professional floor care", icon: "floor" },
-    { id: "garage", name: "Sweep inside Garage", price: 0, description: "Garage cleaning service", icon: "garage" },
-    { id: "rug-small", name: "Rug Cleaning (small, ea.)", price: 0, description: "Small rug cleaning service", icon: "rug" },
-    { id: "rug-big", name: "Rug cleaning (big, ea.)", price: 0, description: "Large rug cleaning service", icon: "rug-big" },
+    { id: "heavy", name: "Heavy Duty / Post Construction", price: 60, priceType: "percentage", description: "Intensive cleaning after construction (+60% of base price)", icon: "house-stars-heavy" },
+    { id: "pet", name: "Pet in the house", price: 15, priceType: "fixed", description: "Cleaning service for homes with pets", icon: "house-pets" },
+    { id: "windows", name: "Interior Windows", price: 50, priceType: "fixed", description: "Windows from inside (up to 6 pcs)", icon: "window" },
+    { id: "blinds", name: "Wet Wipe Window Blinds (per window)", price: 10, priceType: "fixed", description: "Price per window / set of blinds", icon: "blinds" },
+    { id: "fan", name: "Ceiling Fan / Chandelier (per one)", price: 15, priceType: "fixed", description: "Cleaning ceiling fans and chandeliers", icon: "fan" },
+    { id: "oven", name: "Inside Oven", price: 30, priceType: "fixed", description: "Deep cleaning (inside/outside), 30-45 min.", icon: "oven" },
+    { id: "refrigerator", name: "Inside Fridge", price: 30, priceType: "fixed", description: "Shelf removal, washing/sanitization, 30-45 min.", icon: "fridge" },
+    { id: "cabinets-empty", name: "Inside Cabinets (Empty)", price: 50, priceType: "fixed", description: "Cleaning empty kitchen cabinets", icon: "cabinets" },
+    { id: "cabinets-full", name: "Inside Cabinets (full)", price: 70, priceType: "fixed", description: "Cleaning cabinets with items inside", icon: "cabinets-full" },
+    { id: "dishes", name: "Wash 1 sink full of dishes", price: 20, priceType: "fixed", description: "Dishwashing service", icon: "dishes" },
+    { id: "laundry", name: "Laundry", price: 25, priceType: "fixed", description: "Washing/Drying/Folding", icon: "laundry" },
+    { id: "hardwood", name: "Hardwood Floor Scrubbing & Polishing (per room)", price: 45, priceType: "fixed", description: "Professional floor care", icon: "floor" },
+    { id: "garage", name: "Sweep inside Garage", price: 35, priceType: "fixed", description: "Garage cleaning service", icon: "garage" },
+    { id: "rug-small", name: "Rug Cleaning (small, ea.)", price: 20, priceType: "fixed", description: "Small rug cleaning service", icon: "rug" },
+    { id: "rug-big", name: "Rug cleaning (big, ea.)", price: 40, priceType: "fixed", description: "Large rug cleaning service", icon: "rug-big" },
+    { id: "patio", name: "Patio / Balcony Sweep & Clean", price: 20, priceType: "fixed", description: "Outdoor patio or balcony cleaning", icon: "patio" },
+    { id: "trash", name: "Trash Removal (Multiple Bags)", price: 20, priceType: "fixed", description: "Removal of multiple trash bags", icon: "trash" },
+    { id: "bed-linen", name: "Bed Linen Change (per bed)", price: 10, priceType: "fixed", description: "Changing bed linens per bed", icon: "bed" },
   ];
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -164,62 +183,81 @@ export default function BookPage() {
       basePrice = Math.round(basePrice * 1.1);
     }
 
-    // Add additional services prices
+    // Calculate additional services prices
+    let additionalServicesTotal = 0;
+    let hasHeavyDuty = false;
+
     if (formData.additionalServices && formData.additionalServices.length > 0) {
       formData.additionalServices.forEach((serviceId: string) => {
         const service = additionalServicesList.find(s => s.id === serviceId);
-        if (service && service.price > 0) {
-          basePrice += service.price;
+        if (service) {
+          if (service.priceType === "percentage") {
+            // Percentage-based pricing (e.g., Heavy Duty +60%)
+            hasHeavyDuty = true;
+            // Will be applied after calculating fixed prices
+          } else if (service.price > 0) {
+            // Fixed price services
+            additionalServicesTotal += service.price;
+          }
         }
       });
     }
-    
-    return basePrice;
+
+    // Apply percentage-based add-ons (like Heavy Duty +60%)
+    if (hasHeavyDuty) {
+      const heavyDutyService = additionalServicesList.find(s => s.id === "heavy");
+      if (heavyDutyService && formData.additionalServices.includes("heavy")) {
+        const percentageIncrease = (basePrice * heavyDutyService.price) / 100;
+        additionalServicesTotal += percentageIncrease;
+      }
+    }
+
+    return Math.round(basePrice + additionalServicesTotal);
   };
 
   const estimatedPrice = calculatePrice();
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: brand.bg, minWidth: '1200px' }}>
+    <div className="min-h-screen w-full" style={{ backgroundColor: brand.bg }}>
       {/* Header */}
       <header className="sticky top-0 z-20 backdrop-blur-sm border-b" style={{ backgroundColor: "rgba(255,255,255,0.95)", borderColor: "#E5E7EB" }}>
-        <div className="w-full px-8 py-5 flex items-center justify-between max-w-7xl mx-auto">
-          <Link href="/" className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="w-full px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 flex items-center justify-between max-w-7xl mx-auto">
+          <Link href="/" className="flex items-center gap-2 sm:gap-4">
+            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 flex items-center justify-center">
               <Image 
                 src="/logo2.png" 
                 alt="Go Clean USA Logo" 
-                width={64}
-                height={64}
-                className="h-full w-full object-contain"
-                style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(85%) contrast(130%)' }}
+                width={96}
+                height={96}
+                className="h-full w-full"
+                style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
               />
             </div>
-            <span className="text-2xl font-bold" style={{ color: "#4CAF50" }}>Go Clean USA</span>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold" style={{ color: "#4CAF50" }}>Go Clean USA</span>
           </Link>
           <Link 
             href="/"
-            className="px-6 py-2.5 rounded-xl font-semibold transition-all"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-semibold transition-all text-sm sm:text-base"
             style={{ backgroundColor: "#4CAF50", color: "#FFFFFF" }}
             onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
             onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
           >
             Back to Home
           </Link>
-            </div>
+        </div>
       </header>
 
       {/* Booking Form Section */}
-      <section className="py-20" style={{ backgroundColor: brand.bg }}>
-        <div className="max-w-4xl mx-auto px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold tracking-tight mb-6" style={{ color: "#0F172A" }}>Book Your Cleaning Service</h1>
-            <p className="text-lg leading-relaxed" style={{ color: "#475569" }}>
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{ backgroundColor: brand.bg }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 sm:mb-6" style={{ color: "#0F172A" }}>Book Your Cleaning Service</h1>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed px-4" style={{ color: "#475569" }}>
               Tell us about your rooms, schedule and priorities. We&apos;ll tailor a plan that feels just right.
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl border shadow-lg p-10" style={{ borderColor: "#E2E8F0", boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
+          <div className="bg-white rounded-2xl sm:rounded-3xl border shadow-lg p-4 sm:p-6 md:p-8 lg:p-10" style={{ borderColor: "#E2E8F0", boxShadow: "0 10px 40px rgba(0,0,0,0.08)" }}>
             {!stripePublishableKey && (
               <div className="mb-6 p-4 rounded-lg bg-yellow-50 border border-yellow-200">
                 <p className="text-sm text-yellow-800">
@@ -323,7 +361,7 @@ export default function BookPage() {
                   />
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Number of Bedrooms*</label>
                   <input 
@@ -333,7 +371,7 @@ export default function BookPage() {
                     max="10" 
                     value={formData.bedrooms}
                     onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
+                    className="w-full rounded-xl border px-4 py-3 sm:py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
                     style={{ borderColor: "#E2E8F0" }} 
                     placeholder="2" 
                     required
@@ -348,7 +386,7 @@ export default function BookPage() {
                     max="10" 
                     value={formData.bathrooms}
                     onChange={handleInputChange}
-                    className="w-full rounded-xl border px-4 py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
+                    className="w-full rounded-xl border px-4 py-3 sm:py-3.5 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
                     style={{ borderColor: "#E2E8F0" }} 
                     placeholder="1" 
                     required
@@ -408,17 +446,17 @@ export default function BookPage() {
 
               {/* Service Type and Frequency Section */}
               <div>
-                <h3 className="text-lg font-bold mb-4" style={{ color: "#0F172A" }}>2) Type of Cleaning and Periodicity</h3>
+                <h3 className="text-base sm:text-lg font-bold mb-4" style={{ color: "#0F172A" }}>2) Type of Cleaning and Periodicity</h3>
                 
-                <div className="mb-4 flex items-center gap-4">
-                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Type:</label>
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <label className="text-sm font-semibold" style={{ color: "#0F172A" }}>Type:</label>
                   <div className="flex flex-1 rounded-lg overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFFFF" }}>
                     {["Standard", "Deep", "Move-In/Out"].map((type, index) => (
                       <button
                         key={type}
                         type="button"
                         onClick={() => setFormData(prev => ({ ...prev, serviceType: type }))}
-                        className="flex-1 px-5 py-2.5 font-semibold transition-all"
+                        className="flex-1 px-3 sm:px-5 py-2 sm:py-2.5 font-semibold transition-all text-xs sm:text-sm"
                         style={{
                           backgroundColor: formData.serviceType === type ? "#0F172A" : "#FFFFFF",
                           borderRight: index < 2 ? "1px solid #E2E8F0" : "none",
@@ -433,15 +471,15 @@ export default function BookPage() {
                   </div>
                 </div>
 
-                <div className="mb-4 flex items-center gap-4">
-                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Frequency:</label>
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <label className="text-sm font-semibold" style={{ color: "#0F172A" }}>Frequency:</label>
                   <div className="flex gap-2 flex-1 flex-wrap">
                     {["One-time", "Monthly", "Once every 2 weeks", "Weekly"].map((freq) => (
                       <button
                         key={freq}
                         type="button"
                         onClick={() => setFormData(prev => ({ ...prev, duration: freq }))}
-                        className="px-5 py-2.5 rounded-lg font-semibold transition-all border"
+                        className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold transition-all border text-xs sm:text-sm"
                         style={{
                           backgroundColor: formData.duration === freq ? "#0F172A" : "#FFFFFF",
                           borderColor: formData.duration === freq ? "#0F172A" : "#E2E8F0",
@@ -456,15 +494,15 @@ export default function BookPage() {
                   </div>
                 </div>
 
-                <div className="mb-4 flex items-center gap-4">
-                  <label className="text-sm font-semibold whitespace-nowrap" style={{ color: "#0F172A", minWidth: "60px" }}>Products:</label>
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <label className="text-sm font-semibold" style={{ color: "#0F172A" }}>Products:</label>
                   <div className="flex gap-2 flex-1">
                     {["Regular", "Eco"].map((product) => (
                       <button
                         key={product}
                         type="button"
                         onClick={() => setFormData(prev => ({ ...prev, ecoCleaning: product === "Eco" }))}
-                        className="px-5 py-2.5 rounded-lg font-semibold transition-all border"
+                        className="flex-1 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold transition-all border text-xs sm:text-sm"
                         style={{
                           backgroundColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#FFFFFF",
                           borderColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#E2E8F0",
@@ -482,8 +520,8 @@ export default function BookPage() {
 
               {/* Select Extras Section */}
               <div>
-                <h3 className="text-lg font-bold mb-6" style={{ color: "#0F172A" }}>Select Extras</h3>
-                <div className="grid grid-cols-5 gap-4">
+                <h3 className="text-base sm:text-lg font-bold mb-4 sm:mb-6" style={{ color: "#0F172A" }}>Select Extras</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                   {additionalServicesList.map((service) => {
                     const isSelected = formData.additionalServices?.includes(service.id) || false;
                     return (
@@ -632,13 +670,52 @@ export default function BookPage() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 2l1 3h3l-2 1.5 1 3L9 7l-2 1.5 1-3L5 5h3z" />
                             </svg>
                           )}
+                          {service.icon === "baseboard" && (
+                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <rect x="4" y="18" width="16" height="2" rx="1" strokeWidth={1} />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 20h16M6 18v-2M10 18v-2M14 18v-2M18 18v-2" />
+                            </svg>
+                          )}
+                          {service.icon === "wall" && (
+                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <rect x="4" y="4" width="16" height="16" rx="1" strokeWidth={1} />
+                              <circle cx="10" cy="10" r="2" fill="currentColor" opacity="0.3" />
+                              <circle cx="14" cy="14" r="1.5" fill="currentColor" opacity="0.3" />
+                            </svg>
+                          )}
+                          {service.icon === "patio" && (
+                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <rect x="4" y="12" width="16" height="8" rx="1" strokeWidth={1} />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 12h16M6 12v-4M10 12v-4M14 12v-4M18 12v-4" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 8l2-2M16 8l-2-2" />
+                            </svg>
+                          )}
+                          {service.icon === "trash" && (
+                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          )}
+                          {service.icon === "bed" && (
+                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <rect x="4" y="6" width="16" height="12" rx="1" strokeWidth={1} />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 12h16M6 8v8M18 8v8" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 10h8M8 14h8" />
+                            </svg>
+                          )}
                         </div>
                         
-                        {/* Service Name */}
+                        {/* Service Name and Price */}
                         <div className="text-center mb-2 flex-1">
                           <p className="text-xs font-medium" style={{ color: "#0F172A" }}>
                             {service.name}
                           </p>
+                          {service.price > 0 && (
+                            <p className="text-xs font-semibold mt-1" style={{ color: "#4CAF50" }}>
+                              {service.priceType === "percentage" 
+                                ? `+${service.price}%` 
+                                : `$${service.price}`}
+                            </p>
+                          )}
                         </div>
                         
                         {/* Info Icon */}

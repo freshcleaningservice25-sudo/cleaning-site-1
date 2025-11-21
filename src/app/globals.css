@@ -66,10 +66,10 @@ body {
 ::placeholder { color: #6b7280; opacity: 1; }
 ::-ms-input-placeholder { color: #6b7280; }
 
-/* Force desktop layout on mobile - always show desktop view */
+/* Responsive layout - allow mobile view */
 html, body {
-  min-width: 1200px !important;
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 * {
