@@ -15,20 +15,8 @@ const stripePromise = stripePublishableKey ? loadStripe(stripePublishableKey) : 
 const useBookingKoala = process.env.NEXT_PUBLIC_USE_BOOKINGKOALA === "true";
 const bookingKoalaMode = (process.env.NEXT_PUBLIC_BOOKINGKOALA_MODE || "redirect") as "embed" | "redirect" | "iframe";
 
-export default function BookPage() {
-  // If BookingKoala is enabled, render BookingKoala component
-  if (useBookingKoala) {
-    return (
-      <BookingKoala 
-        mode={bookingKoalaMode}
-        bookingUrl={process.env.NEXT_PUBLIC_BOOKINGKOALA_URL}
-        embedCode={process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE}
-        storeId={process.env.NEXT_PUBLIC_BOOKINGKOALA_STORE_ID}
-      />
-    );
-  }
-
-  // Otherwise, use the original custom booking form
+// Custom booking form component
+function CustomBookingForm() {
   const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -918,4 +906,21 @@ export default function BookPage() {
       />
     </div>
   );
+}
+
+export default function BookPage() {
+  // If BookingKoala is enabled, render BookingKoala component
+  if (useBookingKoala) {
+    return (
+      <BookingKoala 
+        mode={bookingKoalaMode}
+        bookingUrl={process.env.NEXT_PUBLIC_BOOKINGKOALA_URL}
+        embedCode={process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE}
+        storeId={process.env.NEXT_PUBLIC_BOOKINGKOALA_STORE_ID}
+      />
+    );
+  }
+
+  // Otherwise, use the original custom booking form
+  return <CustomBookingForm />;
 }
