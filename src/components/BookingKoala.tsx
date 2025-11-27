@@ -22,6 +22,10 @@ export default function BookingKoala({
   const defaultBookingUrl = process.env.NEXT_PUBLIC_BOOKINGKOALA_URL || bookingUrl;
   const defaultEmbedCode = process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE || embedCode;
 
+  // Extract script src from embed code if present (for embed mode)
+  const scriptMatch = defaultEmbedCode?.match(/<script[^>]+src=["']([^"']+)["'][^>]*>/i);
+  const scriptSrc = scriptMatch ? scriptMatch[1] : null;
+
   useEffect(() => {
     // If redirect mode, redirect immediately
     if (mode === "redirect" && defaultBookingUrl) {
@@ -29,6 +33,30 @@ export default function BookingKoala({
       return;
     }
   }, [mode, defaultBookingUrl]);
+
+  // Load embed script dynamically if in embed mode
+  useEffect(() => {
+    if (mode === "embed" && scriptSrc) {
+      // Check if script already exists to avoid duplicates
+      const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+      if (existingScript) {
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = scriptSrc;
+      script.defer = true;
+      document.body.appendChild(script);
+
+      return () => {
+        // Cleanup: remove script on unmount
+        const scriptToRemove = document.querySelector(`script[src="${scriptSrc}"]`);
+        if (scriptToRemove && scriptToRemove.parentNode) {
+          scriptToRemove.parentNode.removeChild(scriptToRemove);
+        }
+      };
+    }
+  }, [mode, scriptSrc]);
 
   // If redirect mode, show loading state
   if (mode === "redirect") {
@@ -361,36 +389,8 @@ export default function BookingKoala({
 
   // Embed code mode - use provided embed script
   if (mode === "embed" && defaultEmbedCode) {
-    // Extract script src from embed code if present
-    const scriptMatch = defaultEmbedCode.match(/<script[^>]+src=["']([^"']+)["'][^>]*>/i);
-    const scriptSrc = scriptMatch ? scriptMatch[1] : null;
-    
     // Extract iframe HTML (everything except script tags)
-    const iframeHtml = defaultEmbedCode.replace(/<script[^>]*>.*?<\/script>/gis, '').trim();
-
-    useEffect(() => {
-      // Load script dynamically if present
-      if (scriptSrc) {
-        // Check if script already exists to avoid duplicates
-        const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
-        if (existingScript) {
-          return;
-        }
-
-        const script = document.createElement('script');
-        script.src = scriptSrc;
-        script.defer = true;
-        document.body.appendChild(script);
-
-        return () => {
-          // Cleanup: remove script on unmount
-          const scriptToRemove = document.querySelector(`script[src="${scriptSrc}"]`);
-          if (scriptToRemove && scriptToRemove.parentNode) {
-            scriptToRemove.parentNode.removeChild(scriptToRemove);
-          }
-        };
-      }
-    }, [scriptSrc]);
+    const iframeHtml = defaultEmbedCode.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '').trim();
 
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", minWidth: '1200px' }}>
