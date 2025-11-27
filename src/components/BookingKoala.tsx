@@ -26,6 +26,7 @@ export default function BookingKoala({
   const scriptMatch = defaultEmbedCode?.match(/<script[^>]+src=["']([^"']+)["'][^>]*>/i);
   const scriptSrc = scriptMatch ? scriptMatch[1] : null;
 
+  // All hooks must be called at the top level before any conditional returns
   useEffect(() => {
     // If redirect mode, redirect immediately
     if (mode === "redirect" && defaultBookingUrl) {
