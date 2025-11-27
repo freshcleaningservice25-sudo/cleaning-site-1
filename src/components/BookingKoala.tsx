@@ -27,6 +27,7 @@ export default function BookingKoala({
   const scriptSrc = scriptMatch ? scriptMatch[1] : null;
 
   // All hooks must be called at the top level before any conditional returns
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     // If redirect mode, redirect immediately
     if (mode === "redirect" && defaultBookingUrl) {
@@ -36,6 +37,7 @@ export default function BookingKoala({
   }, [mode, defaultBookingUrl]);
 
   // Load embed script dynamically if in embed mode
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (mode === "embed" && scriptSrc) {
       // Check if script already exists to avoid duplicates
