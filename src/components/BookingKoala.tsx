@@ -88,7 +88,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page */}
-        <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
+        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
           <div className="w-full px-8 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center">
@@ -399,7 +399,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", minWidth: '1200px' }}>
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
+        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
           <div className="w-full px-8 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center">

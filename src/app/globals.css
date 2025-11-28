@@ -108,3 +108,32 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+/* BookingKoala modal z-index fix - ensure modals appear above header */
+#bookingkoala-embed,
+#bookingkoala-embed * {
+  position: relative;
+}
+
+/* Ensure BookingKoala date picker and other modals appear above everything */
+#bookingkoala-embed [class*="modal"],
+#bookingkoala-embed [class*="Modal"],
+#bookingkoala-embed [class*="popup"],
+#bookingkoala-embed [class*="Popup"],
+#bookingkoala-embed [class*="calendar"],
+#bookingkoala-embed [class*="Calendar"],
+#bookingkoala-embed [class*="datepicker"],
+#bookingkoala-embed [class*="DatePicker"],
+iframe[src*="bookingkoala"] {
+  z-index: 9999 !important;
+}
+
+/* Fix for BookingKoala modals that might be in body */
+body > [class*="modal"],
+body > [class*="Modal"],
+body > [class*="popup"],
+body > [class*="Popup"],
+body > [id*="bookingkoala"],
+body > [id*="BookingKoala"] {
+  z-index: 10000 !important;
+}
