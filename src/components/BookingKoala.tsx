@@ -87,8 +87,8 @@ export default function BookingKoala({
   if (mode === "iframe" && defaultBookingUrl) {
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
-        {/* Header - Same as main page */}
-        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
+        {/* Header - Same as main page - Pinned at top */}
+        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
           <div className="w-full px-8 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center">
@@ -377,11 +377,11 @@ export default function BookingKoala({
         </header>
 
         {/* BookingKoala Iframe */}
-        <div className="w-full" style={{ marginTop: '80px', minHeight: "calc(100vh - 80px)" }}>
+        <div className="w-full" style={{ marginTop: '140px', paddingTop: '20px', minHeight: "calc(100vh - 140px)" }}>
           <iframe
             src={defaultBookingUrl}
             className="w-full border-0"
-            style={{ minHeight: "calc(100vh - 80px)" }}
+            style={{ minHeight: "calc(100vh - 160px)" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
@@ -398,8 +398,8 @@ export default function BookingKoala({
 
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", minWidth: '1200px' }}>
-        {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
+        {/* Header - Pinned at top */}
+        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
           <div className="w-full px-8 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center">
@@ -688,7 +688,7 @@ export default function BookingKoala({
         </header>
 
         {/* Embed Container */}
-        <div className="max-w-7xl mx-auto px-8 py-12" style={{ marginTop: '80px' }}>
+        <div className="max-w-7xl mx-auto px-8 py-12" style={{ marginTop: '140px', paddingTop: '20px' }}>
           <div 
             id="bookingkoala-embed"
             dangerouslySetInnerHTML={{ __html: iframeHtml }}
