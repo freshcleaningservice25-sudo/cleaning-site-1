@@ -34,7 +34,7 @@ export default function QRCodePage() {
           width: 400,
           margin: 2,
           color: {
-            dark: "#4CAF50", // Your brand green color
+            dark: "#0C5E3E", // Your brand green color
             light: "#ffffff",
           },
         });
@@ -79,7 +79,7 @@ export default function QRCodePage() {
               width={120}
               height={120}
               className="object-cover rounded-full"
-              style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
+              style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function QRCodePage() {
                   ref={canvasRef} 
                   className="border-4 rounded-lg" 
                   style={{ 
-                    borderColor: "#4CAF50",
+                    borderColor: "#0C5E3E",
                     display: isGenerating ? "none" : "block"
                   }} 
                 />
@@ -126,15 +126,15 @@ export default function QRCodePage() {
             onClick={handleDownload}
             disabled={!downloadUrl || isGenerating}
             className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ backgroundColor: "#4CAF50" }}
+            style={{ backgroundColor: "#0C5E3E" }}
             onMouseEnter={(e) => {
               if (!e.currentTarget.disabled) {
-                (e.target as HTMLButtonElement).style.backgroundColor = "#45A049";
+                (e.target as HTMLButtonElement).style.backgroundColor = "#0A4C32";
               }
             }}
             onMouseLeave={(e) => {
               if (!e.currentTarget.disabled) {
-                (e.target as HTMLButtonElement).style.backgroundColor = "#4CAF50";
+                (e.target as HTMLButtonElement).style.backgroundColor = "#0C5E3E";
               }
             }}
           >
@@ -148,12 +148,12 @@ export default function QRCodePage() {
           <Link
             href="/"
             className="inline-block text-base font-semibold transition-colors"
-            style={{ color: "#4CAF50" }}
+            style={{ color: "#0C5E3E" }}
             onMouseEnter={(e) => {
-              (e.target as HTMLAnchorElement).style.color = "#388E3C";
+              (e.target as HTMLAnchorElement).style.color = "#09402A";
             }}
             onMouseLeave={(e) => {
-              (e.target as HTMLAnchorElement).style.color = "#4CAF50";
+              (e.target as HTMLAnchorElement).style.color = "#0C5E3E";
             }}
           >
             ← Back to Home

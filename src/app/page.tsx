@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function GoCleanWelcomeFinalBranded() {
-  const brand = { primary: "#4CAF50", primaryDark: "#388E3C", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
+  const brand = { primary: "#0C5E3E", primaryDark: "#09402A", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -192,7 +192,7 @@ export default function GoCleanWelcomeFinalBranded() {
               width={120}
               height={120}
               className="object-cover rounded-full"
-              style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
+                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
             />
           </div>
           
@@ -205,7 +205,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#4CAF50";
+                  target.style.color = "#0C5E3E";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -214,7 +214,7 @@ export default function GoCleanWelcomeFinalBranded() {
               >
                 <span className="relative">
                   About Us
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
                 </span>
               </a>
               <a 
@@ -223,7 +223,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#4CAF50";
+                  target.style.color = "#0C5E3E";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -232,7 +232,7 @@ export default function GoCleanWelcomeFinalBranded() {
               >
                 <span className="relative">
                   Services
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
                 </span>
               </a>
               <a 
@@ -241,7 +241,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#4CAF50";
+                  target.style.color = "#0C5E3E";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -250,7 +250,7 @@ export default function GoCleanWelcomeFinalBranded() {
               >
                 <span className="relative">
                   Our Approach
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
                 </span>
               </a>
               <a 
@@ -259,7 +259,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#4CAF50";
+                  target.style.color = "#0C5E3E";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -268,7 +268,7 @@ export default function GoCleanWelcomeFinalBranded() {
               >
                 <span className="relative">
                   Contact
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#4CAF50" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
                 </span>
               </a>
             </nav>
@@ -278,7 +278,7 @@ export default function GoCleanWelcomeFinalBranded() {
               <a 
                 href="tel:+19173852100" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Call us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +288,7 @@ export default function GoCleanWelcomeFinalBranded() {
               <a 
                 href="mailto:Contact@gocleanusa.com" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Email us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,7 +300,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Follow Go Clean Chicago on Facebook"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -312,7 +312,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Follow Go Clean Chicago on Instagram"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -324,7 +324,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Follow us on TikTok"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -336,9 +336,9 @@ export default function GoCleanWelcomeFinalBranded() {
             <a 
               href="/book" 
               className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex-shrink-0" 
-              style={{ backgroundColor: "#4CAF50", fontSize: "15px", letterSpacing: "0.01em" }}
-              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#45A049")} 
-              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
+              style={{ backgroundColor: "#0C5E3E", fontSize: "15px", letterSpacing: "0.01em" }}
+              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0A4C32")} 
+              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
             >
               Book Cleaning
             </a>
@@ -348,7 +348,7 @@ export default function GoCleanWelcomeFinalBranded() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors"
-            style={{ backgroundColor: "#4CAF50" }}
+            style={{ backgroundColor: "#0C5E3E" }}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -403,7 +403,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 <a 
                   href="tel:+19173852100" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#4CAF50" }}
+                  style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Call us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -413,7 +413,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 <a 
                   href="mailto:Contact@gocleanusa.com" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#4CAF50" }}
+                  style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Email us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -425,7 +425,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#4CAF50" }}
+                  style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Follow us on TikTok"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -437,7 +437,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 href="/book" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
-                style={{ backgroundColor: "#4CAF50" }}
+                style={{ backgroundColor: "#0C5E3E" }}
               >
                 Book Cleaning
               </a>
@@ -450,7 +450,7 @@ export default function GoCleanWelcomeFinalBranded() {
       <section id="hero" className="border-b" style={{ paddingTop: '140px' }}>
         <div className="w-full py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#4CAF50", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#0C5E3E", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
             <p className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-6 md:mb-8 px-4" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Eco-Safe, Professionally Done.</p>
 
             <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10 px-4" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "500px" }}>
@@ -460,16 +460,16 @@ export default function GoCleanWelcomeFinalBranded() {
               <a 
                 href="/book" 
                 className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-2xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-center" 
-                style={{ backgroundColor: "#4CAF50", fontSize: "14px sm:text-base" }}
-                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
-                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
+                style={{ backgroundColor: "#0C5E3E", fontSize: "14px sm:text-base" }}
+                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#09402A")} 
+                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
               >
                 Book Cleaning
               </a>
               <a 
                 href="#approach" 
                 className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border-2 font-semibold transition-all duration-200 hover:bg-green-50 text-center" 
-                style={{ borderColor: "#4CAF50", color: "#4CAF50", fontSize: "14px sm:text-base" }}
+                style={{ borderColor: "#0C5E3E", color: "#0C5E3E", fontSize: "14px sm:text-base" }}
               >
                 Our Approach
               </a>
@@ -500,22 +500,22 @@ export default function GoCleanWelcomeFinalBranded() {
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
             {[
               {title:'Stress-Free Residential Cleaning', description:'Reclaim your home with regular, deep, or move-out services for apartments, condos, and family homes.', icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               )},
               {title:'Office & Commercial Space Sanitation', description:'Maintain a clean, professional environment for offices, studios, salons, and small businesses.', icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               )},
               {title:'Fast, 5-Star Airbnb Turnovers', description:'Ensure 5-star reviews with fast, detailed cleaning, linen service, and essential restocking.', icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
               )},
               {title:'Total Move In/Out Restoration', description:'Full cleaning and restoration, including appliances, cabinets, baseboards, and beyond, for guaranteed deposit return.', icon: (
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               )},
@@ -573,17 +573,17 @@ export default function GoCleanWelcomeFinalBranded() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               {text: "Local family team — not a big platform", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               )},
               {text: "Eco or regular cleaning — your choice", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               )},
               {text: "We bring our own supplies & equipment", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2 4h7v16H2V4z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2 4h7M2 20h7" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 8h6v10h-6V8z" />
@@ -593,17 +593,17 @@ export default function GoCleanWelcomeFinalBranded() {
                 </svg>
               )},
               {text: "2 cleaners available for faster cleaning", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               )},
               {text: "Experienced with Residential, Commercial, and Airbnb", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
               )},
               {text: "Clear pricing, no surprises", icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#4CAF50" }}>
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               )},
@@ -637,9 +637,9 @@ export default function GoCleanWelcomeFinalBranded() {
                 <a
                   href="/book"
                   className="w-full inline-block px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-center text-sm sm:text-base"
-                  style={{ backgroundColor: "#4CAF50" }}
-                  onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
-                  onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
+                  style={{ backgroundColor: "#0C5E3E" }}
+                  onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#09402A")} 
+                  onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
                 >
                   Book Now
                 </a>
@@ -668,7 +668,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <div className="rounded-xl border p-6 bg-white text-left">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">🌿</span>
-                <p className="text-sm font-semibold" style={{ color: "#4CAF50" }}>1. Eco-Safe Clean</p>
+                <p className="text-sm font-semibold" style={{ color: "#0C5E3E" }}>1. Eco-Safe Clean</p>
               </div>
               <h3 className="text-xl font-bold mb-3" style={{ color: "#0F172A" }}>The safest choice for your family</h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
@@ -678,7 +678,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <div className="rounded-xl border p-6 bg-white text-left">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">🛠️</span>
-                <p className="text-sm font-semibold" style={{ color: "#4CAF50" }}>2. Pro-Grade Power</p>
+                <p className="text-sm font-semibold" style={{ color: "#0C5E3E" }}>2. Pro-Grade Power</p>
               </div>
               <h3 className="text-xl font-bold mb-3" style={{ color: "#0F172A" }}>For the toughest cleaning challenges</h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
@@ -705,7 +705,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <button
               onClick={prevWork}
               className="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
-              style={{ color: "#4CAF50" }}
+              style={{ color: "#0C5E3E" }}
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -714,7 +714,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <button
               onClick={nextWork}
               className="absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
-              style={{ color: "#4CAF50" }}
+              style={{ color: "#0C5E3E" }}
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -1076,7 +1076,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#45A049" }}>
+      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Top Section */}
           <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-6 sm:gap-8">

@@ -218,17 +218,17 @@ function CustomBookingForm() {
                 width={96}
                 height={96}
                 className="h-full w-full"
-                style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
+                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
               />
             </div>
-            <span className="text-lg sm:text-xl md:text-2xl font-bold" style={{ color: "#4CAF50" }}>Go Clean USA</span>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold" style={{ color: "#0C5E3E" }}>Go Clean USA</span>
           </Link>
           <Link 
             href="/"
             className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-semibold transition-all text-sm sm:text-base"
-            style={{ backgroundColor: "#4CAF50", color: "#FFFFFF" }}
-            onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#388E3C")} 
-            onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#4CAF50")}
+            style={{ backgroundColor: "#0C5E3E", color: "#FFFFFF" }}
+            onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#09402A")} 
+            onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
           >
             Back to Home
           </Link>
@@ -264,7 +264,7 @@ function CustomBookingForm() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2" style={{ color: "#4CAF50" }}>Request Sent Successfully! 🎉</h3>
+                <h3 className="text-2xl font-bold mb-2" style={{ color: "#0C5E3E" }}>Request Sent Successfully! 🎉</h3>
                 <p className="text-lg" style={{ color: "#475569" }}>
                   Your request has been received. Redirecting to payment...
                 </p>
@@ -517,14 +517,14 @@ function CustomBookingForm() {
                       key={service.id}
                         className="flex flex-col items-center p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md"
                       style={{
-                          borderColor: isSelected ? "#4CAF50" : "#E2E8F0",
+                          borderColor: isSelected ? "#0C5E3E" : "#E2E8F0",
                           backgroundColor: isSelected ? "#F0FDF4" : "#FFFFFF",
                           borderWidth: isSelected ? "2px" : "1px"
                       }}
                       onClick={() => handleAdditionalServiceToggle(service.id)}
                     >
                         {/* Icon */}
-                        <div className="mb-3 w-12 h-12 flex items-center justify-center" style={{ color: "#4CAF50" }}>
+                        <div className="mb-3 w-12 h-12 flex items-center justify-center" style={{ color: "#0C5E3E" }}>
                           {service.icon === "house-stars" && (
                             <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -698,7 +698,7 @@ function CustomBookingForm() {
                             {service.name}
                           </p>
                           {service.price > 0 && (
-                            <p className="text-xs font-semibold mt-1" style={{ color: "#4CAF50" }}>
+                            <p className="text-xs font-semibold mt-1" style={{ color: "#0C5E3E" }}>
                               {service.priceType === "percentage" 
                                 ? `+${service.price}%` 
                                 : `$${service.price}`}
@@ -756,7 +756,7 @@ function CustomBookingForm() {
                       value="newCard"
                       defaultChecked
                       className="w-4 h-4"
-                      style={{ accentColor: "#4CAF50" }}
+                      style={{ accentColor: "#0C5E3E" }}
                     />
                     <span className="text-sm font-medium" style={{ color: "#0F172A" }}>New Credit Card</span>
                   </label>
@@ -833,7 +833,7 @@ function CustomBookingForm() {
                           <span className="text-black text-[8px] font-semibold leading-tight">Safe &</span>
                           <span className="text-black text-[8px] font-semibold leading-tight">Secure</span>
                         </div>
-                        <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: "#4CAF50" }}>
+                        <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: "#0C5E3E" }}>
                           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4" />
@@ -851,7 +851,7 @@ function CustomBookingForm() {
                       type="checkbox"
                       required
                       className="mt-1 w-4 h-4 rounded border-gray-300"
-                      style={{ accentColor: "#4CAF50" }}
+                      style={{ accentColor: "#0C5E3E" }}
                     />
                     <span className="text-sm" style={{ color: "#0F172A" }}>
                       Accept terms and conditions
@@ -878,9 +878,9 @@ function CustomBookingForm() {
                 type="submit" 
                 disabled={isSubmitting}
                 className="w-full inline-flex items-center justify-center px-8 py-4 rounded-2xl text-white font-bold shadow-lg transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl transform hover:scale-[1.02]" 
-                style={{ backgroundColor: "#4CAF50" }} 
-                onMouseEnter={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#388E3C")} 
-                onMouseLeave={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#4CAF50")}
+                style={{ backgroundColor: "#0C5E3E" }} 
+                onMouseEnter={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#09402A")} 
+                onMouseLeave={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#0C5E3E")}
               >
                 {isSubmitting ? "Sending Request..." : "Book Cleaning"}
               </button>
