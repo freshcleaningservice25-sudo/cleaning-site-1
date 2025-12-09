@@ -7,6 +7,21 @@
   --brand-ink: #0a4c32; /* darker brand tone */
 }
 
+.logo-crop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.logo-crop img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

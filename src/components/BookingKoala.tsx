@@ -89,18 +89,19 @@ export default function BookingKoala({
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page - Pinned at top */}
         <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
-          <div className="w-full px-8 py-1 flex items-center justify-between">
-            {/* Logo Section */}
-            <div className="flex items-center">
-              <Image 
-                src="/logo2.png" 
-                alt="Go Clean USA Logo" 
-                width={120}
-                height={120}
-                className="object-cover rounded-full"
-                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
-              />
-            </div>
+          <div className="w-full px-6 py-1 flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" aria-label="Go Clean USA - Home">
+              <div className="logo-crop">
+                <Image
+                  src="/logo_2.svg"
+                  alt="Go Clean USA Logo"
+                  width={90}
+                  height={90}
+                  className="object-contain"
+                />
+              </div>
+            </Link>
             
             {/* Desktop Navigation and CTA */}
             <div className="hidden lg:flex items-center gap-12">
@@ -377,11 +378,11 @@ export default function BookingKoala({
         </header>
 
         {/* BookingKoala Iframe */}
-        <div className="w-full" style={{ marginTop: '140px', paddingTop: '20px', minHeight: "calc(100vh - 140px)" }}>
+        <div className="w-full" style={{ marginTop: '220px', paddingTop: '32px', minHeight: "calc(100vh - 220px)" }}>
           <iframe
             src={defaultBookingUrl}
             className="w-full border-0"
-            style={{ minHeight: "calc(100vh - 160px)" }}
+            style={{ minHeight: "calc(100vh - 260px)" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
@@ -400,18 +401,19 @@ export default function BookingKoala({
       <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", minWidth: '1200px' }}>
         {/* Header - Pinned at top */}
         <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
-          <div className="w-full px-8 py-1 flex items-center justify-between">
+          <div className="w-full px-6 py-1 flex items-center justify-between">
             {/* Logo Section */}
-            <div className="flex items-center">
-              <Image 
-                src="/logo2.png" 
-                alt="Go Clean USA Logo" 
-                width={120}
-                height={120}
-                className="object-cover rounded-full"
-                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
-              />
-            </div>
+            <Link href="/" aria-label="Go Clean USA - Home">
+              <div className="logo-crop">
+                <Image 
+                  src="/logo_2.svg" 
+                  alt="Go Clean USA Logo" 
+                  width={90}
+                  height={90}
+                  className="object-contain"
+                />
+              </div>
+            </Link>
             
             {/* Desktop Navigation and CTA */}
             <div className="hidden lg:flex items-center gap-12">
@@ -688,7 +690,7 @@ export default function BookingKoala({
         </header>
 
         {/* Embed Container */}
-        <div className="max-w-7xl mx-auto px-8 py-12" style={{ marginTop: '140px', paddingTop: '20px' }}>
+        <div className="max-w-7xl mx-auto px-8 py-12" style={{ marginTop: '220px', paddingTop: '32px' }}>
           <div 
             id="bookingkoala-embed"
             dangerouslySetInnerHTML={{ __html: iframeHtml }}

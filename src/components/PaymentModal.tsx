@@ -230,7 +230,7 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
             </p>
             {serviceData?.ecoCleaning && (
               <p className="text-sm font-medium" style={{ color: "#0C5E3E" }}>
-                🌿 Eco Cleaning Enabled
+                🌿 Organic Cleaning Enabled
               </p>
             )}
             {serviceData?.additionalServices && serviceData.additionalServices.length > 0 && (

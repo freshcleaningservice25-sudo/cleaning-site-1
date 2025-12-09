@@ -526,7 +526,7 @@ export default function AdminDashboard() {
                 
                 {selectedOrder.ecoCleaning && (
                   <div>
-                    <label className="text-sm font-medium text-gray-500">Eco Cleaning</label>
+                    <label className="text-sm font-medium text-gray-500">Organic Cleaning</label>
                     <p className="text-lg">Yes</p>
                   </div>
                 )}

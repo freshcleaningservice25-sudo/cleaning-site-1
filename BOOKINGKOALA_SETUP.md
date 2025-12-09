@@ -1,4 +1,4 @@
-# BookingKoala Integration Guide
+image.png# BookingKoala Integration Guide
 
 This guide will help you integrate BookingKoala into your existing cleaning service website.
 

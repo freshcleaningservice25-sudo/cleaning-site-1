@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   description: "Book professional home cleaning quickly and securely.",
   icons: {
     icon: [
-      { url: "/logo2.png", type: "image/png" },
+      { url: "/logo_2.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/logo2.png", type: "image/png" },
+      { url: "/logo_2.svg", type: "image/svg+xml" },
     ],
   },
 };

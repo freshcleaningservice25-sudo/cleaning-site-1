@@ -211,14 +211,13 @@ function CustomBookingForm() {
       <header className="sticky top-0 z-20 backdrop-blur-sm border-b" style={{ backgroundColor: "rgba(255,255,255,0.95)", borderColor: "#E5E7EB" }}>
         <div className="w-full px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 flex items-center justify-between max-w-7xl mx-auto">
           <Link href="/" className="flex items-center gap-2 sm:gap-4">
-            <div className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 flex items-center justify-center">
+            <div className="logo-crop">
               <Image 
-                src="/logo2.png" 
+                src="/logo_2.svg" 
                 alt="Go Clean USA Logo" 
                 width={96}
                 height={96}
-                className="h-full w-full"
-                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
+                className="h-full w-full object-contain"
               />
             </div>
             <span className="text-lg sm:text-xl md:text-2xl font-bold" style={{ color: "#0C5E3E" }}>Go Clean USA</span>
@@ -485,17 +484,17 @@ function CustomBookingForm() {
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <label className="text-sm font-semibold" style={{ color: "#0F172A" }}>Products:</label>
                   <div className="flex gap-2 flex-1">
-                    {["Regular", "Eco"].map((product) => (
+                    {["Regular", "Organic"].map((product) => (
                       <button
                         key={product}
                         type="button"
-                        onClick={() => setFormData(prev => ({ ...prev, ecoCleaning: product === "Eco" }))}
+                        onClick={() => setFormData(prev => ({ ...prev, ecoCleaning: product === "Organic" }))}
                         className="flex-1 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold transition-all border text-xs sm:text-sm"
                         style={{
-                          backgroundColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#FFFFFF",
-                          borderColor: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#E2E8F0",
+                          backgroundColor: ((product === "Organic" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#FFFFFF",
+                          borderColor: ((product === "Organic" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#0F172A" : "#E2E8F0",
                           borderWidth: "1px",
-                          color: ((product === "Eco" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#FFFFFF" : "#0F172A",
+                          color: ((product === "Organic" && formData.ecoCleaning) || (product === "Regular" && !formData.ecoCleaning)) ? "#FFFFFF" : "#0F172A",
                           cursor: "pointer"
                         }}
                       >
@@ -727,7 +726,7 @@ function CustomBookingForm() {
                   </span>
                 </div>
                 <div className="text-sm space-y-1" style={{ color: "#475569" }}>
-                  <p>Basic materials and inventory are included. Eco-friendly products are available at the client&apos;s choice.</p>
+                  <p>Basic materials and inventory are included. Organic products are available at the client&apos;s choice.</p>
                   <p>The final price is confirmed by photo/video or upon inspection.</p>
                 </div>
               </div>

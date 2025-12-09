@@ -16,12 +16,12 @@ export default function GoCleanWelcomeFinalBranded() {
       answer: "Standard Cleaning covers regular maintenance — dusting, vacuuming, mopping, bathrooms, and kitchen surfaces. Deep Cleaning includes extra detailing: baseboards, inside appliances, doors, vents, and areas behind furniture."
     },
     {
-      question: "What's the difference between Eco and Regular cleaning products?",
-      answer: "We offer both options: Eco Cleaning uses plant-based, biodegradable, pet & child safe products. Regular Cleaning uses professional-grade products for heavy-duty tasks. You can choose either or let us mix both as needed."
+      question: "What's the difference between Organic and Regular cleaning products?",
+      answer: "We offer both options: Organic Cleaning uses plant-based, biodegradable, pet & child safe products. Regular Cleaning uses professional-grade products for heavy-duty tasks. You can choose either or let us mix both as needed."
     },
     {
       question: "Do I need to provide cleaning supplies or equipment?",
-      answer: "No need — we bring everything ourselves. We use our own professional tools, vacuums, mops, and eco-friendly products. If you have your favorite products or want us to use yours — no problem, we can do it your way."
+      answer: "No need — we bring everything ourselves. We use our own professional tools, vacuums, mops, and organic products. If you have your favorite products or want us to use yours — no problem, we can do it your way."
     },
     {
       question: "How long will the cleaning take?",
@@ -37,7 +37,7 @@ export default function GoCleanWelcomeFinalBranded() {
     },
     {
       question: "Are your products safe for pets and kids?",
-      answer: "Yes! Our eco line is made from natural, non-toxic ingredients — perfect for families with kids or pets."
+      answer: "Yes! Our organic line is made from natural, non-toxic ingredients — perfect for families with kids or pets."
     },
     {
       question: "Do you clean Airbnbs or offices?",
@@ -183,19 +183,18 @@ export default function GoCleanWelcomeFinalBranded() {
     <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
-        <div className="w-full px-8 py-1 flex items-center justify-between">
-          {/* Logo Section */}
-          <div className="flex items-center">
-            <Image 
-              src="/logo2.png" 
+        <div className="w-full px-6 py-1 flex items-center justify-between">
+          {/* Logo */}
+          <div className="logo-crop">
+            <Image
+              src="/logo_2.svg" 
               alt="Go Clean USA Logo" 
-              width={120}
-              height={120}
-              className="object-cover rounded-full"
-                style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
+              width={90}
+              height={90}
+              className="object-contain"
             />
           </div>
-          
+
           {/* Desktop Navigation and CTA */}
           <div className="hidden lg:flex items-center gap-12">
             <nav className="flex items-center gap-16 text-base">
@@ -451,7 +450,7 @@ export default function GoCleanWelcomeFinalBranded() {
         <div className="w-full py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#0C5E3E", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
-            <p className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-6 md:mb-8 px-4" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Eco-Safe, Professionally Done.</p>
+            <p className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-6 md:mb-8 px-4" style={{ color: "#0F172A", letterSpacing: "-0.01em" }}>Chicago&apos;s Custom Cleaning: Organic-Safe, Professionally Done.</p>
 
             <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 md:mb-10 px-4" style={{ color: "#475569", lineHeight: "1.7", maxWidth: "500px" }}>
               Stop worrying about cleaning schedules. We are a family-owned team providing custom solutions—from gentle, plant-based products to powerful deep-clean techniques. Your satisfaction is 100% guaranteed, or we re-clean for free.
@@ -530,18 +529,28 @@ export default function GoCleanWelcomeFinalBranded() {
         </div>
       </section>
 
-      {/* Eco or Regular Section */}
+      {/* Organic or Regular Section */}
       <section className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6" style={{ color: "#0F172A" }}>You Choose The Care: Eco-Safe or Pro-Grade Power.</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+            <div className="rounded-xl overflow-hidden order-1 lg:order-1 w-full">
+              <Image 
+                src="/your%20choice.jpeg" 
+                alt="Organic or regular cleaning options illustration" 
+                width={900}
+                height={600}
+                className="w-full h-auto object-cover"
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              />
+            </div>
+            <div className="order-2 lg:order-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6" style={{ color: "#0F172A" }}>You Choose The Care: Organic-Safe or Pro-Grade Power.</h2>
               <p className="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6" style={{ color: "#475569", lineHeight: "1.7" }}>
                 We believe cleaning should never be &quot;one-size-fits-all.&quot; We provide honest flexibility, allowing you to choose the right solution for your family, pets, and home surfaces. Both options are safe, effective, and tailored to your approval.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Certified Eco-Safe: Non-toxic, plant-based products for a clean, chemical-free home.",
+                  "Certified Organic-Safe: Non-toxic, plant-based products for a clean, chemical-free home.",
                   "Pro-Grade Power: Stronger, professional-grade cleaners for deep sanitation and heavy-duty jobs.",
                   "Guaranteed Pet & Kid Safety: Always safe for your children and furry friends.",
                   "Your Approval First: We only use stronger products with your explicit prior approval and responsibility."
@@ -552,15 +561,6 @@ export default function GoCleanWelcomeFinalBranded() {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="rounded-xl overflow-hidden">
-              <Image 
-                src="/eco-hero.jpeg" 
-                alt="Eco and regular cleaning products" 
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
-              />
             </div>
           </div>
         </div>
@@ -577,7 +577,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               )},
-              {text: "Eco or regular cleaning — your choice", icon: (
+              {text: "Organic or regular cleaning — your choice", icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#0C5E3E" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -647,7 +647,7 @@ export default function GoCleanWelcomeFinalBranded() {
             ))}
           </div>
           <p className="text-xs sm:text-sm text-center max-w-2xl mx-auto px-4" style={{ color: "#64748B" }}>
-            Not every home can be cleaned 100% with eco-only products — and that&apos;s okay. If your space needs stronger solutions, we&apos;ll let you know first and use them safely.
+            Not every home can be cleaned 100% with organic-only products — and that&apos;s okay. If your space needs stronger solutions, we&apos;ll let you know first and use them safely.
           </p>
         </div>
       </section>
@@ -668,7 +668,7 @@ export default function GoCleanWelcomeFinalBranded() {
             <div className="rounded-xl border p-6 bg-white text-left">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">🌿</span>
-                <p className="text-sm font-semibold" style={{ color: "#0C5E3E" }}>1. Eco-Safe Clean</p>
+                <p className="text-sm font-semibold" style={{ color: "#0C5E3E" }}>1. Organic-Safe Clean</p>
               </div>
               <h3 className="text-xl font-bold mb-3" style={{ color: "#0F172A" }}>The safest choice for your family</h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
@@ -824,7 +824,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   ))}
                 </div>
                 <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
-                  I scheduled an eco cleaning with GoCleanUSA and couldn&apos;t be happier! The team arrived on time, brought their own eco-friendly supplies, and made my apartment sparkle without any harsh smells. I love that they care about the environment while still providing an amazing clean. Highly recommend!
+                  I scheduled an organic cleaning with GoCleanUSA and couldn&apos;t be happier! The team arrived on time, brought their own organic supplies, and made my apartment sparkle without any harsh smells. I love that they care about the environment while still providing an amazing clean. Highly recommend!
                 </p>
               </div>
               <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
@@ -864,7 +864,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   ))}
                 </div>
                 <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
-                  We&apos;ve been using GoCleanUSA&apos;s regular cleaning for months and it&apos;s always consistent and professional. The eco products leave our home fresh and chemical-free — perfect since we have pets and small kids. The cleaners are always polite and trustworthy.
+                  We&apos;ve been using GoCleanUSA&apos;s regular cleaning for months and it&apos;s always consistent and professional. The organic products leave our home fresh and chemical-free — perfect since we have pets and small kids. The cleaners are always polite and trustworthy.
                 </p>
               </div>
               <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
@@ -884,7 +884,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   ))}
                 </div>
                 <p className="text-base leading-relaxed" style={{ color: "#0F172A" }}>
-                  Booked a last-minute cleaning before a family visit and they squeezed me in! The cleaners worked quickly but thoroughly. The eco option made the house smell clean without any strong chemicals. Excellent customer service from start to finish.
+                  Booked a last-minute cleaning before a family visit and they squeezed me in! The cleaners worked quickly but thoroughly. The organic option made the house smell clean without any strong chemicals. Excellent customer service from start to finish.
                 </p>
               </div>
               <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
@@ -913,12 +913,12 @@ export default function GoCleanWelcomeFinalBranded() {
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-0 py-4 flex items-center justify-between text-left hover:opacity-80 transition-opacity"
+                  className="relative w-full px-0 py-4 flex items-center justify-center text-center hover:opacity-80 transition-opacity"
                 >
                   <span className="text-base font-medium" style={{ color: "#0F172A" }}>
                     {faq.question}
                   </span>
-                  <span className="text-2xl font-light" style={{ color: "#0F172A" }}>
+                  <span className="absolute right-2 sm:right-3 text-2xl font-light" style={{ color: "#0F172A" }}>
                     {openFAQ === index ? "−" : "+"}
                   </span>
                 </button>
@@ -1018,13 +1018,13 @@ export default function GoCleanWelcomeFinalBranded() {
                     </svg>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-white flex items-center justify-center">
+                    <div className="w-8 h-8 bg-white flex items-center justify-center logo-crop">
                       <Image 
-                        src="/logo2.png" 
+                        src="/logo_new.png" 
                         alt="Go Clean Logo" 
                         width={32}
                         height={32}
-                        style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
+                        style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
                       />
                     </div>
                     <div className="flex flex-col">
@@ -1083,13 +1083,13 @@ export default function GoCleanWelcomeFinalBranded() {
             {/* Logo Section */}
             <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-10 h-10 bg-white flex items-center justify-center">
+                <div className="w-10 h-10 bg-white flex items-center justify-center rounded-md overflow-hidden">
                   <Image 
-                    src="/logo2.png" 
+                    src="/logo_2.svg" 
                     alt="Go Clean USA Logo" 
                     width={40}
                     height={40}
-                    style={{ filter: "brightness(0) saturate(100%) invert(40%) sepia(85%) saturate(2500%) hue-rotate(88deg) brightness(95%) contrast(115%)" }}
+                    className="object-contain"
                   />
                 </div>
               </div>

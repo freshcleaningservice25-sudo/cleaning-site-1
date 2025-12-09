@@ -73,14 +73,15 @@ export default function QRCodePage() {
         <div className="bg-white rounded-3xl border shadow-lg p-10" style={{ borderColor: "#E2E8F0" }}>
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <Image 
-              src="/logo2.png" 
-              alt="Go Clean USA Logo" 
-              width={120}
-              height={120}
-              className="object-cover rounded-full"
-              style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
-            />
+            <div className="logo-crop">
+              <Image 
+                src="/logo_2.svg" 
+                alt="Go Clean USA Logo" 
+                width={120}
+                height={120}
+                className="object-contain"
+              />
+            </div>
           </div>
 
           <h1 className="text-3xl font-bold mb-4" style={{ color: "#0F172A" }}>
