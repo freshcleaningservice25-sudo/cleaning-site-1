@@ -116,7 +116,7 @@ export default function GoCleanWelcomeFinalBranded() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
         <div className="w-full px-6 py-1 flex items-center justify-between">
           {/* Logo */}
-          <div className="logo-crop">
+          <a href="/" className="logo-crop" aria-label="Go Clean USA home">
             <Image
               src="/logo_2.svg" 
               alt="Go Clean USA Logo" 
@@ -124,7 +124,7 @@ export default function GoCleanWelcomeFinalBranded() {
               height={90}
               className="object-contain"
             />
-          </div>
+          </a>
 
           {/* Desktop Navigation and CTA */}
           <div className="hidden lg:flex items-center gap-12">
@@ -409,7 +409,7 @@ export default function GoCleanWelcomeFinalBranded() {
           <div className="relative w-full lg:w-1/2 flex items-center justify-center mt-4 lg:mt-0">
             <div className="w-full max-w-md rounded-3xl overflow-hidden">
               <Image 
-                src="/clean-hero-removebg-preview.png" 
+                src="/clean-hero2.jpeg" 
                 alt="Professional cleaning service" 
                 width={600}
                 height={740}
@@ -854,7 +854,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   </span>
                 </button>
                 {openFAQ === index && (
-                  <div className="pb-4">
+                  <div className="pb-4 px-4 sm:px-6 text-center">
                     <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
                       {faq.answer}
                     </p>

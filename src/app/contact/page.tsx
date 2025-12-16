@@ -448,7 +448,7 @@ export default function ContactPage() {
                   className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-colors disabled:opacity-80"
                   style={{ backgroundColor: brand.primary }}
                 >
-                  {status === "submitting" ? "Sending..." : "Send Request"}
+                  {status === "submitting" ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </form>
@@ -489,6 +489,65 @@ export default function ContactPage() {
         </div>
       </div>
       </div>
+
+      {/* Footer */}
+      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          {/* Top Section */}
+          <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-6 sm:gap-8">
+            {/* Logo Section */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-10 h-10 bg-white flex items-center justify-center rounded-md overflow-hidden">
+                  <Image 
+                    src="/logo_2.svg" 
+                    alt="Go Clean USA Logo" 
+                    width={40}
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+              <span className="text-white font-bold text-lg sm:text-xl uppercase">Go Clean USA</span>
+              <span className="text-white text-xs sm:text-sm uppercase mt-1">Cleaning Services</span>
+              <div className="mt-4 text-white text-sm space-y-1">
+                <p>917-385-2100</p>
+                <p>Contact@gocleanusa.com</p>
+                <p>4011A N Lowell Ave 1A-W</p>
+                <p>Chicago, 60641</p>
+              </div>
+            </div>
+
+            {/* Services and Links Section */}
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 lg:gap-16">
+              {/* Services Column */}
+              <div className="flex flex-col">
+                <h3 className="text-white font-semibold uppercase mb-4 text-sm">SERVICES</h3>
+                <div className="flex flex-col gap-2">
+                  <a href="/#services" className="text-white hover:opacity-80 transition-opacity text-sm">Residential Cleaning</a>
+                  <a href="/#services" className="text-white hover:opacity-80 transition-opacity text-sm">Office & Commercial</a>
+                  <a href="/#services" className="text-white hover:opacity-80 transition-opacity text-sm">Airbnb Turnovers</a>
+                  <a href="/#services" className="text-white hover:opacity-80 transition-opacity text-sm">Move In/Out Cleaning</a>
+                </div>
+              </div>
+
+              {/* Links Column */}
+              <div className="flex flex-col gap-2">
+                <a href="#" className="text-white hover:opacity-80 transition-opacity text-sm">Privacy Policy</a>
+                <a href="#" className="text-white hover:opacity-80 transition-opacity text-sm">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div className="border-t mb-6" style={{ borderColor: "rgba(255, 255, 255, 0.3)" }}></div>
+
+          {/* Bottom Section */}
+          <div className="flex flex-row items-center">
+            <p className="text-white text-sm">© {new Date().getFullYear()} Go Clean USA. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
