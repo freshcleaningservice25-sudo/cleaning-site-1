@@ -4,10 +4,10 @@ import { db } from "@/lib/firebaseAdmin";
 import { Resend } from "resend";
 
 const ContactSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  phone: z.string().min(5),
-  message: z.string().min(5),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(5, "Phone number must be at least 5 characters"),
+  message: z.string().min(5, "Message must be at least 5 characters"),
 });
 
 export async function POST(req: NextRequest) {
@@ -52,8 +52,27 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, message: "Contact request received" });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Invalid request";
     console.error("Error submitting contact request:", err);
+    
+    // Handle Zod validation errors
+    if (err instanceof z.ZodError) {
+      const firstError = err.errors[0];
+      let errorMessage = "Please check your input and try again.";
+      
+      if (firstError.path[0] === "message") {
+        errorMessage = "Message must be at least 5 characters long.";
+      } else if (firstError.path[0] === "email") {
+        errorMessage = "Please enter a valid email address.";
+      } else if (firstError.path[0] === "phone") {
+        errorMessage = "Phone number must be at least 5 characters.";
+      } else if (firstError.path[0] === "name") {
+        errorMessage = "Name is required.";
+      }
+      
+      return NextResponse.json({ error: errorMessage }, { status: 400 });
+    }
+    
+    const message = err instanceof Error ? err.message : "Invalid request";
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
