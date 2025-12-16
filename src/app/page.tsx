@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function GoCleanWelcomeFinalBranded() {
   const brand = { primary: "#0C5E3E", primaryDark: "#09402A", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const faqs = [
@@ -111,74 +110,6 @@ export default function GoCleanWelcomeFinalBranded() {
     setCurrentWorkIndex((prev) => (prev - 1 + workExamples.length) % workExamples.length);
   };
 
-  // Handle fullscreen changes
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
-    };
-  }, []);
-
-  const toggleFullscreen = async () => {
-    const mapContainer = document.querySelector('.map-container') as HTMLElement;
-    if (!mapContainer) return;
-
-    // Type definitions for vendor-specific fullscreen APIs
-    interface HTMLElementWithVendorFullscreen extends HTMLElement {
-      webkitRequestFullscreen?: () => Promise<void>;
-      mozRequestFullScreen?: () => Promise<void>;
-      msRequestFullscreen?: () => Promise<void>;
-    }
-
-    interface DocumentWithVendorFullscreen extends Document {
-      webkitExitFullscreen?: () => Promise<void>;
-      mozCancelFullScreen?: () => Promise<void>;
-      msExitFullscreen?: () => Promise<void>;
-    }
-
-    const element = mapContainer as HTMLElementWithVendorFullscreen;
-    const doc = document as DocumentWithVendorFullscreen;
-
-    try {
-      if (!document.fullscreenElement) {
-        // Enter fullscreen
-        if (mapContainer.requestFullscreen) {
-          await mapContainer.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-          await element.webkitRequestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-          await element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-          await element.msRequestFullscreen();
-        }
-      } else {
-        // Exit fullscreen
-        if (document.exitFullscreen) {
-          await document.exitFullscreen();
-        } else if (doc.webkitExitFullscreen) {
-          await doc.webkitExitFullscreen();
-        } else if (doc.mozCancelFullScreen) {
-          await doc.mozCancelFullScreen();
-        } else if (doc.msExitFullscreen) {
-          await doc.msExitFullscreen();
-        }
-      }
-    } catch (error) {
-      console.error('Error toggling fullscreen:', error);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
@@ -253,7 +184,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 </span>
               </a>
               <a 
-                href="#contact" 
+                href="/contact" 
                 className="font-semibold uppercase tracking-wide transition-all duration-200 relative py-2 group" 
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
@@ -275,7 +206,7 @@ export default function GoCleanWelcomeFinalBranded() {
             {/* Social Media & Contact Icons */}
             <div className="flex items-center gap-3">
               <a 
-                href="tel:+19173852100" 
+                href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                 style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Call us"
@@ -285,7 +216,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 </svg>
               </a>
               <a 
-                href="mailto:Contact@gocleanusa.com" 
+                href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                 style={{ backgroundColor: "#0C5E3E" }}
                 aria-label="Email us"
@@ -391,7 +322,7 @@ export default function GoCleanWelcomeFinalBranded() {
                 Our Approach
               </a>
               <a 
-                href="#contact" 
+                href="/contact" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="font-semibold uppercase tracking-wide py-2 transition-colors"
                 style={{ color: "#1F2937" }}
@@ -400,7 +331,7 @@ export default function GoCleanWelcomeFinalBranded() {
               </a>
               <div className="flex items-center gap-3 pt-2">
                 <a 
-                  href="tel:+19173852100" 
+                  href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
                   style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Call us"
@@ -410,7 +341,7 @@ export default function GoCleanWelcomeFinalBranded() {
                   </svg>
                 </a>
                 <a 
-                  href="mailto:Contact@gocleanusa.com" 
+                  href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
                   style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Email us"
@@ -935,146 +866,6 @@ export default function GoCleanWelcomeFinalBranded() {
         </div>
       </section>
 
-      {/* Contact & Serving Area Section */}
-      <section id="contact" className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-wide text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#1F2937" }}>Contacts</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-            {/* Contact Information */}
-            <div>
-              <div className="space-y-3 mb-8">
-                <div>
-                  <a href="tel:+19173852100" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
-                    917-385-2100
-                  </a>
-                </div>
-                <div>
-                  <a href="mailto:Contact@gocleanusa.com" className="text-base hover:text-green-600 transition-colors block" style={{ color: "#1F2937" }}>
-                    Contact@gocleanusa.com
-                  </a>
-                </div>
-                <div>
-                  <p className="text-base" style={{ color: "#1F2937" }}>
-                    4011A N Lowell Ave 1A-W<br />
-                    Chicago, 60641
-                  </p>
-                </div>
-                <div className="mt-6">
-                  <p className="text-base font-semibold mb-2" style={{ color: "#1F2937" }}>Office Hours:</p>
-                  <p className="text-base mb-1" style={{ color: "#1F2937" }}>Mon-Sat: 7:30am-9pm</p>
-                  <p className="text-base" style={{ color: "#1F2937" }}>Sun: 9am-6pm</p>
-                </div>
-              </div>
-              
-              {/* Social Media Icons */}
-              <div className="flex items-center gap-4 mt-8">
-                <a 
-                  href="https://www.facebook.com/people/Go-Clean-Chicago/61584054026967/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#1877F2" }}
-                  aria-label="Follow Go Clean Chicago on Facebook"
-                >
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://www.instagram.com/goclean.chicago?igsh=cjZ1dTVuamExOGRq" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#E4405F" }}
-                  aria-label="Follow Go Clean Chicago on Instagram"
-                >
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://www.tiktok.com/@gocleanusa.com?_r=1&_t=ZP-91TOV6iSNzS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#000000" }}
-                  aria-label="Follow us on TikTok"
-                >
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Google Maps Embed */}
-            <div className="map-container" style={{ position: 'relative' }}>
-              {/* Map Header Bar */}
-              <div className="bg-gray-800 px-4 py-3 rounded-t-lg flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                    <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-white flex items-center justify-center logo-crop">
-                      <Image 
-                        src="/logo_new.png" 
-                        alt="Go Clean Logo" 
-                        width={32}
-                        height={32}
-                        style={{ filter: "brightness(0) saturate(100%) invert(22%) sepia(42%) saturate(540%) hue-rotate(103deg) brightness(90%) contrast(95%)" }}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-lg">Go Clean USA</span>
-                      <span className="text-gray-300 text-xs">Go Clean USA</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button 
-                    className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors"
-                    aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-                    onClick={toggleFullscreen}
-                  >
-                    {isFullscreen ? (
-                      // Exit fullscreen icon (compress)
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
-                      </svg>
-                    ) : (
-                      // Enter fullscreen icon (expand)
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </div>
-              
-              {/* Map Container */}
-              <div className={`w-full rounded-b-lg overflow-hidden shadow-md relative flex-1 ${isFullscreen ? 'h-[calc(100vh-60px)]' : 'h-96'}`}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380510.6741687111!2d-88.01214780859376!3d41.83364702139266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c3cd0f4cbed%3A0xafe0a6ad09c0c000!2sChicago%2C%20IL!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Go Clean USA Serving Area"
-                ></iframe>
-              </div>
-              <p className="text-sm mt-4" style={{ color: "#64748B" }}>
-                We serve Chicago and surrounding suburbs including Evanston, Naperville, Elgin, Joliet, and more.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -1095,6 +886,12 @@ export default function GoCleanWelcomeFinalBranded() {
               </div>
               <span className="text-white font-bold text-lg sm:text-xl uppercase">Go Clean USA</span>
               <span className="text-white text-xs sm:text-sm uppercase mt-1">Cleaning Services</span>
+              <div className="mt-4 text-white text-sm space-y-1">
+                <p>917-385-2100</p>
+                <p>Contact@gocleanusa.com</p>
+                <p>4011A N Lowell Ave 1A-W</p>
+                <p>Chicago, 60641</p>
+              </div>
             </div>
 
             {/* Services and Links Section */}
