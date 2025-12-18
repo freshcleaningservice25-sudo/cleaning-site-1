@@ -119,7 +119,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page - Pinned at top */}
-        <header className="fixed top-0 left-0 right-0 z-[9999] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
+        <header className="fixed top-0 left-0 right-0 z-[99999] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999, transform: "translateZ(0)", willChange: "transform" }}>
           <div className="w-full px-6 py-1 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" aria-label="Go Clean USA - Home">
@@ -385,14 +385,14 @@ export default function BookingKoala({
         </header>
 
         {/* Spacer to prevent content from going under header */}
-        <div style={{ height: "180px", width: "100%", backgroundColor: "transparent", flexShrink: 0, position: "relative", zIndex: 0 }}></div>
+        <div style={{ height: "180px", width: "100%", backgroundColor: "transparent", flexShrink: 0, position: "relative", zIndex: 1 }}></div>
         
         {/* BookingKoala Iframe */}
-        <div className="w-full relative z-0" style={{ minHeight: "1000px", marginTop: 0, paddingTop: 0 }}>
+        <div className="w-full relative" style={{ minHeight: "1000px", marginTop: 0, paddingTop: 0, zIndex: 1, isolation: "isolate" }}>
           <iframe
             src={iframeSrc}
-            className="w-full border-0 relative z-0"
-            style={{ height: "1000px", border: "none", position: "relative", zIndex: 0, display: "block" }}
+            className="w-full border-0"
+            style={{ height: "1000px", border: "none", position: "relative", zIndex: 1, display: "block" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
