@@ -37,12 +37,26 @@ export async function POST(req: NextRequest) {
 
     // Send notification email (best-effort)
     const resendApiKey = process.env.RESEND_API_KEY;
-    const resendFrom = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || "Go Clean USA <onboarding@resend.dev>";
+    let resendFrom = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL;
+    
+    // If RESEND_FROM is just a domain, convert it to a proper email format
+    if (resendFrom && !resendFrom.includes('@')) {
+      // If it's just a domain like "gocleanusa.com", use noreply@domain
+      resendFrom = `Go Clean USA <noreply@${resendFrom}>`;
+    }
+    
+    // Fallback to default if still not set
+    if (!resendFrom) {
+      resendFrom = "Go Clean USA <onboarding@resend.dev>";
+    }
+    
     const notifyTo = process.env.CONTACT_NOTIFY_EMAIL || "Contact@gocleanusa.com";
 
     if (resendApiKey) {
       try {
         const resend = new Resend(resendApiKey);
+        console.log("Attempting to send email - From:", resendFrom, "To:", notifyTo);
+        
         const emailResult = await resend.emails.send({
           from: resendFrom,
           to: notifyTo,
@@ -61,10 +75,15 @@ export async function POST(req: NextRequest) {
             <p>${message.replace(/\n/g, '<br>')}</p>
           `,
         });
-        console.log("Email sent successfully:", emailResult);
-      } catch (emailError) {
+        console.log("Email sent successfully:", JSON.stringify(emailResult, null, 2));
+      } catch (emailError: any) {
         // Log email error but don't fail the request
         console.error("Failed to send notification email:", emailError);
+        console.error("Error details:", {
+          message: emailError?.message,
+          name: emailError?.name,
+          statusCode: emailError?.statusCode,
+        });
         console.error("Email config - From:", resendFrom, "To:", notifyTo, "API Key present:", !!resendApiKey);
       }
     } else {
