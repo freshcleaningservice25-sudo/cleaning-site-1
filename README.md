@@ -83,3 +83,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Project Info
 
 This is the Go Clean USA cleaning services website, deployed on Vercel and integrated with BookingKoala for online bookings.
+
+**Last Updated:** December 2025
