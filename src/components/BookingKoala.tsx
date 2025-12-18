@@ -484,7 +484,7 @@ export default function BookingKoala({
                   </span>
                 </Link>
                 <Link 
-                  href="/#contact" 
+                  href="/contact" 
                   className="font-semibold uppercase tracking-wide transition-all duration-200 relative py-2 group" 
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
@@ -506,7 +506,7 @@ export default function BookingKoala({
               {/* Social Media & Contact Icons */}
               <div className="flex items-center gap-3">
                 <a 
-                  href="tel:+19173852100" 
+                  href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                   style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Call us"
@@ -516,7 +516,7 @@ export default function BookingKoala({
                   </svg>
                 </a>
                 <a 
-                  href="mailto:Contact@gocleanusa.com" 
+                  href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
                   style={{ backgroundColor: "#0C5E3E" }}
                   aria-label="Email us"
@@ -622,7 +622,7 @@ export default function BookingKoala({
                   Our Approach
                 </Link>
                 <Link 
-                  href="/#contact" 
+                  href="/contact" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="font-semibold uppercase tracking-wide py-2 transition-colors"
                   style={{ color: "#1F2937" }}
@@ -631,7 +631,7 @@ export default function BookingKoala({
                 </Link>
                 <div className="flex items-center gap-3 pt-2">
                   <a 
-                    href="tel:+19173852100" 
+                    href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
                     style={{ backgroundColor: "#0C5E3E" }}
                     aria-label="Call us"
@@ -641,7 +641,7 @@ export default function BookingKoala({
                     </svg>
                   </a>
                   <a 
-                    href="mailto:Contact@gocleanusa.com" 
+                    href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
                     style={{ backgroundColor: "#0C5E3E" }}
                     aria-label="Email us"
