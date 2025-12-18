@@ -56,16 +56,16 @@ export async function POST(req: NextRequest) {
     
     // Handle Zod validation errors
     if (err instanceof z.ZodError) {
-      const firstError = err.errors[0];
+      const firstError = err.issues[0];
       let errorMessage = "Please check your input and try again.";
       
-      if (firstError.path[0] === "message") {
+      if (firstError && firstError.path && firstError.path[0] === "message") {
         errorMessage = "Message must be at least 5 characters long.";
-      } else if (firstError.path[0] === "email") {
+      } else if (firstError && firstError.path && firstError.path[0] === "email") {
         errorMessage = "Please enter a valid email address.";
-      } else if (firstError.path[0] === "phone") {
+      } else if (firstError && firstError.path && firstError.path[0] === "phone") {
         errorMessage = "Phone number must be at least 5 characters.";
-      } else if (firstError.path[0] === "name") {
+      } else if (firstError && firstError.path && firstError.path[0] === "name") {
         errorMessage = "Name is required.";
       }
       
