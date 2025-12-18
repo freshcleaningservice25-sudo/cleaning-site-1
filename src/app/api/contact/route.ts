@@ -37,17 +37,38 @@ export async function POST(req: NextRequest) {
 
     // Send notification email (best-effort)
     const resendApiKey = process.env.RESEND_API_KEY;
-    const resendFrom = process.env.RESEND_FROM || "Go Clean USA <onboarding@resend.dev>";
+    const resendFrom = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || "Go Clean USA <onboarding@resend.dev>";
     const notifyTo = process.env.CONTACT_NOTIFY_EMAIL || "Contact@gocleanusa.com";
 
     if (resendApiKey) {
-      const resend = new Resend(resendApiKey);
-      await resend.emails.send({
-        from: resendFrom,
-        to: notifyTo,
-        subject: `New contact request from ${name}`,
-        text: `You have a new contact request.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage:\n${message}\n\nRequest ID: ${contactId}\n`,
-      });
+      try {
+        const resend = new Resend(resendApiKey);
+        const emailResult = await resend.emails.send({
+          from: resendFrom,
+          to: notifyTo,
+          subject: `New contact request from ${name}`,
+          text: `You have a new contact request.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage:\n${message}\n\nRequest ID: ${contactId}\n`,
+          html: `
+            <h2>New Contact Request</h2>
+            <p>You have received a new contact request from your website.</p>
+            <ul>
+              <li><strong>Name:</strong> ${name}</li>
+              <li><strong>Email:</strong> ${email}</li>
+              <li><strong>Phone:</strong> ${phone}</li>
+              <li><strong>Request ID:</strong> ${contactId}</li>
+            </ul>
+            <h3>Message:</h3>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+          `,
+        });
+        console.log("Email sent successfully:", emailResult);
+      } catch (emailError) {
+        // Log email error but don't fail the request
+        console.error("Failed to send notification email:", emailError);
+        console.error("Email config - From:", resendFrom, "To:", notifyTo, "API Key present:", !!resendApiKey);
+      }
+    } else {
+      console.warn("RESEND_API_KEY not configured. Email notification skipped.");
     }
 
     return NextResponse.json({ success: true, message: "Contact request received" });
