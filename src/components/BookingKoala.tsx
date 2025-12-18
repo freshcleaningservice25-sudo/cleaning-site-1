@@ -119,7 +119,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page - Pinned at top */}
-        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
+        <header className="fixed top-0 left-0 right-0 z-[9999] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
           <div className="w-full px-6 py-1 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" aria-label="Go Clean USA - Home">
@@ -385,11 +385,11 @@ export default function BookingKoala({
         </header>
 
         {/* BookingKoala Iframe */}
-        <div className="w-full pt-32" style={{ minHeight: "1000px" }}>
+        <div className="w-full pt-32 relative z-0" style={{ minHeight: "1000px" }}>
           <iframe
             src={iframeSrc}
-            className="w-full border-0"
-            style={{ height: "1000px", border: "none" }}
+            className="w-full border-0 relative z-0"
+            style={{ height: "1000px", border: "none", position: "relative", zIndex: 0 }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
