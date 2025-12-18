@@ -384,16 +384,19 @@ export default function BookingKoala({
           )}
         </header>
 
+        {/* Spacer to prevent content from going under header */}
+        <div style={{ height: "180px", width: "100%", backgroundColor: "transparent", flexShrink: 0, position: "relative", zIndex: 0 }}></div>
+        
         {/* BookingKoala Iframe */}
-        <div className="w-full pt-32 relative z-0" style={{ minHeight: "1000px" }}>
+        <div className="w-full relative z-0" style={{ minHeight: "1000px", marginTop: 0, paddingTop: 0 }}>
           <iframe
             src={iframeSrc}
             className="w-full border-0 relative z-0"
-            style={{ height: "1000px", border: "none", position: "relative", zIndex: 0 }}
+            style={{ height: "1000px", border: "none", position: "relative", zIndex: 0, display: "block" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
-            scrolling="no"
+            scrolling="yes"
           />
         </div>
       </div>
