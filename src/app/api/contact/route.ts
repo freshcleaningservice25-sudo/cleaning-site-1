@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/firebaseAdmin";
-import { Resend } from "resend";
+import { sendEmail } from "@/lib/email";
 
 const ContactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -36,58 +36,33 @@ export async function POST(req: NextRequest) {
     });
 
     // Send notification email (best-effort)
-    const resendApiKey = process.env.RESEND_API_KEY;
-    let resendFrom = process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL;
-    
-    // If RESEND_FROM is just a domain, convert it to a proper email format
-    if (resendFrom && !resendFrom.includes('@')) {
-      // If it's just a domain like "gocleanusa.com", use noreply@domain
-      resendFrom = `Go Clean USA <noreply@${resendFrom}>`;
-    }
-    
-    // Fallback to default if still not set
-    if (!resendFrom) {
-      resendFrom = "Go Clean USA <onboarding@resend.dev>";
-    }
-    
     const notifyTo = process.env.CONTACT_NOTIFY_EMAIL || "Contact@gocleanusa.com";
 
-    if (resendApiKey) {
-      try {
-        const resend = new Resend(resendApiKey);
-        console.log("Attempting to send email - From:", resendFrom, "To:", notifyTo);
-        
-        const emailResult = await resend.emails.send({
-          from: resendFrom,
-          to: notifyTo,
-          subject: `New contact request from ${name}`,
-          text: `You have a new contact request.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage:\n${message}\n\nRequest ID: ${contactId}\n`,
-          html: `
-            <h2>New Contact Request</h2>
-            <p>You have received a new contact request from your website.</p>
-            <ul>
-              <li><strong>Name:</strong> ${name}</li>
-              <li><strong>Email:</strong> ${email}</li>
-              <li><strong>Phone:</strong> ${phone}</li>
-              <li><strong>Request ID:</strong> ${contactId}</li>
-            </ul>
-            <h3>Message:</h3>
-            <p>${message.replace(/\n/g, '<br>')}</p>
-          `,
-        });
-        console.log("Email sent successfully:", JSON.stringify(emailResult, null, 2));
-      } catch (emailError: any) {
-        // Log email error but don't fail the request
-        console.error("Failed to send notification email:", emailError);
-        console.error("Error details:", {
-          message: emailError?.message,
-          name: emailError?.name,
-          statusCode: emailError?.statusCode,
-        });
-        console.error("Email config - From:", resendFrom, "To:", notifyTo, "API Key present:", !!resendApiKey);
+    try {
+      const emailResult = await sendEmail({
+        to: notifyTo,
+        subject: `New contact request from ${name}`,
+        text: `You have a new contact request.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage:\n${message}\n\nRequest ID: ${contactId}\n`,
+        html: `
+          <h2>New Contact Request</h2>
+          <p>You have received a new contact request from your website.</p>
+          <ul>
+            <li><strong>Name:</strong> ${name}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Phone:</strong> ${phone}</li>
+            <li><strong>Request ID:</strong> ${contactId}</li>
+          </ul>
+          <h3>Message:</h3>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        `,
+      });
+
+      if (!emailResult.success) {
+        console.warn("Failed to send notification email:", emailResult.error);
       }
-    } else {
-      console.warn("RESEND_API_KEY not configured. Email notification skipped.");
+    } catch (emailError: any) {
+      // Log email error but don't fail the request
+      console.error("Failed to send notification email:", emailError);
     }
 
     return NextResponse.json({ success: true, message: "Contact request received" });

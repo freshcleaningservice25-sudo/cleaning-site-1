@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@getbrevo/brevo": "^3.0.1",
+    "@sendgrid/mail": "^8.1.6",
     "@stripe/react-stripe-js": "^5.2.0",
     "@stripe/stripe-js": "^8.1.0",
     "@types/qrcode": "^1.5.5",

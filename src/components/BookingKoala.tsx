@@ -120,16 +120,16 @@ export default function BookingKoala({
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page - Pinned at top */}
         <header className="fixed top-0 left-0 right-0 z-[99999] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999, transform: "translateZ(0)", willChange: "transform" }}>
-          <div className="w-full px-6 py-1 flex items-center justify-between">
+          <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" aria-label="Go Clean USA - Home">
-              <div className="logo-crop">
+              <div className="logo-crop w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[90px] lg:h-[90px]">
                 <Image
                   src="/logo_2.svg"
                   alt="Go Clean USA Logo"
                   width={90}
                   height={90}
-                  className="object-contain"
+                  className="object-contain w-full h-full"
                 />
               </div>
             </Link>
@@ -285,16 +285,16 @@ export default function BookingKoala({
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors"
+              className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
               style={{ backgroundColor: "#0C5E3E" }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
@@ -304,7 +304,7 @@ export default function BookingKoala({
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="lg:hidden border-t" style={{ borderColor: "#E5E7EB", backgroundColor: "#FAF8F4" }}>
-              <nav className="flex flex-col px-4 py-4 space-y-4">
+              <nav className="flex flex-col px-4 sm:px-6 py-4 space-y-3 sm:space-y-4">
                 <Link 
                   href="/#hero" 
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -385,14 +385,14 @@ export default function BookingKoala({
         </header>
 
         {/* Spacer to prevent content from going under header */}
-        <div style={{ height: "180px", width: "100%", backgroundColor: "transparent", flexShrink: 0, position: "relative", zIndex: 1 }}></div>
+        <div className="h-32 sm:h-40 md:h-44 lg:h-48 w-full bg-transparent flex-shrink-0 relative z-10"></div>
         
         {/* BookingKoala Iframe */}
-        <div className="w-full relative" style={{ minHeight: "1000px", marginTop: 0, paddingTop: 0, zIndex: 1, isolation: "isolate" }}>
+        <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4">
           <iframe
             src={iframeSrc}
-            className="w-full border-0"
-            style={{ height: "1000px", border: "none", position: "relative", zIndex: 1, display: "block" }}
+            className="w-full border-0 h-[600px] sm:h-[700px] md:h-[800px] lg:h-[1000px]"
+            style={{ border: "none", position: "relative", zIndex: 1, display: "block" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
@@ -409,19 +409,19 @@ export default function BookingKoala({
     const iframeHtml = defaultEmbedCode.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '').trim();
 
     return (
-      <div className="min-h-screen" style={{ backgroundColor: "#FAF8F4", minWidth: '1200px' }}>
+      <div className="min-h-screen w-full overflow-x-hidden" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Pinned at top */}
         <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
-          <div className="w-full px-6 py-1 flex items-center justify-between">
+          <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <Link href="/" aria-label="Go Clean USA - Home">
-              <div className="logo-crop">
+              <div className="logo-crop w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[90px] lg:h-[90px]">
                 <Image 
                   src="/logo_2.svg" 
                   alt="Go Clean USA Logo" 
                   width={90}
                   height={90}
-                  className="object-contain"
+                  className="object-contain w-full h-full"
                 />
               </div>
             </Link>
@@ -577,16 +577,16 @@ export default function BookingKoala({
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors"
+              className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
               style={{ backgroundColor: "#0C5E3E" }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
@@ -596,7 +596,7 @@ export default function BookingKoala({
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="lg:hidden border-t" style={{ borderColor: "#E5E7EB", backgroundColor: "#FAF8F4" }}>
-              <nav className="flex flex-col px-4 py-4 space-y-4">
+              <nav className="flex flex-col px-4 sm:px-6 py-4 space-y-3 sm:space-y-4">
                 <Link 
                   href="/#hero" 
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -701,9 +701,11 @@ export default function BookingKoala({
         </header>
 
         {/* Embed Container */}
-        <div className="max-w-7xl mx-auto px-8 py-12" style={{ marginTop: '220px', paddingTop: '32px' }}>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 mt-24 sm:mt-32 md:mt-40 lg:mt-48 pt-4 sm:pt-8">
           <div 
             id="bookingkoala-embed"
+            className="w-full overflow-x-auto"
+            style={{ minHeight: '600px' }}
             dangerouslySetInnerHTML={{ __html: iframeHtml }}
           />
         </div>

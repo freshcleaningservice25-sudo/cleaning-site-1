@@ -114,15 +114,15 @@ export default function GoCleanWelcomeFinalBranded() {
     <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
-        <div className="w-full px-6 py-1 flex items-center justify-between">
+        <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
           {/* Logo */}
-          <a href="/" className="logo-crop" aria-label="Go Clean USA home">
+          <a href="/" className="logo-crop w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[90px] lg:h-[90px]" aria-label="Go Clean USA home">
             <Image
               src="/logo_2.svg" 
               alt="Go Clean USA Logo" 
               width={90}
               height={90}
-              className="object-contain"
+              className="object-contain w-full h-full"
             />
           </a>
 
@@ -277,16 +277,16 @@ export default function GoCleanWelcomeFinalBranded() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg transition-colors"
+            className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
             style={{ backgroundColor: "#0C5E3E" }}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
@@ -296,7 +296,7 @@ export default function GoCleanWelcomeFinalBranded() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t" style={{ borderColor: "#E5E7EB", backgroundColor: "#FAF8F4" }}>
-            <nav className="flex flex-col px-4 py-4 space-y-4">
+            <nav className="flex flex-col px-4 sm:px-6 py-4 space-y-3 sm:space-y-4">
               <a 
                 href="#hero" 
                 onClick={() => setIsMobileMenuOpen(false)}

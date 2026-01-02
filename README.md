@@ -30,8 +30,17 @@ Then fill in the values:
 
 **Other Required Variables:**
 - `ADMIN_PASSWORD`: Password for admin login
-- `RESEND_API_KEY`: Get from [Resend.com](https://resend.com) (for email notifications)
-- `RESEND_FROM_EMAIL`: Your verified email address in Resend
+- `SENDGRID_API_KEY`: Get from [SendGrid.com](https://sendgrid.com) - Free tier: 100 emails/day
+  - Sign up at [sendgrid.com](https://signup.sendgrid.com/)
+  - Go to Settings > API Keys
+  - Click "Create API Key"
+  - Choose "Full Access" or "Restricted Access" (with Mail Send permissions)
+  - Copy the API key (you'll only see it once!)
+- `SENDGRID_FROM_EMAIL`: Your verified sender email address in SendGrid (e.g., `noreply@yourdomain.com` or `Go Clean USA <noreply@yourdomain.com>`)
+  - You need to verify your sender email/domain in SendGrid first
+  - Go to Settings > Sender Authentication
+  - Verify a Single Sender or set up Domain Authentication
+- `CONTACT_NOTIFY_EMAIL`: Email address to receive contact form notifications (defaults to `Contact@gocleanusa.com`)
 - `STRIPE_SECRET_KEY`: Get from [Stripe Dashboard](https://dashboard.stripe.com/apikeys)
 - `STRIPE_WEBHOOK_SECRET`: Get from Stripe Webhooks
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: Get from Stripe Dashboard
