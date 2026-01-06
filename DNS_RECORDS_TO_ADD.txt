@@ -1,0 +1,165 @@
+================================================================================
+SENDGRID DNS RECORDS FOR gocleanusa.com
+Copy and paste these EXACTLY into your DNS provider
+================================================================================
+
+RECORD 1 - CNAME (Link Branding)
+---------------------------------
+Type:     CNAME
+Host:     em5888
+Value:    u58508189.wl190.sendgrid.net
+TTL:      3600 (or default/auto)
+
+Note: Some DNS providers may require "em5888.gocleanusa.com" in the Host field.
+      Try "em5888" first, if that doesn't work, use the full domain.
+
+
+RECORD 2 - CNAME (DKIM Key 1)
+------------------------------
+Type:     CNAME
+Host:     s1._domainkey
+Value:    s1.domainkey.u58508189.wl190.sendgrid.net
+TTL:      3600 (or default/auto)
+
+Note: Some DNS providers may require "s1._domainkey.gocleanusa.com" in the Host field.
+      Try "s1._domainkey" first, if that doesn't work, use the full domain.
+
+
+RECORD 3 - CNAME (DKIM Key 2)
+------------------------------
+Type:     CNAME
+Host:     s2._domainkey
+Value:    s2.domainkey.u58508189.wl190.sendgrid.net
+TTL:      3600 (or default/auto)
+
+Note: Some DNS providers may require "s2._domainkey.gocleanusa.com" in the Host field.
+      Try "s2._domainkey" first, if that doesn't work, use the full domain.
+
+
+RECORD 4 - TXT (DMARC Policy)
+------------------------------
+Type:     TXT
+Host:     _dmarc
+Value:    v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;
+TTL:      3600 (or default/auto)
+
+Note: Some DNS providers may require "_dmarc.gocleanusa.com" in the Host field.
+      Try "_dmarc" first, if that doesn't work, use the full domain.
+
+
+================================================================================
+STEP-BY-STEP INSTRUCTIONS
+================================================================================
+
+1. Log into your DNS provider (Namecheap, GoDaddy, Cloudflare, etc.)
+
+2. Find DNS Management / DNS Settings / Advanced DNS
+
+3. Click "Add Record" or "Create Record"
+
+4. Add Record 1:
+   - Select Type: CNAME
+   - Enter Host: em5888
+   - Enter Value: u58508189.wl190.sendgrid.net
+   - Save
+
+5. Add Record 2:
+   - Select Type: CNAME
+   - Enter Host: s1._domainkey
+   - Enter Value: s1.domainkey.u58508189.wl190.sendgrid.net
+   - Save
+
+6. Add Record 3:
+   - Select Type: CNAME
+   - Enter Host: s2._domainkey
+   - Enter Value: s2.domainkey.u58508189.wl190.sendgrid.net
+   - Save
+
+7. Add Record 4:
+   - Select Type: TXT
+   - Enter Host: _dmarc
+   - Enter Value: v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;
+   - Save
+
+8. Wait 15-30 minutes for DNS propagation
+
+9. Go back to SendGrid and click "Verify" or "Check DNS Records"
+
+10. All errors should disappear once records are found!
+
+
+================================================================================
+COMMON DNS PROVIDER EXAMPLES
+================================================================================
+
+NAMECHEAP:
+----------
+- Go to: Domain List → Manage → Advanced DNS
+- Click "Add New Record"
+- For Host field, enter just: em5888 (they auto-add .gocleanusa.com)
+- Copy the Value exactly as shown above
+
+GODADDY:
+--------
+- Go to: My Products → DNS → Manage DNS
+- Click "Add" button
+- For Host field, enter just: em5888 (they auto-add .gocleanusa.com)
+- Copy the Value exactly as shown above
+
+CLOUDFLARE:
+-----------
+- Go to: Your Domain → DNS → Records
+- Click "Add record"
+- Type: CNAME
+- Name: em5888 (they auto-add the domain)
+- Target: u58508189.wl190.sendgrid.net
+- Click "Save"
+
+GOOGLE DOMAINS:
+---------------
+- Go to: DNS → Custom Records
+- Click "Add record"
+- Host name: em5888
+- Type: CNAME
+- Data: u58508189.wl190.sendgrid.net
+- Click "Save"
+
+AWS ROUTE 53:
+-------------
+- Go to: Hosted Zones → gocleanusa.com → Create Record
+- Record name: em5888
+- Record type: CNAME
+- Value: u58508189.wl190.sendgrid.net
+- Click "Create records"
+
+
+================================================================================
+VERIFICATION
+================================================================================
+
+After adding all records, verify they're working by running:
+
+    ./check-dns.sh
+
+Or check online at: https://www.whatsmydns.net/
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If records still show errors after 30+ minutes:
+
+✓ Double-check you copied values EXACTLY (no extra spaces)
+✓ Verify you're editing DNS for gocleanusa.com (not a subdomain)
+✓ Check if your DNS provider requires different host format
+✓ Make sure all 4 records are saved
+✓ Try removing and re-adding if still not working
+
+Common mistakes:
+✗ Typing values instead of copying
+✗ Adding .gocleanusa.com when provider auto-adds it
+✗ Wrong record type (CNAME vs A vs TXT)
+✗ Extra spaces or characters in values
+✗ Forgetting to save the records
+
