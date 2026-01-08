@@ -256,11 +256,33 @@ footer.snap-section {
 /* Disable scroll snap on mobile for better UX */
 @media (max-width: 768px) {
   .scroll-snap-container {
-    scroll-snap-type: none;
+    scroll-snap-type: none !important;
+    position: static !important;
   }
   
   .snap-section {
-    scroll-snap-align: none;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+  
+  /* Ensure normal scrolling on mobile */
+  html {
+    height: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  body {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    position: relative !important;
+  }
+  
+  main {
+    height: auto !important;
+    overflow: visible !important;
   }
 }
 
