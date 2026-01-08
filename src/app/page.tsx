@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useReveal } from "@/components/useReveal";
 
 export default function GoCleanWelcomeFinalBranded() {
   const brand = { primary: "#0C5E3E", primaryDark: "#09402A", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
@@ -110,8 +111,10 @@ export default function GoCleanWelcomeFinalBranded() {
     setCurrentWorkIndex((prev) => (prev - 1 + workExamples.length) % workExamples.length);
   };
 
+  useReveal(); // Enable scroll reveal animations
+
   return (
-    <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
+    <div className="min-h-screen w-full scroll-snap-container" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
         <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
@@ -377,7 +380,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </header>
 
       {/* Hero */}
-      <section id="hero" className="border-b" style={{ paddingTop: '140px' }}>
+      <section id="hero" className="snap-section is-visible border-b" style={{ paddingTop: '140px' }}>
         <div className="w-full py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-3" style={{ color: "#0C5E3E", letterSpacing: "-0.02em" }}>Go Clean USA</h1>
@@ -424,7 +427,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Services */}
-      <section id="services" className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
+      <section id="services" className="snap-section border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#0F172A" }}>Our Services</h2>
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
@@ -461,7 +464,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Organic or Regular Section */}
-      <section className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
+      <section className="snap-section border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div className="rounded-xl overflow-hidden order-1 lg:order-1 w-full">
@@ -498,7 +501,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="border-b" style={{ backgroundColor: "#FAFAFA" }}>
+      <section className="snap-section border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 md:mb-12" style={{ color: "#0F172A" }}>Why Chicago Clients Choose Us</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -549,7 +552,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Pricing Section */}
-      <section className="border-b" style={{ backgroundColor: "#FFFFFF" }}>
+      <section className="snap-section border-b" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 px-4" style={{ color: "#0F172A" }}>BOOK NOW & SECURE YOUR SPOT</h2>
           <p className="text-sm sm:text-base md:text-lg text-center mb-6 sm:mb-8 md:mb-12 max-w-2xl mx-auto px-4" style={{ color: "#475569" }}>
@@ -584,7 +587,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Approach */}
-      <section id="approach" className="border-b" style={{ backgroundColor: brand.bg }}>
+      <section id="approach" className="snap-section border-b" style={{ backgroundColor: brand.bg }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-6 sm:mb-8" style={{ color: "#0F172A" }}>Our Approach</h2>
           <div className="max-w-4xl mx-auto text-center mb-6 sm:mb-8 md:mb-10 px-4">
@@ -626,7 +629,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Our Works Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
+      <section className="snap-section py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>OUR WORKS</h2>
@@ -737,7 +740,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Customer Reviews Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAF8F4" }}>
+      <section className="snap-section py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAF8F4" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>What Our Customers Say</h2>
@@ -828,7 +831,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
+      <section className="snap-section py-8 sm:py-12 md:py-16 lg:py-20 border-b" style={{ backgroundColor: "#FAFAFA" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4" style={{ color: "#0F172A" }}>FAQ</h2>
@@ -867,7 +870,7 @@ export default function GoCleanWelcomeFinalBranded() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
+      <footer className="snap-section py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Top Section */}
           <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-6 sm:gap-8">
