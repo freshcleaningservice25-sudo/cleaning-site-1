@@ -665,10 +665,17 @@ function CustomBookingForm() {
                       if (dateInputRef.current) {
                         // Try showPicker first (modern browsers)
                         if (typeof dateInputRef.current.showPicker === 'function') {
-                          dateInputRef.current.showPicker().catch(() => {
-                            // Fallback to click if showPicker fails
-                            dateInputRef.current?.click();
-                          });
+                          const result = dateInputRef.current.showPicker();
+                          // Check if showPicker returns a Promise
+                          if (result && typeof result.catch === 'function') {
+                            result.catch(() => {
+                              // Fallback to click if showPicker fails
+                              dateInputRef.current?.click();
+                            });
+                          } else {
+                            // If showPicker doesn't return a Promise, fallback to click
+                            dateInputRef.current.click();
+                          }
                         } else {
                           // Fallback to click
                           dateInputRef.current.click();
