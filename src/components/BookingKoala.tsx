@@ -119,7 +119,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Same as main page - Pinned at top */}
-        <header className="fixed top-0 left-0 right-0 z-[99999] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0, zIndex: 99999, transform: "translateZ(0)", willChange: "transform" }}>
+        <header className="fixed top-0 left-0 right-0 z-[50] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transform: "translateZ(0)", willChange: "transform" }}>
           <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" aria-label="Go Clean USA - Home">
@@ -388,11 +388,11 @@ export default function BookingKoala({
         <div className="h-32 sm:h-40 md:h-44 lg:h-48 w-full bg-transparent flex-shrink-0 relative z-10"></div>
         
         {/* BookingKoala Iframe */}
-        <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4">
+        <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4" style={{ pointerEvents: "none" }}>
           <iframe
             src={iframeSrc}
             className="w-full border-0 h-[600px] sm:h-[700px] md:h-[800px] lg:h-[1000px]"
-            style={{ border: "none", position: "relative", zIndex: 1, display: "block" }}
+            style={{ border: "none", position: "relative", zIndex: 1, display: "block", pointerEvents: "auto" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
@@ -411,7 +411,7 @@ export default function BookingKoala({
     return (
       <div className="min-h-screen w-full overflow-x-hidden" style={{ backgroundColor: "#FAF8F4" }}>
         {/* Header - Pinned at top */}
-        <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0 }}>
+        <header className="fixed top-0 left-0 right-0 z-[50] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", position: "fixed", top: 0, left: 0, right: 0, zIndex: 50 }}>
           <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
             {/* Logo Section */}
             <Link href="/" aria-label="Go Clean USA - Home">
@@ -705,7 +705,7 @@ export default function BookingKoala({
           <div 
             id="bookingkoala-embed"
             className="w-full overflow-x-auto"
-            style={{ minHeight: '600px' }}
+            style={{ minHeight: '600px', pointerEvents: "auto" }}
             dangerouslySetInnerHTML={{ __html: iframeHtml }}
           />
         </div>

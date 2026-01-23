@@ -116,7 +116,7 @@ export default function GoCleanWelcomeFinalBranded() {
   return (
     <div className="min-h-screen w-full scroll-snap-container" style={{ backgroundColor: "#FAF8F4", color: brand.text }}>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4" }}>
+      <header className="fixed top-0 left-0 right-0 z-[50] backdrop-blur-sm shadow-sm" style={{ backgroundColor: "#FAF8F4", zIndex: 50 }}>
         <div className="w-full px-3 sm:px-4 md:px-6 py-1 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo-crop w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[90px] lg:h-[90px]" aria-label="Go Clean USA home">
@@ -412,8 +412,8 @@ export default function GoCleanWelcomeFinalBranded() {
           <div className="relative w-full lg:w-1/2 flex items-center justify-center mt-4 lg:mt-0">
             <div className="w-full max-w-md rounded-3xl overflow-hidden">
               <Image 
-                src="/clean-hero2.jpeg" 
-                alt="Professional cleaning service" 
+                src="/main page.jpeg" 
+                alt="Go Clean USA cleaning team" 
                 width={600}
                 height={740}
                 className="w-full h-auto object-contain"

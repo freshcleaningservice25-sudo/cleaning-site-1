@@ -620,7 +620,7 @@ function CustomBookingForm() {
               </div>
                 <div>
                   <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Preferred Date*</label>
-                <div className="relative">
+                <div className="relative" style={{ zIndex: 1 }}>
                   <input 
                     name="date"
                     type="text" 
@@ -636,7 +636,7 @@ function CustomBookingForm() {
                       setFormData(prev => ({ ...prev, date: value }));
                     }}
                     className="w-full rounded-xl border px-4 py-3.5 pr-12 outline-none focus:ring-2 focus:ring-green-500 transition-all" 
-                    style={{ borderColor: "#E2E8F0" }} 
+                    style={{ borderColor: "#E2E8F0", pointerEvents: "auto" }} 
                     placeholder="MM/DD/YYYY"
                     maxLength={10}
                     pattern="(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}"
@@ -646,6 +646,7 @@ function CustomBookingForm() {
                     ref={dateInputRef}
                     type="date"
                     className="absolute opacity-0 pointer-events-none"
+                    style={{ zIndex: -1 }}
                     onChange={(e) => {
                       if (e.target.value) {
                         const date = new Date(e.target.value);
@@ -658,11 +659,27 @@ function CustomBookingForm() {
                   />
                   <button
                     type="button"
-                    onClick={() => dateInputRef.current?.showPicker?.() || dateInputRef.current?.click()}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (dateInputRef.current) {
+                        // Try showPicker first (modern browsers)
+                        if (typeof dateInputRef.current.showPicker === 'function') {
+                          dateInputRef.current.showPicker().catch(() => {
+                            // Fallback to click if showPicker fails
+                            dateInputRef.current?.click();
+                          });
+                        } else {
+                          // Fallback to click
+                          dateInputRef.current.click();
+                        }
+                      }
+                    }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors z-10"
+                    style={{ zIndex: 10, pointerEvents: "auto" }}
                     aria-label="Open calendar"
                   >
-                    <svg className="w-5 h-5" style={{ color: "#64748B" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5" style={{ color: "#64748B", pointerEvents: "none" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </button>

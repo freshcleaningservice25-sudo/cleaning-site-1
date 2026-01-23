@@ -161,8 +161,16 @@ html, body {
 #bookingkoala-embed [class*="Calendar"],
 #bookingkoala-embed [class*="datepicker"],
 #bookingkoala-embed [class*="DatePicker"],
+#bookingkoala-embed [class*="date-picker"],
+#bookingkoala-embed [class*="DatePicker"],
+#bookingkoala-embed button[class*="calendar"],
+#bookingkoala-embed button[class*="Calendar"],
+#bookingkoala-embed svg[class*="calendar"],
+#bookingkoala-embed [role="button"][aria-label*="calendar" i],
+#bookingkoala-embed [role="button"][aria-label*="date" i],
 iframe[src*="bookingkoala"] {
-  z-index: 9999 !important;
+  z-index: 100000 !important;
+  position: relative !important;
 }
 
 /* Fix for BookingKoala modals that might be in body */
@@ -171,8 +179,17 @@ body > [class*="Modal"],
 body > [class*="popup"],
 body > [class*="Popup"],
 body > [id*="bookingkoala"],
-body > [id*="BookingKoala"] {
-  z-index: 10000 !important;
+body > [id*="BookingKoala"],
+body > [class*="calendar"],
+body > [class*="Calendar"],
+body > [class*="datepicker"],
+body > [class*="DatePicker"] {
+  z-index: 100001 !important;
+}
+
+/* Ensure iframe content can receive pointer events */
+iframe[src*="bookingkoala"] {
+  pointer-events: auto !important;
 }
 
 /* Mobile responsive improvements */
@@ -202,6 +219,15 @@ body > [id*="BookingKoala"] {
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pan-x;
+  pointer-events: auto;
+}
+
+/* Ensure BookingKoala iframe and its content can receive events */
+#bookingkoala-embed iframe,
+iframe[src*="bookingkoala"] {
+  pointer-events: auto !important;
+  touch-action: pan-y pan-x !important;
 }
 
 @media (max-width: 768px) {
@@ -209,11 +235,24 @@ body > [id*="BookingKoala"] {
     transform: scale(0.95);
     transform-origin: top left;
     width: 105%;
+    touch-action: pan-y pan-x;
   }
   
   #bookingkoala-embed iframe {
     width: 100% !important;
     max-width: 100% !important;
+    pointer-events: auto !important;
+    touch-action: pan-y pan-x !important;
+  }
+  
+  /* Ensure date picker buttons in BookingKoala are clickable */
+  #bookingkoala-embed button,
+  #bookingkoala-embed [role="button"],
+  #bookingkoala-embed [type="button"],
+  iframe[src*="bookingkoala"] {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
   }
 }
 
@@ -270,6 +309,8 @@ footer.snap-section {
     height: auto !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: auto !important;
   }
   
   body {
@@ -278,11 +319,25 @@ footer.snap-section {
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     position: relative !important;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: auto !important;
   }
   
   main {
     height: auto !important;
     overflow: visible !important;
+    touch-action: pan-y !important;
+  }
+  
+  /* Ensure header doesn't block scrolling */
+  header {
+    touch-action: none !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Ensure all interactive elements work on mobile */
+  button, a, input, select, textarea {
+    touch-action: manipulation !important;
   }
 }
 
