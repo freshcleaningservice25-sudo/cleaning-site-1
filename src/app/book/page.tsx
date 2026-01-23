@@ -665,15 +665,27 @@ function CustomBookingForm() {
                       if (dateInputRef.current) {
                         // Try showPicker first (modern browsers)
                         if (typeof dateInputRef.current.showPicker === 'function') {
-                          const result = dateInputRef.current.showPicker();
-                          // Check if showPicker returns a Promise
-                          if (result && typeof result.catch === 'function') {
-                            result.catch(() => {
-                              // Fallback to click if showPicker fails
-                              dateInputRef.current?.click();
-                            });
-                          } else {
-                            // If showPicker doesn't return a Promise, fallback to click
+                          try {
+                            // Call showPicker - handle both void and Promise<void> return types
+                            // Immediately cast to unknown to avoid void type inference
+                            const pickerResult: unknown = dateInputRef.current.showPicker();
+                            // Check if result is a Promise - only check typeof, avoid null/undefined checks that test void
+                            const resultType = typeof pickerResult;
+                            if (resultType === 'object') {
+                              // Now safe to check for catch property since we know it's an object
+                              const resultObj = pickerResult as Record<string, unknown>;
+                              if ('catch' in resultObj && typeof resultObj.catch === 'function') {
+                                (pickerResult as Promise<void>).catch(() => {
+                                  // Fallback to click if showPicker fails
+                                  dateInputRef.current?.click();
+                                });
+                                return; // Exit early if Promise was handled
+                              }
+                            }
+                            // If showPicker returns void or is not a Promise, fallback to click
+                            dateInputRef.current.click();
+                          } catch {
+                            // If showPicker throws or doesn't work, fallback to click
                             dateInputRef.current.click();
                           }
                         } else {
