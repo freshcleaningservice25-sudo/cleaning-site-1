@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         subject: "Your Cleaning Service Order Has Been Accepted! 🎉",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #0C5E3E;">Order Accepted!</h2>
+            <h2 style="color: #419544;">Order Accepted!</h2>
             <p>Hello ${order.firstName} ${order.lastName},</p>
             <p>Great news! We've accepted your cleaning service order and we're excited to help you!</p>
             

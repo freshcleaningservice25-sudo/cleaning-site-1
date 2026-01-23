@@ -34,7 +34,7 @@ export default function QRCodePage() {
           width: 400,
           margin: 2,
           color: {
-            dark: "#0C5E3E", // Your brand green color
+            dark: "#669966", // Your brand green color
             light: "#ffffff",
           },
         });
@@ -109,7 +109,7 @@ export default function QRCodePage() {
                   ref={canvasRef} 
                   className="border-4 rounded-lg" 
                   style={{ 
-                    borderColor: "#0C5E3E",
+                    borderColor: "#669966",
                     display: isGenerating ? "none" : "block"
                   }} 
                 />
@@ -127,15 +127,15 @@ export default function QRCodePage() {
             onClick={handleDownload}
             disabled={!downloadUrl || isGenerating}
             className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ backgroundColor: "#0C5E3E" }}
+            style={{ backgroundColor: "#669966" }}
             onMouseEnter={(e) => {
               if (!e.currentTarget.disabled) {
-                (e.target as HTMLButtonElement).style.backgroundColor = "#0A4C32";
+                (e.target as HTMLButtonElement).style.backgroundColor = "#347737";
               }
             }}
             onMouseLeave={(e) => {
               if (!e.currentTarget.disabled) {
-                (e.target as HTMLButtonElement).style.backgroundColor = "#0C5E3E";
+                (e.target as HTMLButtonElement).style.backgroundColor = "#669966";
               }
             }}
           >
@@ -149,12 +149,12 @@ export default function QRCodePage() {
           <Link
             href="/"
             className="inline-block text-base font-semibold transition-colors"
-            style={{ color: "#0C5E3E" }}
+            style={{ color: "#669966" }}
             onMouseEnter={(e) => {
-              (e.target as HTMLAnchorElement).style.color = "#09402A";
+              (e.target as HTMLAnchorElement).style.color = "#347737";
             }}
             onMouseLeave={(e) => {
-              (e.target as HTMLAnchorElement).style.color = "#0C5E3E";
+              (e.target as HTMLAnchorElement).style.color = "#669966";
             }}
           >
             ← Back to Home

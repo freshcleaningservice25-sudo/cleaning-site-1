@@ -100,7 +100,7 @@ export default function BookingKoala({
               </svg>
             </div>
           </div>
-          <h3 className="text-2xl font-bold mb-2" style={{ color: "#0C5E3E" }}>Redirecting to Booking...</h3>
+          <h3 className="text-2xl font-bold mb-2" style={{ color: "#669966" }}>Redirecting to Booking...</h3>
           <p className="text-lg" style={{ color: "#475569" }}>
             Please wait while we redirect you to our booking system.
           </p>
@@ -143,7 +143,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -152,7 +152,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     About Us
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -161,7 +161,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -170,7 +170,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Services
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -179,7 +179,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -188,7 +188,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Our Approach
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -197,7 +197,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -206,7 +206,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Contact
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
               </nav>
@@ -216,7 +216,7 @@ export default function BookingKoala({
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Call us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@ export default function BookingKoala({
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Email us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +238,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow Go Clean Chicago on Facebook"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -250,7 +250,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow Go Clean Chicago on Instagram"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -262,7 +262,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow us on TikTok"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -274,9 +274,9 @@ export default function BookingKoala({
               <Link 
                 href="/book" 
                 className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex-shrink-0" 
-                style={{ backgroundColor: "#0C5E3E", fontSize: "15px", letterSpacing: "0.01em" }}
-                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0A4C32")} 
-                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
+                style={{ backgroundColor: "#669966", fontSize: "15px", letterSpacing: "0.01em" }}
+                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#347737")} 
+                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#669966")}
               >
                 Book Cleaning
               </Link>
@@ -286,7 +286,7 @@ export default function BookingKoala({
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
-              style={{ backgroundColor: "#0C5E3E" }}
+              style={{ backgroundColor: "#669966" }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -341,7 +341,7 @@ export default function BookingKoala({
                   <a 
                     href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Call us"
                   >
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +351,7 @@ export default function BookingKoala({
                   <a 
                     href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Email us"
                   >
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -363,7 +363,7 @@ export default function BookingKoala({
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Follow us on TikTok"
                   >
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -375,7 +375,7 @@ export default function BookingKoala({
                   href="/book" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                 >
                   Book Cleaning
                 </Link>
@@ -435,7 +435,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -444,7 +444,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     About Us
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -453,7 +453,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -462,7 +462,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Services
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -471,7 +471,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -480,7 +480,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Our Approach
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
                 <Link 
@@ -489,7 +489,7 @@ export default function BookingKoala({
                   style={{ color: "#1F2937" }}
                   onMouseEnter={(e) => {
                     const target = e.target as HTMLAnchorElement;
-                    target.style.color = "#0C5E3E";
+                    target.style.color = "#669966";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLAnchorElement;
@@ -498,7 +498,7 @@ export default function BookingKoala({
                 >
                   <span className="relative">
                     Contact
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#669966" }}></span>
                   </span>
                 </Link>
               </nav>
@@ -508,7 +508,7 @@ export default function BookingKoala({
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Call us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -518,7 +518,7 @@ export default function BookingKoala({
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Email us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -530,7 +530,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow Go Clean Chicago on Facebook"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -542,7 +542,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow Go Clean Chicago on Instagram"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -554,7 +554,7 @@ export default function BookingKoala({
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                   aria-label="Follow us on TikTok"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -566,9 +566,9 @@ export default function BookingKoala({
               <Link 
                 href="/book" 
                 className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex-shrink-0" 
-                style={{ backgroundColor: "#0C5E3E", fontSize: "15px", letterSpacing: "0.01em" }}
-                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0A4C32")} 
-                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
+                style={{ backgroundColor: "#669966", fontSize: "15px", letterSpacing: "0.01em" }}
+                onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#347737")} 
+                onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#669966")}
               >
                 Book Cleaning
               </Link>
@@ -578,7 +578,7 @@ export default function BookingKoala({
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
-              style={{ backgroundColor: "#0C5E3E" }}
+              style={{ backgroundColor: "#669966" }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -633,7 +633,7 @@ export default function BookingKoala({
                   <a 
                     href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Call us"
                   >
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -643,7 +643,7 @@ export default function BookingKoala({
                   <a 
                     href="/contact" 
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Email us"
                   >
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -655,7 +655,7 @@ export default function BookingKoala({
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Follow Go Clean Chicago on Facebook"
                   >
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -667,7 +667,7 @@ export default function BookingKoala({
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Follow Go Clean Chicago on Instagram"
                   >
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -679,7 +679,7 @@ export default function BookingKoala({
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                    style={{ backgroundColor: "#0C5E3E" }}
+                    style={{ backgroundColor: "#669966" }}
                     aria-label="Follow us on TikTok"
                   >
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -691,7 +691,7 @@ export default function BookingKoala({
                   href="/book" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#669966" }}
                 >
                   Book Cleaning
                 </Link>
@@ -748,9 +748,9 @@ export default function BookingKoala({
           <Link
             href="/"
             className="inline-block px-8 py-3 rounded-xl text-white font-semibold shadow-md hover:shadow-lg transition-all"
-            style={{ backgroundColor: "#0C5E3E" }}
-            onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#09402A")} 
-            onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
+            style={{ backgroundColor: "#669966" }}
+            onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#347737")} 
+            onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#669966")}
           >
             Back to Home
           </Link>

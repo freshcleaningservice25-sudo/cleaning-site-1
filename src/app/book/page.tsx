@@ -17,7 +17,7 @@ const bookingKoalaMode = (process.env.NEXT_PUBLIC_BOOKINGKOALA_MODE || "redirect
 
 // Custom booking form component
 function CustomBookingForm() {
-  const brand = { primary: "#0E4B3D", primaryDark: "#0A3A2F", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
+  const brand = { primary: "#419544", primaryDark: "#347737", accent: "#2BBE87", bg: "#FAF8F4", text: "#0F172A" };
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -231,7 +231,7 @@ function CustomBookingForm() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#82B97A";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -240,7 +240,7 @@ function CustomBookingForm() {
               >
                 <span className="relative">
                   About Us
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#82B97A" }}></span>
                 </span>
               </a>
               <a 
@@ -249,7 +249,7 @@ function CustomBookingForm() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#82B97A";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -258,7 +258,7 @@ function CustomBookingForm() {
               >
                 <span className="relative">
                   Services
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#82B97A" }}></span>
                 </span>
               </a>
               <a 
@@ -267,7 +267,7 @@ function CustomBookingForm() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#82B97A";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -276,7 +276,7 @@ function CustomBookingForm() {
               >
                 <span className="relative">
                   Our Approach
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#82B97A" }}></span>
                 </span>
               </a>
               <a 
@@ -285,7 +285,7 @@ function CustomBookingForm() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#82B97A";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -294,7 +294,7 @@ function CustomBookingForm() {
               >
                 <span className="relative">
                   Contact
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#82B97A" }}></span>
                 </span>
               </a>
             </nav>
@@ -304,7 +304,7 @@ function CustomBookingForm() {
               <a 
                 href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
                 aria-label="Call us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -314,7 +314,7 @@ function CustomBookingForm() {
               <a 
                 href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
                 aria-label="Email us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -326,7 +326,7 @@ function CustomBookingForm() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
                 aria-label="Follow Go Clean Chicago on Facebook"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -338,7 +338,7 @@ function CustomBookingForm() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
                 aria-label="Follow Go Clean Chicago on Instagram"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -350,7 +350,7 @@ function CustomBookingForm() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
                 aria-label="Follow us on TikTok"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -362,9 +362,9 @@ function CustomBookingForm() {
             <a 
               href="/book" 
               className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex-shrink-0" 
-              style={{ backgroundColor: "#0C5E3E", fontSize: "15px", letterSpacing: "0.01em" }}
-              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0A4C32")} 
-              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
+              style={{ backgroundColor: "#82B97A", fontSize: "15px", letterSpacing: "0.01em" }}
+              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#347737")} 
+              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#82B97A")}
             >
               Book Cleaning
             </a>
@@ -374,7 +374,7 @@ function CustomBookingForm() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
-            style={{ backgroundColor: "#0C5E3E" }}
+            style={{ backgroundColor: "#82B97A" }}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -429,7 +429,7 @@ function CustomBookingForm() {
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#82B97A" }}
                   aria-label="Call us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -439,7 +439,7 @@ function CustomBookingForm() {
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#82B97A" }}
                   aria-label="Email us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -451,7 +451,7 @@ function CustomBookingForm() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#82B97A" }}
                   aria-label="Follow us on TikTok"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -463,7 +463,7 @@ function CustomBookingForm() {
                 href="/book" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#82B97A" }}
               >
                 Book Cleaning
               </a>
@@ -501,7 +501,7 @@ function CustomBookingForm() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2" style={{ color: "#0C5E3E" }}>Request Sent Successfully! 🎉</h3>
+                <h3 className="text-2xl font-bold mb-2" style={{ color: "#82B97A" }}>Request Sent Successfully! 🎉</h3>
                 <p className="text-lg" style={{ color: "#475569" }}>
                   Your request has been received. Redirecting to payment...
                 </p>
@@ -771,14 +771,14 @@ function CustomBookingForm() {
                       key={service.id}
                         className="flex flex-col items-center p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md"
                       style={{
-                          borderColor: isSelected ? "#0C5E3E" : "#E2E8F0",
+                          borderColor: isSelected ? "#82B97A" : "#E2E8F0",
                           backgroundColor: isSelected ? "#F0FDF4" : "#FFFFFF",
                           borderWidth: isSelected ? "2px" : "1px"
                       }}
                       onClick={() => handleAdditionalServiceToggle(service.id)}
                     >
                         {/* Icon */}
-                        <div className="mb-3 w-12 h-12 flex items-center justify-center" style={{ color: "#0C5E3E" }}>
+                        <div className="mb-3 w-12 h-12 flex items-center justify-center" style={{ color: "#82B97A" }}>
                           {service.icon === "house-stars" && (
                             <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -952,7 +952,7 @@ function CustomBookingForm() {
                             {service.name}
                           </p>
                           {service.price > 0 && (
-                            <p className="text-xs font-semibold mt-1" style={{ color: "#0C5E3E" }}>
+                            <p className="text-xs font-semibold mt-1" style={{ color: "#82B97A" }}>
                               {service.priceType === "percentage" 
                                 ? `+${service.price}%` 
                                 : `$${service.price}`}
@@ -1010,7 +1010,7 @@ function CustomBookingForm() {
                       value="newCard"
                       defaultChecked
                       className="w-4 h-4"
-                      style={{ accentColor: "#0C5E3E" }}
+                      style={{ accentColor: "#82B97A" }}
                     />
                     <span className="text-sm font-medium" style={{ color: "#0F172A" }}>New Credit Card</span>
                   </label>
@@ -1087,7 +1087,7 @@ function CustomBookingForm() {
                           <span className="text-black text-[8px] font-semibold leading-tight">Safe &</span>
                           <span className="text-black text-[8px] font-semibold leading-tight">Secure</span>
                         </div>
-                        <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: "#0C5E3E" }}>
+                        <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: "#82B97A" }}>
                           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4" />
@@ -1105,7 +1105,7 @@ function CustomBookingForm() {
                       type="checkbox"
                       required
                       className="mt-1 w-4 h-4 rounded border-gray-300"
-                      style={{ accentColor: "#0C5E3E" }}
+                      style={{ accentColor: "#82B97A" }}
                     />
                     <span className="text-sm" style={{ color: "#0F172A" }}>
                       Accept terms and conditions
@@ -1132,9 +1132,9 @@ function CustomBookingForm() {
                 type="submit" 
                 disabled={isSubmitting}
                 className="w-full inline-flex items-center justify-center px-8 py-4 rounded-2xl text-white font-bold shadow-lg transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl transform hover:scale-[1.02]" 
-                style={{ backgroundColor: "#0C5E3E" }} 
-                onMouseEnter={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#09402A")} 
-                onMouseLeave={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#0C5E3E")}
+                style={{ backgroundColor: "#82B97A" }} 
+                onMouseEnter={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#347737")} 
+                onMouseLeave={(e)=>!isSubmitting && ((e.target as HTMLButtonElement).style.backgroundColor="#82B97A")}
               >
                 {isSubmitting ? "Sending Request..." : "Book Cleaning"}
               </button>

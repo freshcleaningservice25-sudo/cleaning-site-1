@@ -27,14 +27,14 @@ function PaymentSuccessContent() {
           <Link 
             href="/"
             className="block w-full py-3 px-6 rounded-2xl text-white font-semibold transition"
-            style={{ backgroundColor: "#0C5E3E" }}
+            style={{ backgroundColor: "#419544" }}
           >
             Return to Home
           </Link>
           <a 
             href="tel:+19173797224"
             className="block w-full py-3 px-6 rounded-2xl border text-gray-700 font-semibold transition"
-            style={{ borderColor: "#0C5E3E", color: "#0C5E3E" }}
+            style={{ borderColor: "#419544", color: "#419544" }}
           >
             Call Us: 917 379 7224
           </a>

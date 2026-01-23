@@ -83,7 +83,7 @@ function CheckoutForm({ price, onClose }: {
         type="submit"
         disabled={!stripe || isProcessing}
         className="w-full py-4 rounded-2xl text-white font-bold shadow-lg transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl"
-        style={{ backgroundColor: "#0C5E3E" }}
+        style={{ backgroundColor: "#419544" }}
       >
         {isProcessing ? "Processing..." : `Pay $${(price / 100).toFixed(2)}`}
       </button>
@@ -229,7 +229,7 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
               {serviceData?.service || "Residential Cleaning"}
             </p>
             {serviceData?.ecoCleaning && (
-              <p className="text-sm font-medium" style={{ color: "#0C5E3E" }}>
+              <p className="text-sm font-medium" style={{ color: "#419544" }}>
                 🌿 Organic Cleaning Enabled
               </p>
             )}
@@ -253,7 +253,7 @@ export default function PaymentModal({ isOpen, onClose, serviceData, requestId }
 
           <div className="flex justify-between items-center text-lg font-semibold">
             <span>Total Amount:</span>
-            <span style={{ color: "#0C5E3E" }}>${priceInDollars}</span>
+            <span style={{ color: "#419544" }}>${priceInDollars}</span>
           </div>
         </div>
 

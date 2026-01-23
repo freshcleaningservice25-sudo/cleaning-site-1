@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
-  --brand: #0c5e3e; /* primary brand color */
-  --brand-ink: #0a4c32; /* darker brand tone */
+  --brand: #419544; /* primary brand color - 10% darker green */
+  --brand-ink: #347737; /* darker brand tone */
 }
 
 .logo-crop {

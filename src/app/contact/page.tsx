@@ -5,8 +5,8 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 
 const brand = {
-  primary: "#0C5E3E",
-  primaryDark: "#09402A",
+  primary: "#419544",
+  primaryDark: "#347737",
   bg: "#FAF8F4",
   text: "#0F172A",
 };
@@ -84,7 +84,7 @@ export default function ContactPage() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#5A8A4F";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -93,7 +93,7 @@ export default function ContactPage() {
               >
                 <span className="relative">
                   About Us
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#5A8A4F" }}></span>
                 </span>
               </a>
               <a 
@@ -102,7 +102,7 @@ export default function ContactPage() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#5A8A4F";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -111,7 +111,7 @@ export default function ContactPage() {
               >
                 <span className="relative">
                   Services
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#5A8A4F" }}></span>
                 </span>
               </a>
               <a 
@@ -120,7 +120,7 @@ export default function ContactPage() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#5A8A4F";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -129,7 +129,7 @@ export default function ContactPage() {
               >
                 <span className="relative">
                   Our Approach
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#5A8A4F" }}></span>
                 </span>
               </a>
               <a 
@@ -138,7 +138,7 @@ export default function ContactPage() {
                 style={{ color: "#1F2937" }}
                 onMouseEnter={(e) => {
                   const target = e.target as HTMLAnchorElement;
-                  target.style.color = "#0C5E3E";
+                  target.style.color = "#5A8A4F";
                 }}
                 onMouseLeave={(e) => {
                   const target = e.target as HTMLAnchorElement;
@@ -147,7 +147,7 @@ export default function ContactPage() {
               >
                 <span className="relative">
                   Contact
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#0C5E3E" }}></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full" style={{ backgroundColor: "#5A8A4F" }}></span>
                 </span>
               </a>
             </nav>
@@ -157,7 +157,7 @@ export default function ContactPage() {
               <a 
                 href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
                 aria-label="Call us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ export default function ContactPage() {
               <a 
                 href="/contact" 
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
                 aria-label="Email us"
               >
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,7 +179,7 @@ export default function ContactPage() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
                 aria-label="Follow Go Clean Chicago on Facebook"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -191,7 +191,7 @@ export default function ContactPage() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
                 aria-label="Follow Go Clean Chicago on Instagram"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -203,7 +203,7 @@ export default function ContactPage() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-md" 
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
                 aria-label="Follow us on TikTok"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -215,9 +215,9 @@ export default function ContactPage() {
             <a 
               href="/book" 
               className="inline-flex items-center px-8 py-3.5 rounded-lg text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] flex-shrink-0" 
-              style={{ backgroundColor: "#0C5E3E", fontSize: "15px", letterSpacing: "0.01em" }}
-              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0A4C32")} 
-              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#0C5E3E")}
+              style={{ backgroundColor: "#5A8A4F", fontSize: "15px", letterSpacing: "0.01em" }}
+              onMouseEnter={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#347737")} 
+              onMouseLeave={(e)=>((e.target as HTMLAnchorElement).style.backgroundColor="#5A8A4F")}
             >
               Book Cleaning
             </a>
@@ -227,7 +227,7 @@ export default function ContactPage() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg transition-colors flex-shrink-0"
-            style={{ backgroundColor: "#0C5E3E" }}
+            style={{ backgroundColor: "#5A8A4F" }}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -282,7 +282,7 @@ export default function ContactPage() {
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#5A8A4F" }}
                   aria-label="Call us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -292,7 +292,7 @@ export default function ContactPage() {
                 <a 
                   href="/contact" 
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#5A8A4F" }}
                   aria-label="Email us"
                 >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -304,7 +304,7 @@ export default function ContactPage() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
-                  style={{ backgroundColor: "#0C5E3E" }}
+                  style={{ backgroundColor: "#5A8A4F" }}
                   aria-label="Follow us on TikTok"
                 >
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -316,7 +316,7 @@ export default function ContactPage() {
                 href="/book" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-all"
-                style={{ backgroundColor: "#0C5E3E" }}
+                style={{ backgroundColor: "#5A8A4F" }}
               >
                 Book Cleaning
               </a>
@@ -491,7 +491,7 @@ export default function ContactPage() {
       </div>
 
       {/* Footer */}
-      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#0A4C32" }}>
+      <footer className="py-8 sm:py-10 md:py-12" style={{ backgroundColor: "#347737" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           {/* Top Section */}
           <div className="flex flex-col sm:flex-row items-start justify-between mb-6 sm:mb-8 gap-6 sm:gap-8">
