@@ -107,6 +107,20 @@ body {
 html, body {
   width: 100%;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Ensure body can scroll on mobile */
+@media (max-width: 768px) {
+  html {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  body {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
 }
 
 * {
@@ -165,12 +179,57 @@ html, body {
 #bookingkoala-embed [class*="DatePicker"],
 #bookingkoala-embed button[class*="calendar"],
 #bookingkoala-embed button[class*="Calendar"],
+#bookingkoala-embed button[type="button"][aria-label*="calendar" i],
+#bookingkoala-embed button[type="button"][aria-label*="date" i],
 #bookingkoala-embed svg[class*="calendar"],
 #bookingkoala-embed [role="button"][aria-label*="calendar" i],
 #bookingkoala-embed [role="button"][aria-label*="date" i],
+#bookingkoala-embed input[type="date"] + button,
+#bookingkoala-embed input[type="date"] ~ button,
 iframe[src*="bookingkoala"] {
   z-index: 100000 !important;
   position: relative !important;
+}
+
+/* Ensure date picker buttons are clickable */
+#bookingkoala-embed button,
+#bookingkoala-embed [type="button"],
+#bookingkoala-embed [role="button"],
+#bookingkoala-embed input[type="date"] + button,
+#bookingkoala-embed input[type="date"] ~ button,
+#bookingkoala-embed [class*="date"] + button,
+#bookingkoala-embed [class*="Date"] + button {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+  z-index: 100001 !important;
+  position: relative !important;
+}
+
+/* Ensure date input and calendar icon are clickable in custom form */
+input[type="date"] + button,
+input[type="text"][name="date"] ~ button,
+.relative button[aria-label*="calendar" i],
+button[aria-label="Open calendar"] {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  z-index: 100 !important;
+  position: relative !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+/* Ensure date input container doesn't block button clicks */
+.relative:has(input[name="date"]) {
+  pointer-events: auto !important;
+}
+
+.relative:has(input[name="date"]) > button {
+  pointer-events: auto !important;
+  z-index: 100 !important;
 }
 
 /* Fix for BookingKoala modals that might be in body */
@@ -190,6 +249,22 @@ body > [class*="DatePicker"] {
 /* Ensure iframe content can receive pointer events */
 iframe[src*="bookingkoala"] {
   pointer-events: auto !important;
+  touch-action: pan-y pan-x !important;
+}
+
+/* Mobile: Ensure iframe doesn't block page scrolling */
+@media (max-width: 768px) {
+  iframe[src*="bookingkoala"] {
+    touch-action: pan-y pan-x !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Ensure parent container allows scrolling */
+  div:has(iframe[src*="bookingkoala"]) {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+  }
 }
 
 /* Mobile responsive improvements */
@@ -296,7 +371,14 @@ footer.snap-section {
 @media (max-width: 768px) {
   .scroll-snap-container {
     scroll-snap-type: none !important;
-    position: static !important;
+    position: relative !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overscroll-behavior-y: auto !important;
   }
   
   .snap-section {
@@ -308,15 +390,18 @@ footer.snap-section {
   html {
     height: auto !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     touch-action: pan-y !important;
     overscroll-behavior-y: auto !important;
+    position: relative !important;
   }
   
   body {
     height: auto !important;
     min-height: 100vh !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     position: relative !important;
     touch-action: pan-y !important;
@@ -325,19 +410,46 @@ footer.snap-section {
   
   main {
     height: auto !important;
+    min-height: 100vh !important;
     overflow: visible !important;
+    overflow-y: visible !important;
     touch-action: pan-y !important;
+    position: relative !important;
   }
   
   /* Ensure header doesn't block scrolling */
   header {
     touch-action: none !important;
     pointer-events: auto !important;
+    position: fixed !important;
   }
   
   /* Ensure all interactive elements work on mobile */
   button, a, input, select, textarea {
     touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Ensure page container allows scrolling - body/html handle scrolling, not container */
+  div.scroll-snap-container {
+    position: relative !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    touch-action: pan-y !important;
+  }
+  
+  /* Remove any height restrictions that might block scrolling */
+  section {
+    position: relative !important;
+    overflow: visible !important;
+  }
+  
+  /* Ensure no fixed heights block scrolling */
+  .min-h-screen {
+    min-height: 100vh !important;
+    height: auto !important;
   }
 }
 

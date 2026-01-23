@@ -388,11 +388,11 @@ export default function BookingKoala({
         <div className="h-32 sm:h-40 md:h-44 lg:h-48 w-full bg-transparent flex-shrink-0 relative z-10"></div>
         
         {/* BookingKoala Iframe */}
-        <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4" style={{ pointerEvents: "none" }}>
+        <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4" style={{ pointerEvents: "none", overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
           <iframe
             src={iframeSrc}
             className="w-full border-0 h-[600px] sm:h-[700px] md:h-[800px] lg:h-[1000px]"
-            style={{ border: "none", position: "relative", zIndex: 1, display: "block", pointerEvents: "auto" }}
+            style={{ border: "none", position: "relative", zIndex: 1, display: "block", pointerEvents: "auto", touchAction: "pan-y pan-x" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"

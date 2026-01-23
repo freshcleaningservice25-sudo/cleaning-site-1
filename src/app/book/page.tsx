@@ -620,7 +620,7 @@ function CustomBookingForm() {
               </div>
                 <div>
                   <label className="text-sm font-semibold mb-2 block" style={{ color: "#0F172A" }}>Preferred Date*</label>
-                <div className="relative" style={{ zIndex: 1 }}>
+                <div className="relative" style={{ zIndex: 1, pointerEvents: "auto" }}>
                   <input 
                     name="date"
                     type="text" 
@@ -659,43 +659,55 @@ function CustomBookingForm() {
                   />
                   <button
                     type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onTouchStart={(e) => {
+                      e.stopPropagation();
+                    }}
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       if (dateInputRef.current) {
-                        // Try showPicker first (modern browsers)
+                        // Always use click() first - most reliable
+                        dateInputRef.current.focus();
+                        dateInputRef.current.click();
+                        // Then try showPicker if available
                         if (typeof dateInputRef.current.showPicker === 'function') {
                           try {
-                            // Call showPicker - handle both void and Promise<void> return types
-                            // Immediately cast to unknown to avoid void type inference
-                            const pickerResult: unknown = dateInputRef.current.showPicker();
-                            // Check if result is a Promise - only check typeof, avoid null/undefined checks that test void
+                            const pickerResult = dateInputRef.current.showPicker() as unknown;
                             const resultType = typeof pickerResult;
-                            if (resultType === 'object') {
-                              // Now safe to check for catch property since we know it's an object
+                            if (resultType === 'object' && pickerResult !== null) {
                               const resultObj = pickerResult as Record<string, unknown>;
                               if ('catch' in resultObj && typeof resultObj.catch === 'function') {
                                 (pickerResult as Promise<void>).catch(() => {
-                                  // Fallback to click if showPicker fails
-                                  dateInputRef.current?.click();
+                                  // Already handled by click above
                                 });
-                                return; // Exit early if Promise was handled
                               }
                             }
-                            // If showPicker returns void or is not a Promise, fallback to click
-                            dateInputRef.current.click();
                           } catch {
-                            // If showPicker throws or doesn't work, fallback to click
-                            dateInputRef.current.click();
+                            // Already handled by click above
                           }
-                        } else {
-                          // Fallback to click
-                          dateInputRef.current.click();
                         }
                       }
                     }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors z-10"
-                    style={{ zIndex: 10, pointerEvents: "auto" }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded transition-colors"
+                    style={{ 
+                      zIndex: 100, 
+                      pointerEvents: "auto",
+                      touchAction: "manipulation",
+                      WebkitTapHighlightColor: "rgba(0, 0, 0, 0.1)",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                      border: "none",
+                      minWidth: "44px",
+                      minHeight: "44px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative"
+                    }}
                     aria-label="Open calendar"
                   >
                     <svg className="w-5 h-5" style={{ color: "#64748B", pointerEvents: "none" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
