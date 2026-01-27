@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// New BookingKoala embed (booknow, embed params, 1000px height, scrolling=no)
+const DEFAULT_BOOKINGKOALA_URL = "https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&offsetTopM=0";
+const DEFAULT_BOOKINGKOALA_EMBED_CODE = '<iframe src="https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&offsetTopM=0" style="border:none;height:1000px" width="100%" scrolling="no"></iframe><script src="https://gocleanusausa.bookingkoala.com/resources/embed.js" defer></script>';
+
 interface BookingKoalaProps {
   mode?: "embed" | "redirect" | "iframe";
   bookingUrl?: string;
@@ -19,9 +23,9 @@ export default function BookingKoala({
 }: BookingKoalaProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Get BookingKoala URL from environment or use provided URL
-  const defaultBookingUrl = process.env.NEXT_PUBLIC_BOOKINGKOALA_URL || bookingUrl;
-  const defaultEmbedCode = process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE || embedCode;
+  // Get BookingKoala URL from environment, props, or use new embed default
+  const defaultBookingUrl = process.env.NEXT_PUBLIC_BOOKINGKOALA_URL || bookingUrl || DEFAULT_BOOKINGKOALA_URL;
+  const defaultEmbedCode = process.env.NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE || embedCode || DEFAULT_BOOKINGKOALA_EMBED_CODE;
 
   // Extract script src from embed code if present (for embed mode)
   const scriptMatch = defaultEmbedCode?.match(/<script[^>]+src=["']([^"']+)["'][^>]*>/i);
@@ -109,12 +113,11 @@ export default function BookingKoala({
     );
   }
 
-  // Iframe mode - embed BookingKoala booking page
+  // Iframe mode - embed BookingKoala booking page (booknow, bar=false, offsetTop, 1000px, scrolling=no)
   if (mode === "iframe" && defaultBookingUrl) {
-    // Extract iframe src from URL or use provided URL
-    const iframeSrc = defaultBookingUrl.includes('?embed=true') 
-      ? defaultBookingUrl 
-      : `${defaultBookingUrl}${defaultBookingUrl.includes('?') ? '&' : '?'}embed=true`;
+    const iframeSrc = defaultBookingUrl.includes("embed=true")
+      ? defaultBookingUrl
+      : `${defaultBookingUrl}${defaultBookingUrl.includes("?") ? "&" : "?"}embed=true`;
 
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#FAF8F4" }}>
@@ -387,16 +390,16 @@ export default function BookingKoala({
         {/* Spacer to prevent content from going under header */}
         <div className="h-32 sm:h-40 md:h-44 lg:h-48 w-full bg-transparent flex-shrink-0 relative z-10"></div>
         
-        {/* BookingKoala Iframe */}
+        {/* BookingKoala Iframe - booknow embed, 1000px height, scrolling=no */}
         <div className="w-full relative min-h-screen sm:min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] mt-0 pt-0 z-10 isolate px-0 sm:px-2 md:px-4" style={{ pointerEvents: "none", overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
           <iframe
             src={iframeSrc}
-            className="w-full border-0 h-[600px] sm:h-[700px] md:h-[800px] lg:h-[1000px]"
-            style={{ border: "none", position: "relative", zIndex: 1, display: "block", pointerEvents: "auto", touchAction: "pan-y pan-x" }}
+            className="w-full border-0"
+            style={{ border: "none", height: 1000, position: "relative", zIndex: 1, display: "block", pointerEvents: "auto", touchAction: "pan-y pan-x" }}
             title="BookingKoala Booking Form"
             allow="payment"
             loading="lazy"
-            scrolling="yes"
+            scrolling="no"
           />
         </div>
       </div>
@@ -737,12 +740,10 @@ export default function BookingKoala({
               <li>Add one of these environment variables to your <code className="bg-gray-200 px-2 py-1 rounded">.env.local</code>:</li>
             </ol>
             <div className="mt-4 space-y-2 text-xs font-mono bg-gray-800 text-green-400 p-4 rounded overflow-x-auto">
-              <div># For redirect mode (recommended):</div>
-              <div>NEXT_PUBLIC_BOOKINGKOALA_URL=https://yourstore.bookingkoala.com/book</div>
-              <div className="mt-3"># For iframe embed:</div>
-              <div>NEXT_PUBLIC_BOOKINGKOALA_URL=https://yourstore.bookingkoala.com/book</div>
-              <div className="mt-3"># For script embed:</div>
-              <div>NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE={"{`<script src=\"...\"></script>`}"}</div>
+              <div># For redirect or iframe (uses booknow, embed params):</div>
+              <div>NEXT_PUBLIC_BOOKINGKOALA_URL=https://gocleanusausa.bookingkoala.com/booknow?embed=true&amp;bar=false&amp;offsetTop=0&amp;offsetTopM=0</div>
+              <div className="mt-3"># For embed code mode (iframe + script):</div>
+              <div>NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE={"{`<iframe src=\"...booknow?embed=true&bar=false&offsetTop=0&offsetTopM=0\" ...></iframe><script src=\".../embed.js\" defer></script>`}"}</div>
             </div>
           </div>
           <Link
