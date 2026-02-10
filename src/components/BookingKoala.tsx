@@ -6,8 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 // New BookingKoala embed (booknow, embed params, 1000px height, scrolling=no)
-const DEFAULT_BOOKINGKOALA_URL = "https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&offsetTopM=140";
-const DEFAULT_BOOKINGKOALA_EMBED_CODE = '<iframe src="https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&offsetTopM=140" style="border:none;height:1000px" width="100%" scrolling="no"></iframe><script src="https://gocleanusausa.bookingkoala.com/resources/embed.js" defer></script>';
+// NOTE: BookingKoala expects the mobile offset param to be `OffsetTopM` (capital O/T/M)
+// We start with 140px for mobile; tweak this as needed based on where the calendar appears.
+const DEFAULT_BOOKINGKOALA_URL = "https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&OffsetTopM=140";
+const DEFAULT_BOOKINGKOALA_EMBED_CODE = '<iframe src="https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&OffsetTopM=140" style="border:none;height:1000px" width="100%" scrolling="no"></iframe><script src="https://gocleanusausa.bookingkoala.com/resources/embed.js" defer></script>';
 
 interface BookingKoalaProps {
   mode?: "embed" | "redirect" | "iframe";
@@ -739,11 +741,11 @@ export default function BookingKoala({
               <li>Get your booking URL or embed code from your BookingKoala dashboard</li>
               <li>Add one of these environment variables to your <code className="bg-gray-200 px-2 py-1 rounded">.env.local</code>:</li>
             </ol>
-            <div className="mt-4 space-y-2 text-xs font-mono bg-gray-800 text-green-400 p-4 rounded overflow-x-auto">
+              <div className="mt-4 space-y-2 text-xs font-mono bg-gray-800 text-green-400 p-4 rounded overflow-x-auto">
               <div># For redirect or iframe (uses booknow, embed params):</div>
-              <div>NEXT_PUBLIC_BOOKINGKOALA_URL=https://gocleanusausa.bookingkoala.com/booknow?embed=true&amp;bar=false&amp;offsetTop=0&amp;offsetTopM=140</div>
+              <div>NEXT_PUBLIC_BOOKINGKOALA_URL=https://gocleanusausa.bookingkoala.com/booknow?embed=true&amp;bar=false&amp;offsetTop=0&amp;OffsetTopM=140</div>
               <div className="mt-3"># For embed code mode (iframe + script):</div>
-              <div>NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE={"{`<iframe src=\"...booknow?embed=true&bar=false&offsetTop=0&offsetTopM=140\" ...></iframe><script src=\".../embed.js\" defer></script>`}"}</div>
+              <div>NEXT_PUBLIC_BOOKINGKOALA_EMBED_CODE={"{`<iframe src=\"...booknow?embed=true&bar=false&offsetTop=0&OffsetTopM=140\" ...></iframe><script src=\".../embed.js\" defer></script>`}"}</div>
             </div>
           </div>
           <Link
