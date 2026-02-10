@@ -24,6 +24,7 @@ export default function BookingKoala({
   embedCode
 }: BookingKoalaProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [resolvedMode, setResolvedMode] = useState<"embed" | "redirect" | "iframe">(mode);
   
   // Get BookingKoala URL from environment, props, or use new embed default
   const defaultBookingUrl = process.env.NEXT_PUBLIC_BOOKINGKOALA_URL || bookingUrl || DEFAULT_BOOKINGKOALA_URL;
@@ -33,20 +34,38 @@ export default function BookingKoala({
   const scriptMatch = defaultEmbedCode?.match(/<script[^>]+src=["']([^"']+)["'][^>]*>/i);
   const scriptSrc = scriptMatch ? scriptMatch[1] : null;
 
+  // Resolve mode differently on mobile: if iframe is requested, prefer redirect for better UX
+  // This avoids calendar pop-up positioning issues inside iframes on small screens.
+  useEffect(() => {
+    if (mode === "iframe") {
+      if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+        const isSmallScreen = window.innerWidth <= 768;
+        const isMobileUA = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isSmallScreen || isMobileUA) {
+          setResolvedMode("redirect");
+          return;
+        }
+      }
+      setResolvedMode("iframe");
+    } else {
+      setResolvedMode(mode);
+    }
+  }, [mode]);
+
   // All hooks must be called at the top level before any conditional returns
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     // If redirect mode, redirect immediately
-    if (mode === "redirect" && defaultBookingUrl) {
+    if (resolvedMode === "redirect" && defaultBookingUrl) {
       window.location.href = defaultBookingUrl;
       return;
     }
-  }, [mode, defaultBookingUrl]);
+  }, [resolvedMode, defaultBookingUrl]);
 
   // Load embed script dynamically if in embed mode
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (mode === "embed" && scriptSrc) {
+    if (resolvedMode === "embed" && scriptSrc) {
       // Check if script already exists to avoid duplicates
       const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
       if (existingScript) {
@@ -66,12 +85,12 @@ export default function BookingKoala({
         }
       };
     }
-  }, [mode, scriptSrc]);
+  }, [resolvedMode, scriptSrc]);
 
   // Load BookingKoala embed script for iframe mode
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (mode === "iframe" && defaultBookingUrl) {
+    if (resolvedMode === "iframe" && defaultBookingUrl) {
       const embedScriptSrc = "https://gocleanusausa.bookingkoala.com/resources/embed.js";
       // Check if script already exists to avoid duplicates
       const existingScript = document.querySelector(`script[src="${embedScriptSrc}"]`);
@@ -92,10 +111,10 @@ export default function BookingKoala({
         }
       };
     }
-  }, [mode, defaultBookingUrl]);
+  }, [resolvedMode, defaultBookingUrl]);
 
   // If redirect mode, show loading state
-  if (mode === "redirect") {
+  if (resolvedMode === "redirect") {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#FAF8F4" }}>
         <div className="text-center">
@@ -116,7 +135,7 @@ export default function BookingKoala({
   }
 
   // Iframe mode - embed BookingKoala booking page (booknow, bar=false, offsetTop, 1000px, scrolling=no)
-  if (mode === "iframe" && defaultBookingUrl) {
+  if (resolvedMode === "iframe" && defaultBookingUrl) {
     const iframeSrc = defaultBookingUrl.includes("embed=true")
       ? defaultBookingUrl
       : `${defaultBookingUrl}${defaultBookingUrl.includes("?") ? "&" : "?"}embed=true`;
@@ -409,7 +428,7 @@ export default function BookingKoala({
   }
 
   // Embed code mode - use provided embed script
-  if (mode === "embed" && defaultEmbedCode) {
+  if (resolvedMode === "embed" && defaultEmbedCode) {
     // Extract iframe HTML (everything except script tags)
     const iframeHtml = defaultEmbedCode.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '').trim();
 
