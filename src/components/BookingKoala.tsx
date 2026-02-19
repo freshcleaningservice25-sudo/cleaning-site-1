@@ -9,7 +9,7 @@ import Link from "next/link";
 // NOTE: BookingKoala expects the mobile offset param to be `OffsetTopM` (capital O/T/M)
 // We start with 140px for mobile; tweak this as needed based on where the calendar appears.
 const DEFAULT_BOOKINGKOALA_URL = "https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&OffsetTopM=140";
-const DEFAULT_BOOKINGKOALA_EMBED_CODE = '<iframe src="https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&OffsetTopM=0" style="border:none;height:1000px" width="100%" scrolling="no"></iframe><script src="https://gocleanusausa.bookingkoala.com/resources/embed.js" defer></script>';
+const DEFAULT_BOOKINGKOALA_EMBED_CODE = '<iframe src="https://gocleanusausa.bookingkoala.com/booknow?embed=true&bar=false&offsetTop=0&offsetTopM=0" style="border:none;height:1000px" width="100%" scrolling="no"></iframe><script src="https://gocleanusausa.bookingkoala.com/resources/embed.js" defer></script>';
 
 interface BookingKoalaProps {
   mode?: "embed" | "redirect" | "iframe";
